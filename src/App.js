@@ -12,7 +12,7 @@ import CheckoutPage from './components/CheckoutPage/CheckoutPage';
 import withAuthentication from './components/Session/withAuthentication';
 
 var x;
-
+var y;
 function App() {
   return (
     <div className="App">
