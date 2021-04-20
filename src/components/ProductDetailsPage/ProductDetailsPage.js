@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addItemToCart,
   removeItemFromCart,
@@ -17,8 +17,7 @@ import Products from "../../data/products";
 // import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
 export default function ProductDetailsPage() {
-  const cart = useSelector((state) => state.cartState.cart);
-  const wishlist = useSelector((state) => state.wishlistState.wishlist);
+
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
@@ -36,21 +35,40 @@ export default function ProductDetailsPage() {
       }
       return null;
     });
+
   }, [id]);
 
-  useEffect(() => {
+
+/*   useEffect(() => {
     setAddToCart(cart.includes(product));
     setAddToWishlist(wishlist.includes(product));
-  }, [cart, product, wishlist]);
+    cart.map((item)=>{
+      if(item.id === product.id ) {
+        setSelectedSize(product.size);
+        setQuantityCount(product.quantity);
+      }
+      return null;
+    })
+  }, [cart, id, product, wishlist]); */
+
 
   const displaySizes = () => {
     const sizesList = Object.values(SIZES);
     return sizesList.map((size, id) => {
-      return (
+      if(size === selectedSize) {
+        return (
+          <span key={id} className="size selected" onClick={() => setSelectedSize(size)}>
+            {size}
+          </span>
+        );
+      } else {
+        return (
         <span key={id} className="size" onClick={() => setSelectedSize(size)}>
           {size}
         </span>
       );
+      }
+      
     });
   };
 
@@ -73,15 +91,9 @@ export default function ProductDetailsPage() {
 
   useEffect(() => {
     if (isAddToCart) {
-      const selectedProduct = {
-        ...product,
-        size: selectedSize,
-        quantity: quantityCount,
-      };
-      dispatch(addItemToCart(selectedProduct));
-      console.log("selected product", selectedProduct);
-      console.log(isAddToCart, "is add to cart");
-      console.log("Cart", cart);
+      product.size = selectedSize;
+      product.quantity = quantityCount;
+      dispatch(addItemToCart(product));
     } else {
       dispatch(removeItemFromCart(product.id));
     }
@@ -90,6 +102,8 @@ export default function ProductDetailsPage() {
 
   useEffect(() => {
     if (isAddToWishlist) {
+      product.size = selectedSize;
+      product.quantity = quantityCount;
       dispatch(addItemToWishlist(product));
     } else {
       dispatch(removeItemFromWishlist(product.id));
