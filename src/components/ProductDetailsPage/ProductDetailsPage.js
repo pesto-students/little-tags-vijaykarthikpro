@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { 
-  addItemToCart, 
+import { useDispatch } from "react-redux";
+import {
+  addItemToCart,
   removeItemFromCart,
   addItemToWishlist,
-  removeItemFromWishlist } from '../../actions';
+  removeItemFromWishlist,
+} from "../../actions";
 import { SIZES } from "../../Utils";
 import "./ProductDetailsPage.scss";
 import ProductDetailsImg from "../../assets/images/product-details-img.svg";
@@ -15,15 +16,14 @@ import Products from "../../data/products";
 // import Carousel from '../carousel/Carousel'
 // import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
-
 export default function ProductDetailsPage() {
 
-  const cart = useSelector(state => state.cartState.cart);
-  const wishlist = useSelector(state => state.wishlistState.wishlist);
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
   const [isAddToWishlist, setAddToWishlist] = useState(false);
+  const [selectedSize, setSelectedSize] = useState(SIZES.XS);
+
   const dispatch = useDispatch();
   let location = useLocation();
   let id = location.pathname.split("/")[2];
@@ -36,21 +36,39 @@ export default function ProductDetailsPage() {
       return null;
     });
 
-  },[id]);
+  }, [id]);
 
-  useEffect(()=>{
+
+/*   useEffect(() => {
     setAddToCart(cart.includes(product));
     setAddToWishlist(wishlist.includes(product));
-  },[cart, product, wishlist])
+    cart.map((item)=>{
+      if(item.id === product.id ) {
+        setSelectedSize(product.size);
+        setQuantityCount(product.quantity);
+      }
+      return null;
+    })
+  }, [cart, id, product, wishlist]); */
+
 
   const displaySizes = () => {
     const sizesList = Object.values(SIZES);
     return sizesList.map((size, id) => {
-      return (
-        <span key={id} className="size">
+      if(size === selectedSize) {
+        return (
+          <span key={id} className="size selected" onClick={() => setSelectedSize(size)}>
+            {size}
+          </span>
+        );
+      } else {
+        return (
+        <span key={id} className="size" onClick={() => setSelectedSize(size)}>
           {size}
         </span>
       );
+      }
+      
     });
   };
 
@@ -65,31 +83,33 @@ export default function ProductDetailsPage() {
 
   const handleAddToCartClick = () => {
     setAddToCart(!isAddToCart);
-  }
+  };
 
   const handleAddToWishlistClick = () => {
     setAddToWishlist(!isAddToWishlist);
-  }
+  };
 
-  useEffect(() =>{
-    if(isAddToCart) {
+  useEffect(() => {
+    if (isAddToCart) {
+      product.size = selectedSize;
+      product.quantity = quantityCount;
       dispatch(addItemToCart(product));
     } else {
       dispatch(removeItemFromCart(product.id));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isAddToCart])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAddToCart]);
 
-  useEffect(()=>{
-    if(isAddToWishlist) {
+  useEffect(() => {
+    if (isAddToWishlist) {
+      product.size = selectedSize;
+      product.quantity = quantityCount;
       dispatch(addItemToWishlist(product));
     } else {
       dispatch(removeItemFromWishlist(product.id));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[isAddToWishlist])
-
- 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAddToWishlist]);
 
   return (
     <div className="product-details-container">
@@ -122,11 +142,15 @@ export default function ProductDetailsPage() {
           <div className="add-to-buttons">
             <button className="cart" onClick={handleAddToCartClick}>
               <img src={CartIcon} alt="cart-icon" />
-              <span className="cart-btn-text">{!isAddToCart ? 'Add to Cart' : 'Remove from Cart' }</span>
+              <span className="cart-btn-text">
+                {!isAddToCart ? "Add to Cart" : "Remove from Cart"}
+              </span>
             </button>
             <button className="wishlist" onClick={handleAddToWishlistClick}>
               <img src={WishlistIcon} alt="wishlist-icon" />
-              <span className="wishlist-btn-text">{!isAddToWishlist ? 'Add to Wishlist' : 'Remove from Wishlist'}</span>
+              <span className="wishlist-btn-text">
+                {!isAddToWishlist ? "Add to Wishlist" : "Remove from Wishlist"}
+              </span>
             </button>
           </div>
         </div>
@@ -136,4 +160,3 @@ export default function ProductDetailsPage() {
     </div>
   );
 }
-

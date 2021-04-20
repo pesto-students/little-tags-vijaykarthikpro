@@ -5,6 +5,7 @@ import './CheckoutPage.scss';
 // import MenProtrait from '../../assets/images/men-portrait.svg'
 import withAuthorization from '../Session/withAuthorization';
 
+
 function CheckoutPage() {
 
   const cart = useSelector(state => state.cartState.cart);
