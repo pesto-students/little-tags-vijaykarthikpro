@@ -27,9 +27,20 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+      "kentcdodds"
+    ],
+    "rules": {
+      "no-unused-vars": "warn",
+      "prefer-const": "warn",
+      "object-shorthand": "warn",
+      "no-var": "warn",
+      "no-unneeded-ternary": "warn",
+      "no-duplicate-imports": "warn",
+      "import/no-duplicates": "warn",
+      "no-negated-condition": "warn",
+      "no-shadow": "warn",
+      "consistent-return": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -44,6 +55,7 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-kentcdodds": "^18.0.0",
     "redux-devtools": "^3.7.0"
   }
 }
