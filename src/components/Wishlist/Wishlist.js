@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItemFromWishlist, addItemToCart } from '../../actions';
 import "./Wishlist.scss";
+import FirebaseContext from '../Firebase/context';
 import withAuthorization from "../Session/withAuthorization";
 
 function Wishlist() {
 
+  const firebase = useContext(FirebaseContext);
   const wishlist = useSelector(state=> state.wishlistState.wishlist);
+  const cart = useSelector(state => state.cartState.cart);
+  const user = useSelector(state => state.sessionState.authUser);
   const dispatch = useDispatch();
   const [totalItems , setTotalItems] = useState(wishlist.length);
 
   useEffect(()=>{
     setTotalItems(wishlist.length);
-  },[wishlist]);
+    firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+    firebase.saveDataToDatabase(user.uid, "cart", cart);
+  },[cart, firebase, user.uid, wishlist]);
 
   const displayWishlistItems = () =>{
     return wishlist.map((product)=>{

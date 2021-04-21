@@ -1,8 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
+<<<<<<< Updated upstream
 import { useSelector, useDispatch } from 'react-redux';
 import { 
   addItemToCart, 
+=======
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addItemToCart,
+>>>>>>> Stashed changes
   removeItemFromCart,
   addItemToWishlist,
   removeItemFromWishlist } from '../../actions';
@@ -12,14 +18,22 @@ import ProductDetailsImg from "../../assets/images/product-details-img.svg";
 import CartIcon from "../../assets/icons/cart-filled.svg";
 import WishlistIcon from "../../assets/icons/wishlist-filled.svg";
 import Products from "../../data/products";
+import FirebaseContext from '../Firebase/context';
 // import Carousel from '../carousel/Carousel'
 // import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
 
 export default function ProductDetailsPage() {
 
+<<<<<<< Updated upstream
   const cart = useSelector(state => state.cartState.cart);
   const wishlist = useSelector(state => state.wishlistState.wishlist);
+=======
+  const firebase = useContext(FirebaseContext);
+  const cart = useSelector(state => state.cartState.cart);
+  const wishlist = useSelector(state=> state.wishlistState.wishlist);
+  const user = useSelector(state => state.sessionState.authUser);
+>>>>>>> Stashed changes
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
@@ -41,7 +55,24 @@ export default function ProductDetailsPage() {
   useEffect(()=>{
     setAddToCart(cart.includes(product));
     setAddToWishlist(wishlist.includes(product));
+<<<<<<< Updated upstream
   },[cart, product, wishlist])
+=======
+    cart.map((item)=>{
+      if(item.id === product.id ) {
+        setSelectedSize(product.size);
+        setQuantityCount(product.quantity);
+      }
+      return null;
+    })
+  }, [cart, id, product, wishlist]); */
+
+  useEffect(()=>{
+    firebase.saveDataToDatabase(user.uid, "cart", cart);
+    firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+  },[cart, firebase, user.uid, wishlist])
+
+>>>>>>> Stashed changes
 
   const displaySizes = () => {
     const sizesList = Object.values(SIZES);
@@ -71,20 +102,44 @@ export default function ProductDetailsPage() {
     setAddToWishlist(!isAddToWishlist);
   }
 
+<<<<<<< Updated upstream
   useEffect(() =>{
     if(isAddToCart) {
+=======
+  useEffect(() => {
+    if (isAddToCart) {
+      product.size = selectedSize;
+      product.quantity = quantityCount;
+      console.log("cart: ",cart);
+      const isProductAndSizeSame = cart.find((item)=> item.id === product.id/*  && item.size === product.size */)
+      console.log("isProductSame from ProductDEtailsPage:",isProductAndSizeSame);
+      /* if(isProductAndSizeSame.length !== 1) {
+        product.uniqueId = uniqueId();
+        dispatch(addItemToCart(product));
+      } */
+      product.uniqueId = new Date().getTime();
+>>>>>>> Stashed changes
       dispatch(addItemToCart(product));
+      
     } else {
-      dispatch(removeItemFromCart(product.id));
+      dispatch(removeItemFromCart(product.uniqueId));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[isAddToCart])
 
+<<<<<<< Updated upstream
   useEffect(()=>{
     if(isAddToWishlist) {
+=======
+  useEffect(() => {
+    if (isAddToWishlist) {
+      product.size = selectedSize;
+      product.quantity = quantityCount;
+      product.uniqueId = new Date().getTime();
+>>>>>>> Stashed changes
       dispatch(addItemToWishlist(product));
     } else {
-      dispatch(removeItemFromWishlist(product.id));
+      dispatch(removeItemFromWishlist(product.uniqueId));
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[isAddToWishlist])
