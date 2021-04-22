@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addItemToCart,
   removeItemFromCart,
@@ -13,11 +13,16 @@ import ProductDetailsImg from "../../assets/images/product-details-img.svg";
 import CartIcon from "../../assets/icons/cart-filled.svg";
 import WishlistIcon from "../../assets/icons/wishlist-filled.svg";
 import Products from "../../data/products";
+import FirebaseContext from '../Firebase/context';
 // import Carousel from '../carousel/Carousel'
 // import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
 export default function ProductDetailsPage() {
 
+  const cart = useSelector(state => state.cartState.cart);
+  const wishlist = useSelector(state => state.wishlistState.wishlist);
+  const firebase = useContext(FirebaseContext);
+  const user = useSelector(state => state.sessionState.authUser);
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
@@ -42,6 +47,7 @@ export default function ProductDetailsPage() {
 /*   useEffect(() => {
     setAddToCart(cart.includes(product));
     setAddToWishlist(wishlist.includes(product));
+
     cart.map((item)=>{
       if(item.id === product.id ) {
         setSelectedSize(product.size);
@@ -51,6 +57,10 @@ export default function ProductDetailsPage() {
     })
   }, [cart, id, product, wishlist]); */
 
+  useEffect(()=>{
+    firebase.saveDataToDatabase(user.uid, "cart", cart);
+    firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+  },[cart, firebase, user.uid, wishlist])
 
   const displaySizes = () => {
     const sizesList = Object.values(SIZES);
@@ -89,24 +99,27 @@ export default function ProductDetailsPage() {
     setAddToWishlist(!isAddToWishlist);
   };
 
-  useEffect(() => {
+  useEffect(() =>{
     if (isAddToCart) {
       product.size = selectedSize;
       product.quantity = quantityCount;
+      product.uniqueId = new Date().getTime();
       dispatch(addItemToCart(product));
+      
     } else {
-      dispatch(removeItemFromCart(product.id));
+      dispatch(removeItemFromCart(product.uniqueId));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
 
-  useEffect(() => {
+  useEffect(()=>{
     if (isAddToWishlist) {
       product.size = selectedSize;
       product.quantity = quantityCount;
+      product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
     } else {
-      dispatch(removeItemFromWishlist(product.id));
+      dispatch(removeItemFromWishlist(product.uniqueId));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToWishlist]);

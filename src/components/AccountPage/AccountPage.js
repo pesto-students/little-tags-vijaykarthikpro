@@ -18,21 +18,24 @@ function AccountPage() {
   return (
     <div className="account-main">
       <div className="account-aside">
+        <Link to={ROUTES.ACCOUNT} className="nav-links">
+          My Account
+        </Link>
         <Link to={ROUTES.ORDERS} className="nav-links">
-          Orders
+          My Orders
         </Link>
         <Link to={ROUTES.ADDRESS} className="nav-links">
-          Address
+          My Address
         </Link>
         <Link to={ROUTES.WISHLIST} className="nav-links">
-          Wishlist
+          My Wishlist
         </Link>
         <Link to={ROUTES.HOME} className="nav-links" onClick={handleLogout}>
           Log Out
         </Link>
       </div>
       <div className="account-content">
-        <MyAccount />
+        {/* <MyAccount /> */}
         <Switch>
           <Route path={ROUTES.ORDERS}>
             <Orders />
@@ -42,6 +45,9 @@ function AccountPage() {
           </Route>
           <Route path={ROUTES.WISHLIST}>
             <Wishlist />
+          </Route>
+          <Route path={ROUTES.ACCOUNT}>
+            <MyAccount />
           </Route>
         </Switch>
       </div>

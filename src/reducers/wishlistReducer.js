@@ -28,6 +28,12 @@ export default function cartReducer(state = initialState, action) {
             });
             break;
         }
+        case ACTIONS.SET_WISHLIST_FROM_FIREBASE : {
+            return { ...state, wishlist : [...state.wishlist, action.wishlist]}; 
+        }
+        case ACTIONS.REMOVE_WISHLIST_ITEMS : {
+            return { ...state, wishlist: [] }
+        }
         default: 
             return state;
     }
