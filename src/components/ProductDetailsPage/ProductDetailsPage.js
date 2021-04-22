@@ -14,6 +14,7 @@ import CartIcon from "../../assets/icons/cart-filled.svg";
 import WishlistIcon from "../../assets/icons/wishlist-filled.svg";
 import Products from "../../data/products";
 import FirebaseContext from '../Firebase/context';
+import Login from '../Login/Login';
 // import Carousel from '../carousel/Carousel'
 // import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
@@ -29,6 +30,9 @@ export default function ProductDetailsPage() {
   const [isAddToCart, setAddToCart] = useState(false);
   const [isAddToWishlist, setAddToWishlist] = useState(false);
   const [selectedSize, setSelectedSize] = useState(SIZES.XS);
+  const [showLogin, setShowLogin] = useState(false);
+
+  const showLoginModal = () => setShowLogin(!showLogin);
 
   const dispatch = useDispatch();
   let location = useLocation();
@@ -96,14 +100,20 @@ export default function ProductDetailsPage() {
 
   const handleAddToCartClick = () => {
     if(isUserLoggedIn) {
+      setShowLogin(false);
       setAddToCart(!isAddToCart);
+    } else {
+      setShowLogin(true);
     }
     
   };
 
   const handleAddToWishlistClick = () => {
     if(isUserLoggedIn) {
+      setShowLogin(false);
       setAddToWishlist(!isAddToWishlist);
+    } else {
+      setShowLogin(true);
     }
   };
 
@@ -182,6 +192,7 @@ export default function ProductDetailsPage() {
       </div>
       {/* <Carousel /> */}
       {/* <SimilarProducts /> */}
+      <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
     </div>
   );
 }
