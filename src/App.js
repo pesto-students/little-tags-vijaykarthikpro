@@ -30,9 +30,6 @@ function App() {
             <Route path={ROUTES.PRODUCT_DETAILS}>
               <ProductDetailsPage />
             </Route>
-            {/* <Route path={ROUTES.WISHLIST}>
-              <Wishlist />
-            </Route> */}
             <Route path={ROUTES.CHECKOUT}>
               <CheckoutPage />
             </Route>

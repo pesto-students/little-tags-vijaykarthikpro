@@ -26,5 +26,10 @@ export default function Orders() {
     },
   ];
 
-  return <OrderCard ordersData={OrdersData} />;
+  return (
+    <div>
+      <h3>My Orders</h3>
+      <OrderCard ordersData={OrdersData} />
+    </div>
+  );
 }

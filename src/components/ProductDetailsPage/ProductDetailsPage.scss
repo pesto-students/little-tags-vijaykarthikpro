@@ -20,6 +20,8 @@
 }
 
 .product-details-container {
+  max-width: 1500px;
+
   .details {
     @include styles.flex-row-center;
     justify-content: space-between;
@@ -67,7 +69,7 @@
           margin-right: 30px;
           font-size: 20px;
           cursor: pointer;
-          @include make-text-color-gold();
+          color: white;
 
           &:hover {
             font-weight: 600;
@@ -78,7 +80,12 @@
 
           &:active {
             transform: scale(1);
+            @include make-text-color-gold();
           }
+        }
+
+        .selected {
+          @include make-text-color-gold();
         }
       }
 

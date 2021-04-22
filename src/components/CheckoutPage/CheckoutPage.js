@@ -6,6 +6,7 @@ import withAuthorization from '../Session/withAuthorization';
 import FirebaseContext from '../Firebase/context';
 import { SIZES } from "../../Utils";
 
+
 function CheckoutPage() {
 
   const firebase = useContext(FirebaseContext);
