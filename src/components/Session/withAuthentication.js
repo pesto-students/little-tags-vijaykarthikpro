@@ -9,6 +9,7 @@ const withAuthentication = (Component) => {
     const firebase = useContext(FirebaseContext);
     
     const next = async (authUser) => {
+      console.log("next function called from with Authentication:");
       const userDetails = {
         uid: authUser.uid,
         email: authUser.email, 
@@ -17,37 +18,12 @@ const withAuthentication = (Component) => {
       }
       saveToLocalStorage('authUser',userDetails);
       props.setAuthUser(userDetails,true);
-      
-     firebase.getDbRef().child("users").child(authUser.uid).get().then((snapshot) => {
-      if (snapshot.exists()) {
-        const userData = snapshot.val();
-
-        if(userData.cart) {
-          props.setCartFromFirebase(userData.cart);
-        }
-
-        if(userData.wishlist) {
-          props.setWishlistFromFirebase(userData.wishlist);
-        }
-        
-        console.log("withAuthentication: data: ",snapshot.val());
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
-      /* if(userData.cart) {
-        props.setCartFromFirebase(userData.cart)
-      } */
-     
+    
     };
 
     const fallback = () => {
       removeFromLocalStorage('authUser')
       props.setAuthUser(null,false);
-     /*  props.removeCartItems();
-      props.removeWishlistItems(); */
     };
     useEffect(() => {
       const user = JSON.parse(getFromLocalStorage('authUser'));

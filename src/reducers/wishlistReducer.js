@@ -14,14 +14,14 @@ export default function cartReducer(state = initialState, action) {
         case ACTIONS.REMOVE_ITEM_FROM_WISHLIST : {
             const { wishlist } = state;
             const { id } = action
-            const filteredWishlist = wishlist.filter((product) => product.id !== id);
+            const filteredWishlist = wishlist.filter((product) => product.uniqueId !== id);
             return { ...state, wishlist : filteredWishlist} 
         }
         case ACTIONS.UPDATE_WISHLIST_ITEM : {
             const { wishlist } = state;
             const { id, size, quantity } = action
             wishlist.map((product) => {
-                if(product.id === id) {
+                if(product.uniqueId === id) {
                     return { ...product, size, quantity }
                 }
                 return product;

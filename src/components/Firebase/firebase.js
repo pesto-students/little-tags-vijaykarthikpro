@@ -25,9 +25,7 @@ class Firebase {
 
   user = (uid) => this.db.ref(`users/${uid}`);
 
-  getDbRef = (uid) => this.db.ref();
-
-  getDatabase = () => this.db;
+  getDbRef = () => this.db.ref();
 
   saveDataToDatabase = (uid, key, value) => {
     this.user(uid).update({ [key]: value });

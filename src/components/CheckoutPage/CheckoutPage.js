@@ -1,4 +1,4 @@
-import React, { /* useEffect */ useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItemFromCart, addItemToWishlist, updateItemInCart } from '../../actions';
 import './CheckoutPage.scss';
@@ -11,10 +11,11 @@ function CheckoutPage() {
 
   const firebase = useContext(FirebaseContext);
   const cart = useSelector(state => state.cartState.cart);
-  console.log(cart);
   const wishlist = useSelector(state=> state.wishlistState.wishlist);
   const user = useSelector(state => state.sessionState.authUser);
+  const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
   const dispatch = useDispatch(); 
+
   const [totalItems, setTotalItems] = useState(cart.length);
 
   const cartItemsTotalPrice = cart.reduce((acc, product)=>{
@@ -25,15 +26,17 @@ function CheckoutPage() {
 
   useEffect(()=>{
     setTotalItems(cart.length);
-    /* firebase.saveDataToDatabase(user.uid, "cart", cart);
-    firebase.saveDataToDatabase(user.uid, "wishlist", wishlist); */
-  },[cart, firebase, user, wishlist])
+    if(isUserLoggedIn) {
+      firebase.saveDataToDatabase(user.uid, "cart", cart);
+      firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+    }
+  },[cart, firebase, isUserLoggedIn, user, wishlist])
 
 
   const displayCartItems = () => {
 
     return cart.map((product)=>{
-      let { id,  title, price, image, quantity = 1, size = 'XS' } = product;
+      let { uniqueId, title, price, image, quantity = 1, size = 'XS' } = product;
 
       const sizes = Object.values(SIZES).map((item,id) => {
         return <option key={id}>{item}</option>
@@ -41,11 +44,26 @@ function CheckoutPage() {
 
       const handleSizeSelection = (e) => {
         let sizeSelected = e.target.value;
-        dispatch(updateItemInCart(id, sizeSelected, quantity))
+        dispatch(updateItemInCart(uniqueId, sizeSelected, quantity))
+      }
+
+      const handleQuantityIncrease = () => {
+        quantity += 1; 
+        setTotalPrice(totalPrice + price); 
+        dispatch(updateItemInCart(uniqueId,size,(quantity)))
+      }
+
+      const handleQuantityDecrease = () =>{
+        const minimumQuantity = quantity === 1 ? true : false;
+        if(!minimumQuantity) {
+          quantity -= 1;
+          setTotalPrice(totalPrice - price)
+          dispatch(updateItemInCart(uniqueId,size,(quantity)))
+        }
       }
 
       return (
-        <div className="item-row" key={id}>
+        <div className="item-row" key={uniqueId}>
         <div className="product-image">
           <img src={image} alt="product-img"/>
         </div>
@@ -61,18 +79,11 @@ function CheckoutPage() {
                 </div>
                 <span className="quantity-title details-text">Quantity :</span>
                 <div className="quantity">
-                  <button className="decrease-button" onClick={()=> {
-                    const minimumQuantity = quantity === 1 ? true : false;
-                    if(!minimumQuantity) {
-                      quantity -= 1;
-                      setTotalPrice(totalPrice - price)
-                      dispatch(updateItemInCart(id,size,(quantity)))
-                    }
-                  }}>
+                  <button className="decrease-button" onClick={handleQuantityDecrease}>
                     -
                   </button>
                   <span className="count-value">{quantity}</span>
-                  <button className="increase-button" onClick={()=> { quantity += 1; setTotalPrice(totalPrice + price); dispatch(updateItemInCart(id,size,(quantity)))}}>
+                  <button className="increase-button" onClick={handleQuantityIncrease}>
                     +
                   </button>
                 </div>
@@ -89,7 +100,7 @@ function CheckoutPage() {
                   setTotalPrice(totalPrice - (quantity * price));
                 }
                 dispatch(addItemToWishlist(product)); 
-                dispatch(removeItemFromCart(id));
+                dispatch(removeItemFromCart(uniqueId));
               }}>Move to Wishlist</span>
               <span className="remove-btn" onClick={()=>{
                 if(totalItems === 1) {
@@ -98,7 +109,7 @@ function CheckoutPage() {
                   setTotalPrice(totalPrice - (quantity * price));
                 }
                 
-                dispatch(removeItemFromCart(id));
+                dispatch(removeItemFromCart(uniqueId));
               }}>Remove</span>
             </div>
           </div>
