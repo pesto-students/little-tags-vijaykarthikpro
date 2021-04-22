@@ -1,15 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setAddress } from "../../actions";
 import AddressCard from "./AddressCard/AddressCard";
 import "./Address.scss";
 
 export default function Address() {
   const [showForm, setShowForm] = useState(false);
   const [userDetails, setUserDetails] = useState([]);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.sessionState.authUser);
+  console.log(user, "user from address");
   const showAddressForm = () => setShowForm(true);
 
+  useEffect(() => {
+    dispatch(setAddress(userDetails));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userDetails]);
+
   function handleChange(e) {
+    const isDefaultAvailable = userDetails.filter(({ isDefault }) =>
+      isDefault ? true : false
+    );
+    console.log(isDefaultAvailable);
     setShowForm(false);
     e.preventDefault();
+    let isCurrentAddressDefault = false;
+    if (!isDefaultAvailable.length > 0) {
+      isCurrentAddressDefault = true;
+    }
     const { elements } = e.target;
     const currentDetails = {
       name: elements[0].value,
@@ -19,7 +37,7 @@ export default function Address() {
       area: elements[4].value,
       town: elements[5].value,
       city: elements[6].value,
-      isDefault: elements[8].checked,
+      isDefault: isCurrentAddressDefault,
     };
     setUserDetails([...userDetails, currentDetails]);
   }
@@ -47,14 +65,13 @@ export default function Address() {
             <input type="text" name="town" placeholder="Town" />
 
             <input type="text" name="city" placeholder="City" />
-
-            <div>
-              <input type="submit" value="Save"></input>
-            </div>
             <li>
               <input type="checkbox" />
               <span>Make this my default address</span>
             </li>
+            <div>
+              <input type="submit" value="Save"></input>
+            </div>
           </form>
         )}
       </div>

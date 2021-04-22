@@ -19,7 +19,11 @@ export default function AddressCard({ addressData }) {
         <div className="address-card" key={id}>
           <div className="default-address">
             <h3>Address- {id + 1}</h3>
-            {isDefault && <div>Default Address</div>}
+            {isDefault ? (
+              <div>Default Address</div>
+            ) : (
+              <button>Make Default</button>
+            )}
           </div>
           <div>{name}</div>
           <div>{area}</div>
