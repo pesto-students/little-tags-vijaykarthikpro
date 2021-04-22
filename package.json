@@ -2,7 +2,8 @@
   "name": "little-tags",
   "version": "0.1.0",
   "private": true,
-  "author": "Vijay and Rasika",
+  "author": "Vijay Karthik <vijay.karthik1010@gmail.com>",
+  "contributors": ["Rasika Hatwar <13rasikahatwar@gmail.com>"],
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",

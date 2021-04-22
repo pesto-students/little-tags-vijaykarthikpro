@@ -5,6 +5,7 @@ import "./AccountPage.scss";
 import Orders from "../OrdersPage/Orders";
 import Wishlist from "../Wishlist/Wishlist";
 import Address from "../Address/Address";
+import MyAccount from "./MyAccount/MyAccount";
 import * as ROUTES from "../../constants/routes";
 import withAuthorization from "../Session/withAuthorization";
 
@@ -31,6 +32,7 @@ function AccountPage() {
         </Link>
       </div>
       <div className="account-content">
+        <MyAccount />
         <Switch>
           <Route path={ROUTES.ORDERS}>
             <Orders />
@@ -42,10 +44,9 @@ function AccountPage() {
             <Wishlist />
           </Route>
         </Switch>
-        <Orders />
       </div>
     </div>
   );
 }
 
-export default withAuthorization(AccountPage)
+export default withAuthorization(AccountPage);
