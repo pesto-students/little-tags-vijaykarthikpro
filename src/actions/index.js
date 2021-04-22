@@ -8,14 +8,18 @@ import {
   ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST,
   UPDATE_WISHLIST_ITEM, 
-  UPDATE_CART_ITEM} from '../constants/actionTypes';
+  UPDATE_CART_ITEM,
+  SET_CART_FROM_FIREBASE,
+  SET_WISHLIST_FROM_FIREBASE,
+  REMOVE_CART_ITEMS,
+  REMOVE_WISHLIST_ITEMS} from '../constants/actionTypes';
 
 // User actions
 
-export const setAuthUser = (authUser) => ({
+export const setAuthUser = (authUser, isUserLoggedIn) => ({
   type: SET_AUTH_USER,
   authUser,
-  isUserLoggedIn: authUser ? true : false
+  isUserLoggedIn
 });
 
 export const removeAuthUser = () => ({
@@ -72,4 +76,25 @@ export const updateItemInWishlist = (id, size, quantity) => ({
   id,
   size,
   quantity
+})
+
+
+// firebase actions 
+
+export const setCartFromFirebase = (cart) => ({
+  type: SET_CART_FROM_FIREBASE,
+  cart
+})
+
+export const setWishlistFromFirebase = (wishlist) => ({
+  type: SET_WISHLIST_FROM_FIREBASE,
+  wishlist
+})
+
+export const removeCartItems = () => ({
+  type: REMOVE_CART_ITEMS
+})
+
+export const removeWishlistItems = () => ({
+  type: REMOVE_WISHLIST_ITEMS
 })

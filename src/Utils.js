@@ -18,6 +18,10 @@ export const removeFromLocalStorage = (key) => {
     return localStorage.removeItem(key);
 }
 
+export const uniqueId = () =>{
+    return Math.random().toString(36).substr(2, 9);
+}
+
 export const routePathMap = {
     men: "men clothing",
     women: "women clothing",

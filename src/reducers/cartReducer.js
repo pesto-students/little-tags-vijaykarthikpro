@@ -19,7 +19,7 @@ export default function cartReducer(state = initialState, action) {
             return { ...state, cart : filteredCart } 
         }
         case ACTIONS.UPDATE_CART_ITEM : {
-            const { cart } = state;
+            let { cart } = state;
             const { id, size, quantity } = action
             const udpatedCart = cart.map((item) => {
                 if(item.id === id) {
@@ -28,6 +28,12 @@ export default function cartReducer(state = initialState, action) {
                 return item;
             });
             return { ...state, cart: udpatedCart }
+        }
+        case ACTIONS.SET_CART_FROM_FIREBASE : {
+            return { ...state, cart : [...state.cart, action.cart]}; 
+        }
+        case ACTIONS.REMOVE_CART_ITEMS : {
+            return { ...state, cart: [] }
         }
         default: 
             return state;
