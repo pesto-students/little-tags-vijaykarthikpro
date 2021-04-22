@@ -1,9 +1,8 @@
 const products = [
-  
   {
     id: 1,
     title: "Mens Casual Premium Slim Fit T-Shirts ",
-    price: 220.3,
+    price: 520.3,
     description:
       "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
     category: "men clothing",
@@ -22,7 +21,7 @@ const products = [
   {
     id: 3,
     title: "Mens Casual Slim Fit",
-    price: 150.99,
+    price: 550.99,
     description:
       "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "men clothing",
@@ -41,7 +40,7 @@ const products = [
   {
     id: 5,
     title: "Solid Gold Petite Micropave ",
-    price: 168,
+    price: 368,
     description:
       "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
     category: "jewellery",
@@ -125,7 +124,7 @@ const products = [
   {
     id: 14,
     title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
-    price: 560.99,
+    price: 1060.99,
     description:
       "Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates",
     category: "women clothing",
@@ -135,7 +134,7 @@ const products = [
     id: 15,
     title:
       "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
-    price: 290.95,
+    price: 1290.95,
     description:
       "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
     category: "women clothing",
@@ -144,7 +143,7 @@ const products = [
   {
     id: 16,
     title: "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
-    price: 390.99,
+    price: 1390.99,
     description:
       "Lightweight perfet for trip or casual wear---Long sleeve with hooded, adjustable drawstring waist design. Button and zipper front closure raincoat, fully stripes Lined and The Raincoat has 2 side pockets are a good size to hold all kinds of things, it covers the hips, and the hood is generous but doesn't overdo it.Attached Cotton Lined Hood with Adjustable Drawstrings give it a real styled look.",
     category: "women clothing",
@@ -153,7 +152,7 @@ const products = [
   {
     id: 17,
     title: "MBJ Women's Solid Short Sleeve Boat Neck V ",
-    price: 900.85,
+    price: 500.85,
     description:
       "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "women clothing",
@@ -171,7 +170,7 @@ const products = [
   {
     id: 19,
     title: "DANVOUY Womens T Shirt Casual Cotton Short",
-    price: 120.99,
+    price: 420.99,
     description:
       "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
     category: "women clothing",
@@ -180,61 +179,61 @@ const products = [
   {
     id: 20,
     title: "Men's Black T Shirt Casual Cotton",
-    price: 120.99,
+    price: 520.99,
     description:
-    "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "tshirt",
     image: "https://i.ibb.co/PtV8zXF/black-tshirt.jpg",
   },
   {
     id: 21,
     title: "Men's Black T Shirt Casual Cotton",
-    price: 120.99,
+    price: 420.99,
     description:
-    "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "men clothing",
     image: "https://i.ibb.co/PtV8zXF/black-tshirt.jpg",
   },
   {
     id: 22,
     title: "Men's Yellow T Shirt Pattern",
-    price: 120.99,
+    price: 520.99,
     description:
-    "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "tshirt",
     image: "https://i.ibb.co/g66HRts/yellow-tshirt.jpg",
   },
   {
     id: 23,
     title: "Men's Yellow T Shirt Pattern",
-    price: 120.99,
+    price: 620.99,
     description:
-    "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "men clothing",
     image: "https://i.ibb.co/g66HRts/yellow-tshirt.jpg",
   },
   {
     id: 24,
     title: "Men's White T Shirt Printed",
-    price: 120.99,
+    price: 620.99,
     description:
-    "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "tshirt",
     image: "https://i.ibb.co/CBgF3km/white-tshirt-front.jpg",
   },
   {
     id: 25,
     title: "Men's White T Shirt Printed",
-    price: 120.99,
+    price: 420.99,
     description:
-    "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+      "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "men clothing",
     image: "https://i.ibb.co/CBgF3km/white-tshirt-front.jpg",
   },
   {
     id: 26,
     title: "Mens Casual Premium Slim Fit T-Shirts ",
-    price: 220.3,
+    price: 420.3,
     description:
       "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
     category: "tshirt",
@@ -244,7 +243,7 @@ const products = [
   {
     id: 27,
     title: "Mens Casual Slim Fit",
-    price: 120.88,
+    price: 620.88,
     description:
       "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "tshirt",
@@ -253,79 +252,79 @@ const products = [
   {
     id: 28,
     title: "Womens Black Casual Slim Fit",
-    price: 150.99,
+    price: 450.99,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "women clothing",
     image: "https://i.ibb.co/Pzr6HGL/bs1.webp",
   },
   {
     id: 29,
     title: "Womens Black Casual Slim Fit",
-    price: 150.99,
+    price: 550.99,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "tshirt",
     image: "https://i.ibb.co/Pzr6HGL/bs1.webp",
   },
   {
     id: 30,
     title: "Womens Pink Casual T Shirt",
-    price: 160.70,
+    price: 660.7,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "tshirt",
     image: "https://i.ibb.co/bPM48pw/pv2.jpg",
   },
   {
     id: 31,
     title: "Womens Pink Casual T Shirt",
-    price: 160.70,
+    price: 460.7,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "women clothing",
     image: "https://i.ibb.co/bPM48pw/pv2.jpg",
   },
   {
     id: 32,
     title: "Womens Casual Slim Fit",
-    price: 130.68,
+    price: 530.68,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "tshirt",
     image: "https://i.ibb.co/wKxZzry/cowprint1.jpg",
   },
   {
     id: 33,
     title: "Womens Casual Slim Fit",
-    price: 130.68,
+    price: 430.68,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "women clothing",
     image: "https://i.ibb.co/wKxZzry/cowprint1.jpg",
   },
   {
     id: 34,
     title: "Womens White Casual T Shirt",
-    price: 140.68,
+    price: 640.68,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "tshirt",
     image: "https://i.ibb.co/vPQFhqv/wf1.jpg",
   },
   {
     id: 35,
     title: "Womens White Casual T Shirt",
-    price: 140.68,
+    price: 340.68,
     description:
-    "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
+      "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "women clothing",
     image: "https://i.ibb.co/vPQFhqv/wf1.jpg",
   },
   {
     id: 36,
     title: "Mens Cotton Jacket",
-    price: 550.99,
+    price: 750.99,
     description:
       "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
     category: "jacket",
@@ -335,7 +334,7 @@ const products = [
     id: 37,
     title:
       "Lock and Love Women's Removable Hooded Faux Leather Moto Biker Jacket",
-    price: 290.95,
+    price: 1290.95,
     description:
       "100% POLYURETHANE(shell) 100% POLYESTER(lining) 75% POLYESTER 25% COTTON (SWEATER), Faux leather material for style and comfort / 2 pockets of front, 2-For-One Hooded denim style faux leather jacket, Button detail on waist / Detail stitching at sides, HAND WASH ONLY / DO NOT BLEACH / LINE DRY / DO NOT IRON",
     category: "jacket",
@@ -344,7 +343,7 @@ const products = [
   {
     id: 38,
     title: "BIYLACLESEN Women's 3-in-1 Snowboard Jacket Winter Coats",
-    price: 560.99,
+    price: 1560.99,
     description:
       "Note:The Jackets is US standard size, Please choose size as your usual wear Material: 100% Polyester; Detachable Liner Fabric: Warm Fleece. Detachable Functional Liner: Skin Friendly, Lightweigt and Warm.Stand Collar Liner jacket, keep you warm in cold weather. Zippered Pockets: 2 Zippered Hand Pockets, 2 Zippered Pockets on Chest (enough to keep cards or keys)and 1 Hidden Pocket Inside.Zippered Hand Pockets and Hidden Pocket keep your things secure. Humanized Design: Adjustable and Detachable Hood and Adjustable cuff to prevent the wind and water,for a comfortable fit. 3 in 1 Detachable Design provide more convenience, you can separate the coat and inner as needed, or wear it together. It is suitable for different season and help you adapt to different climates",
     category: "jacket",
@@ -353,7 +352,7 @@ const products = [
   {
     id: 39,
     title: "Rain Jacket Women Windbreaker Striped Climbing Raincoats",
-    price: 390.99,
+    price: 1390.99,
     description:
       "Lightweight perfet for trip or casual wear---Long sleeve with hooded, adjustable drawstring waist design. Button and zipper front closure raincoat, fully stripes Lined and The Raincoat has 2 side pockets are a good size to hold all kinds of things, it covers the hips, and the hood is generous but doesn't overdo it.Attached Cotton Lined Hood with Adjustable Drawstrings give it a real styled look.",
     category: "jacket",
@@ -362,13 +361,11 @@ const products = [
   {
     id: 40,
     title: "Men's Blue Gradient Shirt ",
-    price: 109.95,
-    description:
-      "Men's Lenin shirt three quarter sleeve gradient blue",
+    price: 809.95,
+    description: "Men's Lenin shirt three quarter sleeve gradient blue",
     category: "men clothing",
     image: "https://i.ibb.co/1GjWHnF/blue-shirt.jpg",
   },
-
 ];
 
 export default products;
