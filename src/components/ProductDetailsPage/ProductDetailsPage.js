@@ -23,6 +23,7 @@ export default function ProductDetailsPage() {
   const wishlist = useSelector(state => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
   const user = useSelector(state => state.sessionState.authUser);
+  const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
@@ -58,9 +59,11 @@ export default function ProductDetailsPage() {
   }, [cart, id, product, wishlist]); */
 
   useEffect(()=>{
-    firebase.saveDataToDatabase(user.uid, "cart", cart);
-    firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
-  },[cart, firebase, user.uid, wishlist])
+    if(isUserLoggedIn) {
+      firebase.saveDataToDatabase(user.uid, "cart", cart);
+      firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+    }
+  },[cart, firebase, isUserLoggedIn, user, wishlist])
 
   const displaySizes = () => {
     const sizesList = Object.values(SIZES);
@@ -92,11 +95,16 @@ export default function ProductDetailsPage() {
   };
 
   const handleAddToCartClick = () => {
-    setAddToCart(!isAddToCart);
+    if(isUserLoggedIn) {
+      setAddToCart(!isAddToCart);
+    }
+    
   };
 
   const handleAddToWishlistClick = () => {
-    setAddToWishlist(!isAddToWishlist);
+    if(isUserLoggedIn) {
+      setAddToWishlist(!isAddToWishlist);
+    }
   };
 
   useEffect(() =>{
@@ -107,7 +115,9 @@ export default function ProductDetailsPage() {
       dispatch(addItemToCart(product));
       
     } else {
-      dispatch(removeItemFromCart(product.uniqueId));
+      if(isUserLoggedIn) {
+        dispatch(removeItemFromCart(product.uniqueId));
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
@@ -119,7 +129,9 @@ export default function ProductDetailsPage() {
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
     } else {
-      dispatch(removeItemFromWishlist(product.uniqueId));
+      if(isUserLoggedIn) {
+        dispatch(removeItemFromWishlist(product.uniqueId));
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToWishlist]);
