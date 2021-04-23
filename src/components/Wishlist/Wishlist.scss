@@ -54,6 +54,7 @@
   width: 100%;
   max-width: 1500px;
   margin: 0 auto;
+ 
 
   .bold-title {
     font-weight: 600;
@@ -65,7 +66,8 @@
     width: 100%;
     min-height: 300px;
     margin-right: 10px;
-    padding: 20px;
+    padding: 30px;
+    border-radius: 5px;
 
     .item-row {
       @include styles.flex-row-center;

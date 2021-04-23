@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemFromCart, addItemToWishlist, updateItemInCart } from '../../actions';
+import { removeItemFromCart, addItemToWishlist, updateItemInCart, confirmOrder, removeCartItems } from '../../actions';
 import './CheckoutPage.scss';
 import withAuthorization from '../Session/withAuthorization';
 import FirebaseContext from '../Firebase/context';
 import { SIZES } from "../../Utils";
+import Address from '../Address/Address';
 
 
 function CheckoutPage() {
@@ -12,6 +13,7 @@ function CheckoutPage() {
   const firebase = useContext(FirebaseContext);
   const cart = useSelector(state => state.cartState.cart);
   const wishlist = useSelector(state=> state.wishlistState.wishlist);
+  const orders = useSelector(state=> state.ordersState.orders);
   const user = useSelector(state => state.sessionState.authUser);
   const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
   const dispatch = useDispatch(); 
@@ -21,7 +23,8 @@ function CheckoutPage() {
   },0)
 
   const [totalPrice, setTotalPrice] = useState(cartItemsTotalPrice);
-
+  const [showSelectAddress,setShowSelectAddress] = useState(false);
+  const [shippingAddress, setShippingAddress] = useState({});
 
   useEffect(()=>{
     setTotalItems(cart.length);
@@ -29,8 +32,9 @@ function CheckoutPage() {
     if(isUserLoggedIn) {
       firebase.saveDataToDatabase(user.uid, "cart", cart);
       firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+      firebase.saveDataToDatabase(user.uid, "orders", orders);
     }
-  },[cart, firebase, isUserLoggedIn, user, wishlist, cartItemsTotalPrice])
+  },[cart, firebase, isUserLoggedIn, user, wishlist, cartItemsTotalPrice, orders])
 
 
 
@@ -122,38 +126,68 @@ function CheckoutPage() {
     
   }
 
+  const selectAddressForShipping = (id) =>{
+    const selectedAddress = user.address.filter((_,index)=> index === id);
+    setShippingAddress(selectedAddress[0]);
+  }
+
+  const displayAddressSelection = () =>{
+    return <Address isCheckout={true} selectAddressForShipping={selectAddressForShipping} shippingAddress={shippingAddress}/>
+  }
+
   const handlePlaceOrder = () => {
-    return null;
+
+    if(cart.length !== 0) {
+      if(Object.keys(shippingAddress).length !== 0) {
+        const orders = cart.map((item)=>{
+          return {...item, address: shippingAddress}
+        });
+        dispatch(confirmOrder(orders));
+        dispatch(removeCartItems());
+        setTotalPrice(0);
+      } else {
+        alert("selected shipping address");
+      }
+    } else {
+      alert("Add items to cart");
+    }
+    
   }
 
 
+
+
   return (<div className="checkout-container">
-    <div className="cart-list">
-      <h3 className="bold-title">My Shopping Bag ( {totalItems} items )</h3>
-      {displayCartItems()}
-    </div>
-    <div className="price-column">
-      <h3 className="bold-title">Price Details ( {totalItems} items )</h3>
-      <div>
-        <div className="price-details">
-          <div className="left bold-title">
-            <span>TOTAL MRP</span>
-            <span>DISCOUNT</span>
-            <span>COUPON</span>
-            <span>SHIPPING FEE</span>
-            <span className="total-amount">TOTAL AMOUNT</span>
-          </div>
-          <div className="right">
-            <span>₹ {parseInt(totalPrice).toFixed(2)}</span>
-            <span>₹ 500</span>
-            <span>₹ 0</span>
-            <span>FREE</span>
-            <span className="total-amount">₹ {parseInt(totalPrice).toFixed(2)}</span>
-          </div>
+      <div className="cart-list">
+        <div className="checkout-header">
+          <button onClick={()=> setShowSelectAddress(false)}>Bag</button>
+          <button onClick={()=> setShowSelectAddress(true)}>Address</button>
         </div>
-        <button onClick={handlePlaceOrder}>PLACE ORDER</button>
+        {!showSelectAddress && <h3 className="bold-title">My Shopping Bag ( {totalItems} items )</h3>}
+        {!showSelectAddress ? displayCartItems() : displayAddressSelection()}
       </div>
-    </div>
+      <div className="price-column">
+        <h3 className="bold-title">Price Details ( {totalItems} items )</h3>
+        <div>
+          <div className="price-details">
+            <div className="left bold-title">
+              <span>TOTAL MRP</span>
+              <span>DISCOUNT</span>
+              <span>COUPON</span>
+              <span>SHIPPING FEE</span>
+              <span className="total-amount">TOTAL AMOUNT</span>
+            </div>
+            <div className="right">
+              <span>₹ {parseInt(totalPrice).toFixed(2)}</span>
+              <span>₹ 500</span>
+              <span>₹ 0</span>
+              <span>FREE</span>
+              <span className="total-amount">₹ {parseInt(totalPrice).toFixed(2)}</span>
+            </div>
+          </div>
+          <button onClick={handlePlaceOrder}>PLACE ORDER</button>
+        </div>
+      </div>
   </div>);
 }
 

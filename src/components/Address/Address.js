@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from 'prop-types';
 import { setAddress } from "../../actions";
 import AddressCard from "./AddressCard/AddressCard";
 import "./Address.scss";
 import FirebaseContext from '../Firebase/context';
 import AddressForm from "./AddressFormModal/AddressForm";
 
-export default function Address() {
+export default function Address({ isCheckout, selectAddressForShipping }) {
 
   const firebase = useContext(FirebaseContext);
+  const user = useSelector((state) => state.sessionState.authUser);
   const [showForm, setShowForm] = useState(false);
-  const [userAddresses, setUserAddresses] = useState([]);
+  const [userAddresses, setUserAddresses] = useState(user.address);
   const [isDefaultAddress , setDefaultAddress] = useState(false);
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.sessionState.authUser);
-  console.log(user, "user from address");
+  
   const showAddressForm = () => setShowForm(true);
 
   useEffect(() => {
@@ -22,6 +23,10 @@ export default function Address() {
     firebase.saveDataToDatabase(user.uid, "address", userAddresses);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userAddresses]);
+
+/*   const handleAddressSelection = () => {
+    selectAddressForShipping()
+  } */
 
   const handleMakeDefaultAddress = (id) =>{
 
@@ -72,7 +77,7 @@ export default function Address() {
 
   return (
     <div>
-      <h3>My Address</h3>
+      <span className="my-address-heading">{isCheckout ? 'Select Address' : 'My Address'}</span>
       <div className="main-address">
         <div>
           <button onClick={showAddressForm}>+ ADD NEW ADDRESS</button>
@@ -80,10 +85,17 @@ export default function Address() {
         {showForm && <AddressForm handleFormSubmit={handleFormSubmit} handleFormClose={handleFormClose} isDefaultAddress={isDefaultAddress}/>}
       </div>
       <AddressCard 
-        addressData={userAddresses} 
-        handleMakeDefaultAddress={handleMakeDefaultAddress}
-        handleRemoveAddress={handleRemoveAddress}
+        addressData = {userAddresses} 
+        handleMakeDefaultAddress = {handleMakeDefaultAddress}
+        handleRemoveAddress = {handleRemoveAddress}
+        selectAddressForShipping = {selectAddressForShipping}
+        isCheckout = {isCheckout}
       />
     </div>
   );
+}
+
+Address.propTypes = {
+  isCheckout: PropTypes.bool,
+  selectAddressForShipping: PropTypes.func,
 }

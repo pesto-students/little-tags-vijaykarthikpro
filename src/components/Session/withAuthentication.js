@@ -26,6 +26,7 @@ const withAuthentication = (Component) => {
         email: authUser.email,
         name: authUser.displayName,
         emailVerified: authUser.emailVerified,
+        address: authUser.address
       };
       saveToLocalStorage("authUser", userDetails);
       props.setAuthUser(userDetails, true);

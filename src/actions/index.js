@@ -53,9 +53,9 @@ export const updateItemInCart = (id, size, quantity) => ({
 
 // Orders actions
 
-export const confirmOrder = (product) => ({
+export const confirmOrder = (orders) => ({
   type: CONFIRM_ORDER,
-  product,
+  orders
 });
 
 export const cancelOrder = (id) => ({

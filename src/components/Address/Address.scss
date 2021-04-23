@@ -1,7 +1,14 @@
+.my-address-heading {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
 .main-address {
   display: flex;
   flex-direction: column;
 
+ 
   button {
     background-color: white;
     color: black;
@@ -9,7 +16,7 @@
     border-radius: 5px;
     margin-top: 10px;
     outline: none;
-    border: none;
+    border: 1px black solid;
   }
 
 }
