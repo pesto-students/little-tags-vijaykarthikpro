@@ -25,9 +25,7 @@ class Firebase {
 
   user = (uid) => this.db.ref(`users/${uid}`);
 
-  getDbRef = (uid) => this.db.ref();
-
-  getDatabase = () => this.db;
+  getDbRef = () => this.db.ref();
 
   saveDataToDatabase = (uid, key, value) => {
     this.user(uid).update({ [key]: value });
@@ -39,7 +37,7 @@ class Firebase {
     return this.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         this.user(authUser.uid)
-          .once('value')
+        .get()
           .then((snapshot) => {
             const dbUser = snapshot.val();
             const user = {
