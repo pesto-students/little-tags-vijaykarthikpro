@@ -17,6 +17,12 @@ export default function cartReducer(state = initialState, action) {
             const filteredOrders = orders.map((product) => product.id !== id);
             return { ...state, orders : filteredOrders} 
         }
+        case ACTIONS.SET_ORDERS_FROM_FIREBASE : {
+            return {...state, orders: action.orders}
+        }
+        case ACTIONS.REMOVE_ORDERS : {
+            return {...state, orders: [] }
+        }
         default: 
             return state;
     }

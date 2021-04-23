@@ -7,6 +7,8 @@ import {
   setWishlistFromFirebase,
   removeCartItems,
   removeWishlistItems,
+  setOrdersFromFirebase,
+  removeOrders
 } from "../../actions";
 import FirebaseContext from "../Firebase/context";
 import {
@@ -39,6 +41,10 @@ const withAuthentication = (Component) => {
         props.setWishlistFromFirebase(authUser.wishlist);
       }
 
+      if(authUser.orders) {
+        props.setOrdersFromFirebase(authUser.orders);
+      }
+
       /* if(userData.cart) {
         props.setCartFromFirebase(userData.cart)
       } */
@@ -50,6 +56,7 @@ const withAuthentication = (Component) => {
       props.setAuthUser(null, false);
       props.removeCartItems();
       props.removeWishlistItems(); 
+      props.removeOrders();
     };
     useEffect(() => {
       const user = JSON.parse(getFromLocalStorage("authUser"));
@@ -72,6 +79,8 @@ const withAuthentication = (Component) => {
     setWishlistFromFirebase,
     removeCartItems,
     removeWishlistItems,
+    setOrdersFromFirebase,
+    removeOrders
   })(NewComponent);
 };
 
