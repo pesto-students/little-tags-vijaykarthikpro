@@ -15,22 +15,24 @@ function CheckoutPage() {
   const user = useSelector(state => state.sessionState.authUser);
   const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
   const dispatch = useDispatch(); 
-
   const [totalItems, setTotalItems] = useState(cart.length);
-
   const cartItemsTotalPrice = cart.reduce((acc, product)=>{
     return acc += product.price; 
   },0)
 
   const [totalPrice, setTotalPrice] = useState(cartItemsTotalPrice);
 
+
   useEffect(()=>{
     setTotalItems(cart.length);
+
     if(isUserLoggedIn) {
       firebase.saveDataToDatabase(user.uid, "cart", cart);
       firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
     }
-  },[cart, firebase, isUserLoggedIn, user, wishlist])
+  },[cart, firebase, isUserLoggedIn, user, wishlist, cartItemsTotalPrice])
+
+
 
 
   const displayCartItems = () => {

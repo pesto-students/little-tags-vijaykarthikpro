@@ -30,31 +30,14 @@ const withAuthentication = (Component) => {
       saveToLocalStorage("authUser", userDetails);
       props.setAuthUser(userDetails, true);
 
-      firebase
-        .getDbRef()
-        .child("users")
-        .child(authUser.uid)
-        .get()
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            const userData = snapshot.val();
+      if (authUser.cart) {
+        props.setCartFromFirebase(authUser.cart);
+      }
 
-            if (userData.cart) {
-              props.setCartFromFirebase(userData.cart);
-            }
+      if (authUser.wishlist) {
+        props.setWishlistFromFirebase(authUser.wishlist);
+      }
 
-            if (userData.wishlist) {
-              props.setWishlistFromFirebase(userData.wishlist);
-            }
-
-            // console.log("withAuthentication: data: ", snapshot.val());
-          } else {
-            console.log("No data available");
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
       /* if(userData.cart) {
         props.setCartFromFirebase(userData.cart)
       } */
@@ -62,9 +45,10 @@ const withAuthentication = (Component) => {
 
     const fallback = () => {
       removeFromLocalStorage("authUser");
+      removeFromLocalStorage("state");
       props.setAuthUser(null, false);
-      /*  props.removeCartItems();
-      props.removeWishlistItems(); */
+      props.removeCartItems();
+      props.removeWishlistItems(); 
     };
     useEffect(() => {
       const user = JSON.parse(getFromLocalStorage("authUser"));
