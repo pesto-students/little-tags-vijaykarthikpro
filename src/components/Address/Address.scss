@@ -1,15 +1,32 @@
-.main-address {
-  display: flex;
-  flex-direction: column;
+.address-page {
+  padding: 30px;
 
-  button {
-    background-color: white;
-    color: black;
-    padding: 10px 20px 10px 20px;
-    border-radius: 5px;
-    margin-top: 10px;
-    outline: none;
-    border: none;
+  .my-address-heading {
+    font-size: 20px;
+    font-weight: 600;
+  }
+  
+  
+  .main-address {
+    display: flex;
+    flex-direction: column;
+  
+   
+    button {
+      background-color: white;
+      color: black;
+      padding: 10px 20px 10px 20px;
+      border-radius: 5px;
+      margin-top: 10px;
+      outline: none;
+      border: 1px black solid;
+
+      span {
+        margin-left: 5px;
+      }
+    }
+  
   }
 
 }
+

@@ -6,15 +6,21 @@
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
 }
 
+.address-radio {
+  width: 20px;
+  height: 20px;
+}
 
 
-  .address-card {
+.address-card {
     background-color: white;
     color: black;
     padding: 20px;
-    margin: 10px;
+    margin: 10px 0 10px 0;
     border-radius: 10px;
-    width: 90%;
+    width: 100%;
+    border: 1px black solid;
+    align-self: flex-start;
 
     .address-details {
 
@@ -55,7 +61,7 @@
       }
       
     }
-  }
+}
   
 
 

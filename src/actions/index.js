@@ -14,6 +14,8 @@ import {
   SET_WISHLIST_FROM_FIREBASE,
   REMOVE_CART_ITEMS,
   REMOVE_WISHLIST_ITEMS,
+  SET_ORDERS_FROM_FIREBASE,
+  REMOVE_ORDERS
 } from "../constants/actionTypes";
 
 // User actions
@@ -51,17 +53,26 @@ export const updateItemInCart = (id, size, quantity) => ({
   quantity,
 });
 
+export const removeOrders = () => ({
+  type: REMOVE_ORDERS
+})
+
 // Orders actions
 
-export const confirmOrder = (product) => ({
+export const confirmOrder = (orders) => ({
   type: CONFIRM_ORDER,
-  product,
+  orders
 });
 
 export const cancelOrder = (id) => ({
   type: CANCEL_ORDER,
   id,
 });
+
+export const setOrdersFromFirebase = (orders) => ({
+  type: SET_ORDERS_FROM_FIREBASE,
+  orders
+})
 
 // wishlist actions
 
