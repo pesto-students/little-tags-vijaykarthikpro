@@ -4,6 +4,7 @@ import { setAddress } from "../../actions";
 import AddressCard from "./AddressCard/AddressCard";
 import "./Address.scss";
 import FirebaseContext from '../Firebase/context';
+import AddressForm from "./AddressFormModal/AddressForm";
 
 export default function Address() {
 
@@ -39,7 +40,11 @@ export default function Address() {
     setUserAddresses(updatedAddresses);
   }
 
-  function handleChange(e) {
+  const handleFormClose = () =>{
+    setShowForm(false);
+  }
+
+  function handleFormSubmit(e) {
     const isDefaultAvailable = userAddresses.filter(({ isDefault }) =>
       isDefault ? true : false
     );
@@ -72,31 +77,7 @@ export default function Address() {
         <div>
           <button onClick={showAddressForm}>+ ADD NEW ADDRESS</button>
         </div>
-        {showForm && (
-          <form onSubmit={handleChange}>
-            <input type="text" name="name" placeholder="Name" required/>
-
-            <input type="text" name="mobile" placeholder="Mobile" required/>
-
-            <div className="pincode">
-              <input type="text" name="pincode" placeholder="Pincode" required/>
-              <input type="text" name="state" placeholder="State" id="state" required/>
-            </div>
-
-            <input type="text" name="area" placeholder="Area" required/>
-
-            <input type="text" name="town" placeholder="Town" required/>
-
-            <input type="text" name="city" placeholder="City" required/>
-            {!isDefaultAddress && <li>
-              <input type="checkbox" />
-              <span>Make this my default address</span>
-            </li>}
-            <div>
-              <input type="submit" value="Save"></input>
-            </div>
-          </form>
-        )}
+        {showForm && <AddressForm handleFormSubmit={handleFormSubmit} handleFormClose={handleFormClose} isDefaultAddress={isDefaultAddress}/>}
       </div>
       <AddressCard 
         addressData={userAddresses} 

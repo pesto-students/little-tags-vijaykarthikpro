@@ -30,7 +30,7 @@ export default function cartReducer(state = initialState, action) {
             return { ...state, cart: udpatedCart }
         }
         case ACTIONS.SET_CART_FROM_FIREBASE : {
-            return { ...state, cart : [...state.cart, action.cart]}; 
+            return { ...state, cart : action.cart}; 
         }
         case ACTIONS.REMOVE_CART_ITEMS : {
             return { ...state, cart: [] }

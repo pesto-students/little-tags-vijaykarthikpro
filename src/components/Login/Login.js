@@ -27,7 +27,7 @@ export default function Login({ showLogin, handleModalOpen }) {
 
         handleModalOpen();
 
-        return firebase.user(authUser.user.uid).set({
+        return firebase.user(authUser.user.uid).update({
           email: authUser.user.email,
           displayName: authUser.user.displayName,
           roles: {},
