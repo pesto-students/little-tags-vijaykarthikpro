@@ -15,14 +15,14 @@ export default function cartReducer(state = initialState, action) {
         case ACTIONS.REMOVE_ITEM_FROM_CART : {
             const { cart } = state;
             const { id } = action
-            const filteredCart = cart.filter((product) => product.id !== id);
+            const filteredCart = cart.filter((product) => product.uniqueId !== id);
             return { ...state, cart : filteredCart } 
         }
         case ACTIONS.UPDATE_CART_ITEM : {
             let { cart } = state;
             const { id, size, quantity } = action
             const udpatedCart = cart.map((item) => {
-                if(item.id === id) {
+                if(item.uniqueId === id) {
                     return { ...item, size, quantity }
                 }
                 return item;

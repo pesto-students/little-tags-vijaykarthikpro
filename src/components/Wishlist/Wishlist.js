@@ -11,21 +11,24 @@ function Wishlist() {
   const wishlist = useSelector(state=> state.wishlistState.wishlist);
   const cart = useSelector(state => state.cartState.cart);
   const user = useSelector(state => state.sessionState.authUser);
+  const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
   const dispatch = useDispatch();
   const [totalItems, setTotalItems] = useState(wishlist.length);
 
   useEffect(() => {
     setTotalItems(wishlist.length);
-    firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
-    firebase.saveDataToDatabase(user.uid, "cart", cart);
-  },[cart, firebase, user.uid, wishlist]);
+    if(isUserLoggedIn) {
+      firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+      firebase.saveDataToDatabase(user.uid, "cart", cart);
+    }
+  },[cart, firebase, isUserLoggedIn, user, wishlist]);
 
   const displayWishlistItems = () => {
     return wishlist.map((product) => {
-      const { id, image, title, price } = product;
+      const {  uniqueId, image, title, price, size = 'XS' } = product;
 
       return (
-        <div className="item-row" key={id}>
+        <div className="item-row" key={uniqueId}>
           <div className="product-image">
             <img src={image} alt="item" />
           </div>
@@ -33,7 +36,7 @@ function Wishlist() {
             <div className="item-details">
               <div className="main-details">
                 <span className="bold-title">{title}</span>
-                <span className="details-text">Size : XL</span>
+                <span className="details-text">Size : {size}</span>
               </div>
               <div className="price">
                 <span className="bold-title">₹ {price}</span>
@@ -44,14 +47,14 @@ function Wishlist() {
                 className="wishlist-button"
                 onClick={() => {
                   dispatch(addItemToCart(product));
-                  dispatch(removeItemFromWishlist(id));
+                  dispatch(removeItemFromWishlist(uniqueId));
                 }}
               >
                 Add to bag
               </span>
               <span
                 className="remove-btn"
-                onClick={() => dispatch(removeItemFromWishlist(id))}
+                onClick={() => dispatch(removeItemFromWishlist(uniqueId))}
               >
                 Remove
               </span>

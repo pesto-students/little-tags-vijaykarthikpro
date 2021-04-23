@@ -14,6 +14,7 @@ import CartIcon from "../../assets/icons/cart-filled.svg";
 import WishlistIcon from "../../assets/icons/wishlist-filled.svg";
 import Products from "../../data/products";
 import FirebaseContext from '../Firebase/context';
+import Login from '../Login/Login';
 // import Carousel from '../carousel/Carousel'
 // import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
@@ -23,11 +24,15 @@ export default function ProductDetailsPage() {
   const wishlist = useSelector(state => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
   const user = useSelector(state => state.sessionState.authUser);
+  const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
   const [isAddToWishlist, setAddToWishlist] = useState(false);
   const [selectedSize, setSelectedSize] = useState(SIZES.XS);
+  const [showLogin, setShowLogin] = useState(false);
+
+  const showLoginModal = () => setShowLogin(!showLogin);
 
   const dispatch = useDispatch();
   let location = useLocation();
@@ -58,9 +63,11 @@ export default function ProductDetailsPage() {
   }, [cart, id, product, wishlist]); */
 
   useEffect(()=>{
-    firebase.saveDataToDatabase(user.uid, "cart", cart);
-    firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
-  },[cart, firebase, user.uid, wishlist])
+    if(isUserLoggedIn) {
+      firebase.saveDataToDatabase(user.uid, "cart", cart);
+      firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
+    }
+  },[cart, firebase, isUserLoggedIn, user, wishlist])
 
   const displaySizes = () => {
     const sizesList = Object.values(SIZES);
@@ -92,11 +99,22 @@ export default function ProductDetailsPage() {
   };
 
   const handleAddToCartClick = () => {
-    setAddToCart(!isAddToCart);
+    if(isUserLoggedIn) {
+      setShowLogin(false);
+      setAddToCart(!isAddToCart);
+    } else {
+      setShowLogin(true);
+    }
+    
   };
 
   const handleAddToWishlistClick = () => {
-    setAddToWishlist(!isAddToWishlist);
+    if(isUserLoggedIn) {
+      setShowLogin(false);
+      setAddToWishlist(!isAddToWishlist);
+    } else {
+      setShowLogin(true);
+    }
   };
 
   useEffect(() =>{
@@ -107,7 +125,9 @@ export default function ProductDetailsPage() {
       dispatch(addItemToCart(product));
       
     } else {
-      dispatch(removeItemFromCart(product.uniqueId));
+      if(isUserLoggedIn) {
+        dispatch(removeItemFromCart(product.uniqueId));
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
@@ -119,7 +139,9 @@ export default function ProductDetailsPage() {
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
     } else {
-      dispatch(removeItemFromWishlist(product.uniqueId));
+      if(isUserLoggedIn) {
+        dispatch(removeItemFromWishlist(product.uniqueId));
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToWishlist]);
@@ -170,6 +192,7 @@ export default function ProductDetailsPage() {
       </div>
       {/* <Carousel /> */}
       {/* <SimilarProducts /> */}
+      <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
     </div>
   );
 }
