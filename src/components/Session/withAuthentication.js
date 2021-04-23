@@ -9,7 +9,7 @@ const withAuthentication = (Component) => {
     const firebase = useContext(FirebaseContext);
     
     const next = async (authUser) => {
-      console.log("next function called from with Authentication:");
+      // console.log("next function called from with Authentication:", authUser);
       const userDetails = {
         uid: authUser.uid,
         email: authUser.email, 
@@ -18,20 +18,33 @@ const withAuthentication = (Component) => {
       }
       saveToLocalStorage('authUser',userDetails);
       props.setAuthUser(userDetails,true);
-    
+
+      firebase.getDbRef().child("users").child(authUser.uid).get().then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log("snapshot val: ",snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
     };
 
     const fallback = () => {
       removeFromLocalStorage('authUser')
       props.setAuthUser(null,false);
+/*       props.removeCartItems();
+      props.removeWishlistItems(); */
     };
     useEffect(() => {
       const user = JSON.parse(getFromLocalStorage('authUser'));
+
       if(user) {
         props.setAuthUser(user,true);
       } else {
         props.setAuthUser(null,false);
       }
+
       firebase.onAuthChangeListener(next, fallback);
     });
 
