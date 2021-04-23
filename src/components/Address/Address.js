@@ -1,24 +1,46 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setAddress } from "../../actions";
 import AddressCard from "./AddressCard/AddressCard";
 import "./Address.scss";
+import FirebaseContext from '../Firebase/context';
 
 export default function Address() {
+
+  const firebase = useContext(FirebaseContext);
   const [showForm, setShowForm] = useState(false);
-  const [userDetails, setUserDetails] = useState([]);
+  const [userAddresses, setUserAddresses] = useState([]);
+  const [isDefaultAddress , setDefaultAddress] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.sessionState.authUser);
   console.log(user, "user from address");
   const showAddressForm = () => setShowForm(true);
 
   useEffect(() => {
-    dispatch(setAddress(userDetails));
+    dispatch(setAddress(userAddresses));
+    firebase.saveDataToDatabase(user.uid, "address", userAddresses);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userDetails]);
+  }, [userAddresses]);
+
+  const handleMakeDefaultAddress = (id) =>{
+
+    let updatedAddresses = userAddresses.map((address, index) => {
+      if(index !== id) {
+        return { ...address, isDefault: false}
+      }
+      return {...address, isDefault : true}
+    });
+
+    setUserAddresses(updatedAddresses);
+  }
+
+  const handleRemoveAddress = (id) => {
+    let updatedAddresses = userAddresses.filter((_,index) => index !== id );
+    setUserAddresses(updatedAddresses);
+  }
 
   function handleChange(e) {
-    const isDefaultAvailable = userDetails.filter(({ isDefault }) =>
+    const isDefaultAvailable = userAddresses.filter(({ isDefault }) =>
       isDefault ? true : false
     );
     console.log(isDefaultAvailable);
@@ -26,6 +48,7 @@ export default function Address() {
     e.preventDefault();
     let isCurrentAddressDefault = false;
     if (!isDefaultAvailable.length > 0) {
+      setDefaultAddress(true);
       isCurrentAddressDefault = true;
     }
     const { elements } = e.target;
@@ -39,7 +62,7 @@ export default function Address() {
       city: elements[6].value,
       isDefault: isCurrentAddressDefault,
     };
-    setUserDetails([...userDetails, currentDetails]);
+    setUserAddresses([...userAddresses, currentDetails]);
   }
 
   return (
@@ -51,31 +74,35 @@ export default function Address() {
         </div>
         {showForm && (
           <form onSubmit={handleChange}>
-            <input type="text" name="name" placeholder="Name" />
+            <input type="text" name="name" placeholder="Name" required/>
 
-            <input type="text" name="mobile" placeholder="Mobile" />
+            <input type="text" name="mobile" placeholder="Mobile" required/>
 
             <div className="pincode">
-              <input type="text" name="pincode" placeholder="Pincode" />
-              <input type="text" name="state" placeholder="State" id="state" />
+              <input type="text" name="pincode" placeholder="Pincode" required/>
+              <input type="text" name="state" placeholder="State" id="state" required/>
             </div>
 
-            <input type="text" name="area" placeholder="Area" />
+            <input type="text" name="area" placeholder="Area" required/>
 
-            <input type="text" name="town" placeholder="Town" />
+            <input type="text" name="town" placeholder="Town" required/>
 
-            <input type="text" name="city" placeholder="City" />
-            <li>
+            <input type="text" name="city" placeholder="City" required/>
+            {!isDefaultAddress && <li>
               <input type="checkbox" />
               <span>Make this my default address</span>
-            </li>
+            </li>}
             <div>
               <input type="submit" value="Save"></input>
             </div>
           </form>
         )}
       </div>
-      {!showForm && <AddressCard addressData={userDetails} />}
+      <AddressCard 
+        addressData={userAddresses} 
+        handleMakeDefaultAddress={handleMakeDefaultAddress}
+        handleRemoveAddress={handleRemoveAddress}
+      />
     </div>
   );
 }

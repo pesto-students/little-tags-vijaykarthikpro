@@ -47,7 +47,7 @@ const withAuthentication = (Component) => {
               props.setWishlistFromFirebase(userData.wishlist);
             }
 
-            console.log("withAuthentication: data: ", snapshot.val());
+            // console.log("withAuthentication: data: ", snapshot.val());
           } else {
             console.log("No data available");
           }
