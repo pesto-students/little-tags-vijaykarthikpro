@@ -1,100 +1,103 @@
-import { 
-  SET_AUTH_USER, 
-  REMOVE_AUTH_USER, 
-  ADD_ITEM_TO_CART, 
-  REMOVE_ITEM_FROM_CART, 
-  CONFIRM_ORDER, 
+import {
+  SET_AUTH_USER,
+  REMOVE_AUTH_USER,
+  ADD_USER_ADDRESS,
+  ADD_ITEM_TO_CART,
+  REMOVE_ITEM_FROM_CART,
+  CONFIRM_ORDER,
   CANCEL_ORDER,
   ADD_ITEM_TO_WISHLIST,
   REMOVE_ITEM_FROM_WISHLIST,
-  UPDATE_WISHLIST_ITEM, 
+  UPDATE_WISHLIST_ITEM,
   UPDATE_CART_ITEM,
   SET_CART_FROM_FIREBASE,
   SET_WISHLIST_FROM_FIREBASE,
   REMOVE_CART_ITEMS,
-  REMOVE_WISHLIST_ITEMS} from '../constants/actionTypes';
+  REMOVE_WISHLIST_ITEMS,
+} from "../constants/actionTypes";
 
 // User actions
 
 export const setAuthUser = (authUser, isUserLoggedIn) => ({
   type: SET_AUTH_USER,
   authUser,
-  isUserLoggedIn
+  isUserLoggedIn,
 });
 
 export const removeAuthUser = () => ({
-  type: REMOVE_AUTH_USER
+  type: REMOVE_AUTH_USER,
 });
 
-
+export const setAddress = (address) => ({
+  type: ADD_USER_ADDRESS,
+  address,
+});
 // Cart actions
 
 export const addItemToCart = (product) => ({
   type: ADD_ITEM_TO_CART,
-  product
+  product,
 });
 
 export const removeItemFromCart = (id) => ({
   type: REMOVE_ITEM_FROM_CART,
-  id
-})
+  id,
+});
 
 export const updateItemInCart = (id, size, quantity) => ({
   type: UPDATE_CART_ITEM,
   id,
   size,
-  quantity
-})
-
+  quantity,
+});
 
 // Orders actions
 
 export const confirmOrder = (product) => ({
   type: CONFIRM_ORDER,
-  product
+  product,
 });
 
 export const cancelOrder = (id) => ({
   type: CANCEL_ORDER,
-  id
-})
+  id,
+});
 
 // wishlist actions
 
 export const addItemToWishlist = (product) => ({
   type: ADD_ITEM_TO_WISHLIST,
-  product
+  product,
 });
 
 export const removeItemFromWishlist = (id) => ({
   type: REMOVE_ITEM_FROM_WISHLIST,
-  id
-})
+  id,
+});
 
 export const updateItemInWishlist = (id, size, quantity) => ({
   type: UPDATE_WISHLIST_ITEM,
   id,
   size,
-  quantity
-})
+  quantity,
+});
 
-
-// firebase actions 
+// firebase actions
 
 export const setCartFromFirebase = (cart) => ({
   type: SET_CART_FROM_FIREBASE,
-  cart
-})
+  cart,
+});
 
 export const setWishlistFromFirebase = (wishlist) => ({
   type: SET_WISHLIST_FROM_FIREBASE,
-  wishlist
-})
+  wishlist,
+});
 
 export const removeCartItems = () => ({
-  type: REMOVE_CART_ITEMS
-})
+  type: REMOVE_CART_ITEMS,
+});
 
 export const removeWishlistItems = () => ({
-  type: REMOVE_WISHLIST_ITEMS
-})
+  type: REMOVE_WISHLIST_ITEMS,
+});
