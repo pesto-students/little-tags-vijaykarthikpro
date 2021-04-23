@@ -5,7 +5,7 @@ export const ProfileItems = [
   },
   {
     title: "Orders",
-    path: "/orders",
+    path: "/account/orders",
   },
 ];
 

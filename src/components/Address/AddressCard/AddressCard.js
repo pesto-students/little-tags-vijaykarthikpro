@@ -38,7 +38,7 @@ export default function AddressCard({ addressData, handleMakeDefaultAddress, han
 
       return (
         <div className="address-card" key={id}>
-          {isCheckout && <input name="address" type="radio" onClick={handleAddressSelection} />  }
+          {isCheckout && <input className="address-radio" name="address" type="radio" onClick={handleAddressSelection} />  }
           <div>
             <div className="address-details">
               <div className="header">

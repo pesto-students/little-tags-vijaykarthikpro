@@ -76,11 +76,11 @@ export default function Address({ isCheckout, selectAddressForShipping }) {
   }
 
   return (
-    <div>
+    <div className="address-page">
       <span className="my-address-heading">{isCheckout ? 'Select Address' : 'My Address'}</span>
       <div className="main-address">
         <div>
-          <button onClick={showAddressForm}>+ ADD NEW ADDRESS</button>
+          <button onClick={showAddressForm}>+ <span>ADD NEW ADDRESS</span></button>
         </div>
         {showForm && <AddressForm handleFormSubmit={handleFormSubmit} handleFormClose={handleFormClose} isDefaultAddress={isDefaultAddress}/>}
       </div>
