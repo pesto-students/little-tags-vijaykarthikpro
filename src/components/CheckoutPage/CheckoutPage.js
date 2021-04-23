@@ -145,6 +145,7 @@ function CheckoutPage() {
         dispatch(confirmOrder(orders));
         dispatch(removeCartItems());
         setTotalPrice(0);
+        alert("Order placed successfully");
       } else {
         alert("selected shipping address");
       }
@@ -163,14 +164,14 @@ function CheckoutPage() {
           <button onClick={()=> setShowSelectAddress(false)}>Bag</button>
           <button onClick={()=> setShowSelectAddress(true)}>Address</button>
         </div>
-        {!showSelectAddress && <h3 className="bold-title">My Shopping Bag ( {totalItems} items )</h3>}
+        {!showSelectAddress && <span className="bold-title">My Shopping Bag ( {totalItems} items )</span>}
         {!showSelectAddress ? displayCartItems() : displayAddressSelection()}
       </div>
       <div className="price-column">
-        <h3 className="bold-title">Price Details ( {totalItems} items )</h3>
+        <span className="bold-title">Price Details ( {totalItems} items )</span>
         <div>
           <div className="price-details">
-            <div className="left bold-title">
+            <div className="left">
               <span>TOTAL MRP</span>
               <span>DISCOUNT</span>
               <span>COUPON</span>

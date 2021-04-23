@@ -12,7 +12,7 @@ export default function Orders() {
     <div className="orders-page">
       <span className="my-orders-title">My Orders</span>
       <OrderCard ordersData={ordersData} />
-      {ordersData.length === 0 && <div>Hey, You have not placed any orders yet!</div>}
+      {ordersData.length === 0 && <div className="display-txt">Hey, You have not placed any orders yet!</div>}
     </div>
   );
 }
