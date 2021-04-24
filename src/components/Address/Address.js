@@ -12,9 +12,15 @@ export default function Address({ isCheckout, selectAddressForShipping }) {
   const firebase = useContext(FirebaseContext);
   const user = useSelector((state) => state.sessionState.authUser);
   const [showForm, setShowForm] = useState(false);
-  const [userAddresses, setUserAddresses] = useState(user.address);
+  const [userAddresses, setUserAddresses] = useState([]);
   const [isDefaultAddress , setDefaultAddress] = useState(false);
   const dispatch = useDispatch();
+
+  useEffect(() =>{
+    if(user.address) {
+      setUserAddresses(user.address);
+    }
+  },[user.address]);
   
   const showAddressForm = () => setShowForm(true);
 
