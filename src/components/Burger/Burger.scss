@@ -1,6 +1,6 @@
 .burger-modal {
   background: rgba(0, 0, 0, 0.3);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -14,7 +14,7 @@
     flex-direction: column;
     height: 100%;
     text-align: left;
-    padding-top: 20px;
+    padding-top: 10px;
     margin: 0;
     width: 20%;
     align-items: center;
@@ -23,7 +23,7 @@
     // transition: all 0.3s linear;
     .burger-header {
       display: flex;
-      margin: 20px 0 10px 0;
+      margin: 10px 0 10px 0;
       align-items: center;
       padding-bottom: 20px;
       border-bottom: 1px white solid;
@@ -49,6 +49,12 @@
           }
         }
       }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .burger-main {
+      width: 100%;
     }
   }
 }
