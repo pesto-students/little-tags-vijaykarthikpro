@@ -20,21 +20,41 @@
   .search-result {
     position: absolute;
     top: 40px;
-    left: 10px;
+    left: -40px;
     list-style: none;
     text-align: start;
-    width: 310px;
+    width: 400px;
     max-height: 350px;
     overflow-y: scroll;
     background: white;
     z-index: 2;
-    padding: 10px;
+    padding: 5px;
     overflow: auto;
 
+    li {
+      margin-bottom: 10px;
+      
     .dropdown-search-items {
       text-decoration: none;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100px;
       font-size: 14px;
       color: black;
+      padding: 10px;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: lightgrey;
+      }
+
+      &:active {
+        background-color: grey;
+      }
     }
+
+    }
+
   }
 }
