@@ -26,6 +26,23 @@
         }
       }
 
+
+
+      .logo {
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+
+          .title {
+            padding-left: 10px;
+            font-family: "Gloria Hallelujah";
+            font-size: 25px;
+            // padding: 0px 20px 0 20px;
+          }
+      }
+
       .search-bar {
         display: flex;
         margin-right: 10px;
@@ -33,19 +50,19 @@
         border-radius: 20px;
         background-color: white;
 
-        input[type="text"] {
-          width: 200px;
-          padding: 10px;
-          outline: none;
-          padding-left: 10px;
-          border-radius: 20px;
-          border: 0;
-        }
-        .search-icon {
-          width: 16px;
-          height: 16px;
-          margin: 0 8px 0 8px;
-        }
+        // input[type="text"] {
+        //   width: 200px;
+        //   padding: 10px;
+        //   outline: none;
+        //   padding-left: 10px;
+        //   border-radius: 20px;
+        //   border: 0;
+        // }
+        // .search-icon {
+        //   width: 16px;
+        //   height: 16px;
+        //   margin: 0 8px 0 8px;
+        // }
       }
 
       button {
@@ -68,11 +85,7 @@
       }
     }
 
-    .title {
-      font-family: "Gloria Hallelujah";
-      font-size: 30px;
-      padding: 0px 20px 0 20px;
-    }
+    
 
     .nav-links {
       color: white;

@@ -6,11 +6,12 @@ import Dropdown from "./Dropdown/Dropdown";
 import Login from "../Login/Login";
 import Burger from "../Burger/Burger";
 import AppLogo from "../../assets/icons/logo-symbol.png";
-import SearchIcon from "../../assets/icons/search.svg";
+// import SearchIcon from "../../assets/icons/search.svg";
 import CartIcon from "../../assets/icons/cart.svg";
 import GlobeIcon from "../../assets/icons/globe.svg";
 import WishlistIcon from "../../assets/icons/wishlist.svg";
 import ProfileIcon from "../../assets/icons/person.svg";
+import Search from "./Search/Search";
 import Menu from "../../assets/icons/menu.svg";
 
 export default function Header() {
@@ -53,7 +54,7 @@ export default function Header() {
             <img className="burger-icon" src={Menu} alt="menu-icon" />
             <Burger showMenu={menuClick} handleMenuClick={handleMenuClick} />
           </div>
-          <div>
+          <div className="logo">
             <Link to="/" className="left nav-links">
               <img src={AppLogo} alt="app-logo" />
               <span className="title">Style Beast</span>
@@ -73,8 +74,9 @@ export default function Header() {
         </div>
         <div className="right">
           <div className="search-bar">
-            <input type="text" placeholder="Search items..." />
-            <img className="search-icon" src={SearchIcon} alt="search-icon" />
+            <Search />
+            {/* <input type="text" placeholder="Search items..." />
+            <img className="search-icon" src={SearchIcon} alt="search-icon" /> */}
           </div>
           <div className="menu-item">
             <Link to="/" className="nav-links">
