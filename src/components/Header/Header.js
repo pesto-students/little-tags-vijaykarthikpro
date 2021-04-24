@@ -4,21 +4,28 @@ import { Link } from "react-router-dom";
 import "./Header.scss";
 import Dropdown from "./Dropdown/Dropdown";
 import Login from "../Login/Login";
+import Burger from "../Burger/Burger";
 import AppLogo from "../../assets/icons/logo-symbol.png";
 import SearchIcon from "../../assets/icons/search.svg";
 import CartIcon from "../../assets/icons/cart.svg";
 import GlobeIcon from "../../assets/icons/globe.svg";
 import WishlistIcon from "../../assets/icons/wishlist.svg";
 import ProfileIcon from "../../assets/icons/person.svg";
+import Menu from "../../assets/icons/menu.svg";
 
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
+  const [menuClick, setMenuClick] = useState(false);
+
   const isUserLoggedIn = useSelector(
     (state) => state.sessionState.isUserLoggedIn
   );
 
   const showLoginModal = () => setShowLogin(!showLogin);
-
+  const handleMenuClick = (event) => {
+    setMenuClick(!menuClick);
+    // event.stopPropagation();
+  };
   const renderProfileIcon = () => {
     if (isUserLoggedIn) {
       return (
@@ -42,6 +49,10 @@ export default function Header() {
     <div className="website-header">
       <nav className="navbar">
         <div className="left">
+          <div className="hamburger-menu" onClick={handleMenuClick}>
+            <img className="burger-icon" src={Menu} alt="menu-icon" />
+            <Burger showMenu={menuClick} handleMenuClick={handleMenuClick} />
+          </div>
           <div>
             <Link to="/" className="left nav-links">
               <img src={AppLogo} alt="app-logo" />

@@ -1,6 +1,5 @@
 @use '../../../styles.scss' as styles;
 
-
 .website-header {
   border-bottom: 1px white solid;
 
@@ -12,19 +11,28 @@
     justify-content: space-between;
     padding: 40px;
     font-size: 20px;
-  
+
     .left,
     .right {
       display: flex;
       align-items: center;
-  
+
+      .hamburger-menu {
+        margin-right: 10px;
+        cursor: pointer;
+        .burger-icon {
+          height: 15px;
+          width: 15px;
+        }
+      }
+
       .search-bar {
         display: flex;
         margin-right: 10px;
         align-items: center;
         border-radius: 20px;
         background-color: white;
-  
+
         input[type="text"] {
           width: 200px;
           padding: 10px;
@@ -39,7 +47,7 @@
           margin: 0 8px 0 8px;
         }
       }
-  
+
       button {
         background-color: white;
         color: black;
@@ -50,7 +58,7 @@
         border: 0px;
         cursor: pointer;
       }
-  
+
       .menu-item {
         &:hover {
           .dropdown-menu {
@@ -59,20 +67,20 @@
         }
       }
     }
-  
+
     .title {
       font-family: "Gloria Hallelujah";
       font-size: 30px;
       padding: 0px 20px 0 20px;
     }
-  
+
     .nav-links {
       color: white;
       text-decoration: none;
       padding: 0.5rem 1.2rem;
     }
   }
-  
+
   .dropdown-menu {
     visibility: hidden;
     position: absolute;
@@ -82,25 +90,25 @@
     background: white;
     z-index: 2;
     filter: drop-shadow(1px 1px 1px black);
-  
+
     li {
       cursor: pointer;
       text-decoration: none;
       font-size: 15px;
     }
-  
+
     .dropdown-link {
       display: block;
       width: 100%;
       height: 100%;
       text-decoration: none;
       color: black;
-  
+
       &:hover {
         font-weight: 600;
       }
     }
-  
+
     .profile-menu {
       @include styles.flex-row-center;
       align-items: flex-start;
@@ -112,28 +120,27 @@
       font-size: 16px;
       border: 1px white solid;
       border-radius: 10px 10px 0 0;
-  
+
       .username {
         margin-left: 5px;
         text-transform: capitalize;
       }
     }
-  
+
     .item-padding {
       padding: 10px;
     }
-  
+
     .logout {
       color: black;
       font-size: 16px;
       cursor: pointer;
       margin: 0;
       padding: 0;
-  
+
       &:hover {
         font-weight: 600;
       }
     }
   }
-  
 }
