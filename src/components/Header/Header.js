@@ -16,15 +16,16 @@ import Menu from "../../assets/icons/menu.svg";
 
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
-  const [menuClick, setMenuClick] = useState(false);
+  const [isHamburgerMenuOpen, setHamBurgerMenu] = useState(false);
 
   const isUserLoggedIn = useSelector(
     (state) => state.sessionState.isUserLoggedIn
   );
 
   const showLoginModal = () => setShowLogin(!showLogin);
-  const handleMenuClick = (event) => {
-    setMenuClick(!menuClick);
+
+  const handleBurgerClose = () => {
+    setHamBurgerMenu(!isHamburgerMenuOpen);
     // event.stopPropagation();
   };
   const renderProfileIcon = () => {
@@ -46,13 +47,15 @@ export default function Header() {
     }
   };
 
+
+
   return (
     <div className="website-header">
       <nav className="navbar">
         <div className="left">
-          <div className="hamburger-menu" onClick={handleMenuClick}>
-            <img className="burger-icon" src={Menu} alt="menu-icon" />
-            <Burger showMenu={menuClick} handleMenuClick={handleMenuClick} />
+          <div className="hamburger-menu" >
+            <img className="burger-icon" src={Menu} alt="menu-icon" onClick={handleBurgerClose}/>
+            <Burger showMenu={isHamburgerMenuOpen} handleBurgerClose={handleBurgerClose} />
           </div>
           <div className="logo">
             <Link to="/" className="left nav-links">
@@ -60,7 +63,7 @@ export default function Header() {
               <span className="title">Style Beast</span>
             </Link>
           </div>
-          <div>
+          <div className="category-links">
             <Link to="/products/men" className="nav-links">
               Men
             </Link>

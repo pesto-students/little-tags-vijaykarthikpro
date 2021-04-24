@@ -6,7 +6,6 @@
   bottom: 0;
   right: 0;
   z-index: 2;
-
   //transition: transform 0.3s ease-in-out;
 
   .burger-main {
@@ -14,38 +13,72 @@
     flex-direction: column;
     height: 100%;
     text-align: left;
-    padding-top: 10px;
-    margin: 0;
-    width: 20%;
+    width: 25%;
     align-items: center;
     background: black;
-    // align-items: center;
-    // transition: all 0.3s linear;
+    
     .burger-header {
       display: flex;
-      margin: 10px 0 10px 0;
+      justify-content: space-between;
       align-items: center;
-      padding-bottom: 20px;
-      border-bottom: 1px white solid;
+      padding: 10px;
+      height: 80px;
+
+      .header-logo {
+        display: flex;
+        align-items: center;
+
+        .logo {
+          width: 40px;
+          height: 40px;
+        }
+
+      }
+
+     
+
+      .close-icon {
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+      }
+
       .title {
         font-family: "Gloria Hallelujah";
-        font-size: 30px;
-        // border: 1px red solid;
+        font-size: 25px;
+        padding-left: 10px;
       }
     }
 
+    .line-divider {
+      border-bottom: 1px white solid;
+      width: 100%;
+    }
+
     .burger-list {
-      //   z-index: 2;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      span {
+        margin-top: 20px;
+      }
 
       ul {
+        margin-top: 20px;
+        text-align: center;
+
         li {
           list-style: none;
           padding: 5px;
+
+          
+
           .nav-links {
             color: white;
             text-decoration: none;
             padding: 0.5rem 1.2rem;
+            
           }
         }
       }
