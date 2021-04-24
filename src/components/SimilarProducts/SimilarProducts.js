@@ -54,7 +54,7 @@ export default function SimilarProducts() {
         <h1 className="heading">Similar Products</h1>
         <div className="similar-card-container">
             {/* <Card productsData={onlyFourProducts}/> */}
-            <div className="main-content">{displayProducts()}</div>
+            <div className="similar-products-content">{displayProducts()}</div>
         </div>
     </div>)
 }

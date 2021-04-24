@@ -18,7 +18,7 @@ export default function Card({ productsData }) {
   const displayTitleText = (title) => {
     const words = title.split(" ");
     if (words.length > 4) {
-      const letters = title.substring(0, 20);
+      const letters = title.substring(0, 18);
       return <span className="title">{`${letters}...`}</span>;
     } else {
       return <span className="title">{title}</span>;
