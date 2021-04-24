@@ -3,19 +3,24 @@ import { Link/* , Switch, Route */ } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import "./Burger.scss";
 import AppLogo from "../../assets/icons/logo-symbol.png";
+import CloseIcon from '../../assets/icons/clear.svg';
 
-export default function Burger({ showMenu, handleMenuClick }) {
+export default function Burger({ showMenu, handleMenuClick, handleBurgerClose }) {
   return (
     <>
       {showMenu ? (
         <div className="burger-modal">
           <div className="burger-main">
             <div className="burger-header">
-              <img src={AppLogo} alt="app-logo" />
-              <span className="title">Style Beast</span>
+              <div className="header-logo">
+                <img className="logo" src={AppLogo} alt="app-logo" />
+                <span className="title">Style Beast</span>
+              </div>
+              <img className="close-icon" src={CloseIcon} alt="close" onClick={handleBurgerClose}/>
             </div>
+            <div className="line-divider"></div>
             <div className="burger-list">
-              <h4>Categories</h4>
+              <span className="animate__animated animate__bounce infinite">Categories</span>
               <ul>
                 <li>
                   <Link to={ROUTES.MEN} className="nav-links">

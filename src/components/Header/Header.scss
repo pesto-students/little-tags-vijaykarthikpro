@@ -12,14 +12,14 @@
     padding: 40px;
     font-size: 20px;
 
-    .left,
-    .right {
+    .left {
       display: flex;
       align-items: center;
 
       .hamburger-menu {
         margin-right: 10px;
         cursor: pointer;
+
         .burger-icon {
           height: 15px;
           width: 15px;
@@ -35,13 +35,24 @@
           height: 40px;
         }
 
-          .title {
+        .title {
             padding-left: 10px;
             font-family: "Gloria Hallelujah";
             font-size: 25px;
             // padding: 0px 20px 0 20px;
-          }
+        }
       }
+
+      .category-links {
+        display: block;
+      }
+    }
+
+
+    .right {
+      display: flex;
+      align-items: center;
+      
 
       .search-bar {
         display: flex;
@@ -50,19 +61,6 @@
         border-radius: 20px;
         background-color: white;
 
-        // input[type="text"] {
-        //   width: 200px;
-        //   padding: 10px;
-        //   outline: none;
-        //   padding-left: 10px;
-        //   border-radius: 20px;
-        //   border: 0;
-        // }
-        // .search-icon {
-        //   width: 16px;
-        //   height: 16px;
-        //   margin: 0 8px 0 8px;
-        // }
       }
 
       button {
@@ -157,3 +155,26 @@
     }
   }
 }
+
+
+@media  screen and (max-width: 1200px) { 
+  .website-header {
+    .navbar {
+
+      .left {
+
+        .category-links {
+          display: none;
+        }
+
+      }
+
+      .right {
+        // overflow: hidden;
+      }
+     
+    }
+  }
+  
+}
+
