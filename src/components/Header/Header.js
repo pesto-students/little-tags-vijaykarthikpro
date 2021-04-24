@@ -10,6 +10,7 @@ import CartIcon from "../../assets/icons/cart.svg";
 import GlobeIcon from "../../assets/icons/globe.svg";
 import WishlistIcon from "../../assets/icons/wishlist.svg";
 import ProfileIcon from "../../assets/icons/person.svg";
+import Search from "./Search/Search";
 
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
@@ -62,8 +63,9 @@ export default function Header() {
         </div>
         <div className="right">
           <div className="search-bar">
-            <input type="text" placeholder="Search items..." />
-            <img className="search-icon" src={SearchIcon} alt="search-icon" />
+            <Search />
+            {/* <input type="text" placeholder="Search items..." />
+            <img className="search-icon" src={SearchIcon} alt="search-icon" /> */}
           </div>
           <div className="menu-item">
             <Link to="/" className="nav-links">

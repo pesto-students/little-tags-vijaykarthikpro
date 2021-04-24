@@ -1,0 +1,25 @@
+.search-main {
+  input[type="text"] {
+    width: 300px;
+    padding: 10px;
+    outline: none;
+    padding-left: 10px;
+    border-radius: 20px;
+    border: 0;
+  }
+  .search-icon {
+    width: 16px;
+    height: 16px;
+    margin: 0 8px 0 8px;
+  }
+
+  .search-result {
+    position: absolute;
+    list-style: none;
+    text-align: start;
+    width: 335px;
+    background: grey;
+    z-index: 2;
+    padding-left: 10px;
+  }
+}
