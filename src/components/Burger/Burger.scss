@@ -1,0 +1,54 @@
+.burger-modal {
+  background: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 2;
+  height: 100vh;
+  //transition: transform 0.3s ease-in-out;
+
+  .burger-main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: left;
+    padding-top: 20px;
+    margin: 0;
+    width: 20%;
+    align-items: center;
+    background: black;
+    // align-items: center;
+    // transition: all 0.3s linear;
+    .burger-header {
+      display: flex;
+      margin: 20px 0 10px 0;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px white solid;
+      .title {
+        font-family: "Gloria Hallelujah";
+        font-size: 30px;
+        // border: 1px red solid;
+      }
+    }
+
+    .burger-list {
+      //   z-index: 2;
+      text-align: center;
+
+      ul {
+        li {
+          list-style: none;
+          padding: 5px;
+          .nav-links {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}
