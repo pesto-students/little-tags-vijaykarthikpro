@@ -2,6 +2,7 @@
 
 .list-container {
   display: flex;
+  min-width: 100vh;
 
   .filter {
     display: flex;
@@ -37,7 +38,7 @@
 
   .card-container {
     width: 80%;
-    background-color: #242424;
-    padding: 30px;
+    background-color: white;
+    padding: 20px;
   }
 }
