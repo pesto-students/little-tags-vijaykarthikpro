@@ -16,9 +16,9 @@ import Products from "../../data/products";
 import FirebaseContext from '../Firebase/context';
 import Login from '../Login/Login';
 // import Carousel from '../carousel/Carousel'
-// import SimilarProducts from "../SimilarProducts/SimilarProducts";
+import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
-export default function ProductDetailsPage() {
+export default function ProductDetailsPage(props) {
 
   const cart = useSelector(state => state.cartState.cart);
   const wishlist = useSelector(state => state.wishlistState.wishlist);
@@ -36,17 +36,17 @@ export default function ProductDetailsPage() {
 
   const dispatch = useDispatch();
   let location = useLocation();
-  let id = location.pathname.split("/")[2];
+  let title = location.pathname.split("/")[2];
 
   useEffect(() => {
     Products.map((product) => {
-      if (product.id.toString() === id) {
+      if (product.title.toString() === title) {
         setProduct(product);
       }
       return null;
     });
 
-  }, [id]);
+  }, [title]);
 
 
 /*   useEffect(() => {
@@ -191,7 +191,7 @@ export default function ProductDetailsPage() {
         </div>
       </div>
       {/* <Carousel /> */}
-      {/* <SimilarProducts /> */}
+      <SimilarProducts />
       <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
     </div>
   );

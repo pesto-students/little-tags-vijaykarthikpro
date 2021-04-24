@@ -13,7 +13,7 @@ export default function SimilarProducts() {
   const displayTitleText = (title) => {
     const words = title.split(" ");
     if (words.length > 4) {
-      const letters = title.substring(0, 23);
+      const letters = title.substring(0, 20);
       return <span className="title">{`${letters}...`}</span>;
     } else {
       return <span className="title">{title}</span>;
@@ -25,7 +25,7 @@ export default function SimilarProducts() {
           const { id, image, title, price } =  item
           return (
             <div className="card" key={id}>
-              <Link key={id} to={`/product-details/${id}`}>
+              <Link key={id} to={`/product-details/${title}`}>
                 <div className="card-img">
                   <img src={image} alt="" />
                 </div>
@@ -54,7 +54,7 @@ export default function SimilarProducts() {
         <h1 className="heading">Similar Products</h1>
         <div className="similar-card-container">
             {/* <Card productsData={onlyFourProducts}/> */}
-            <div className="main-content">{displayProducts()}</div>
+            <div className="similar-products-content">{displayProducts()}</div>
         </div>
     </div>)
 }

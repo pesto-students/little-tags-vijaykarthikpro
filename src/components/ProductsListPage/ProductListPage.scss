@@ -2,12 +2,13 @@
 
 .list-container {
   display: flex;
-  padding: 40px;
+  min-width: 100vh;
 
   .filter {
     display: flex;
     flex-direction: column;
-    width: 30%;
+    width: 20%;
+    padding: 30px;
     align-items: flex-start;
     justify-content: flex-start;
 
@@ -36,6 +37,8 @@
   }
 
   .card-container {
-    width: 70%;
+    width: 80%;
+    background-color: white;
+    padding: 20px;
   }
 }

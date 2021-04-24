@@ -20,12 +20,14 @@
 }
 
 .product-details-container {
-  max-width: 1500px;
+  margin: 0 auto;
 
   .details {
     @include styles.flex-row-center;
     justify-content: space-between;
     align-items: flex-start;
+    max-width: 1500px;
+    margin: 0 auto;
 
     .image-carousel {
       width: 50%;

@@ -1,17 +1,54 @@
+
+@mixin make-text-color-gold {
+  background: -webkit-radial-gradient(#f2e205, #d99e32, #d98723);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
+
 .my-account {
+
+  
+  .welcome-user {
+    text-align: center;
+    padding: 30px;
+    font-size: 25px;
+
+    .username {
+      @include make-text-color-gold();
+      text-transform: capitalize;
+    }
+  }
+
   .card-content {
     color: black;
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
+
 
     .card-element {
       background-color: white;
       width: 200px;
-      height: 100px;
       margin: 20px;
-      padding: 20px;
+      padding: 25px;
       text-align: center;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+
+      .card-title {
+        font-size: 20px;
+      }
+
+
+      .display-number {
+        margin-top: 10px;
+        font-size: 30px;
+      }
     }
   }
 }
