@@ -39,7 +39,7 @@ export default function Header() {
   };
 
   return (
-    <div>
+    <div className="website-header">
       <nav className="navbar">
         <div className="left">
           <div>

@@ -5,6 +5,7 @@ import "./AccountPage.scss";
 import Orders from "../OrdersPage/Orders";
 import Wishlist from "../Wishlist/Wishlist";
 import Address from "../Address/Address";
+import MyAccount from "./MyAccount/MyAccount";
 import * as ROUTES from "../../constants/routes";
 import withAuthorization from "../Session/withAuthorization";
 
@@ -17,20 +18,24 @@ function AccountPage() {
   return (
     <div className="account-main">
       <div className="account-aside">
+        <Link to={ROUTES.ACCOUNT} className="nav-links">
+          My Account
+        </Link>
         <Link to={ROUTES.ORDERS} className="nav-links">
-          Orders
+          My Orders
         </Link>
         <Link to={ROUTES.ADDRESS} className="nav-links">
-          Address
+          My Address
         </Link>
         <Link to={ROUTES.WISHLIST} className="nav-links">
-          Wishlist
+          My Wishlist
         </Link>
         <Link to={ROUTES.HOME} className="nav-links" onClick={handleLogout}>
           Log Out
         </Link>
       </div>
       <div className="account-content">
+        {/* <MyAccount /> */}
         <Switch>
           <Route path={ROUTES.ORDERS}>
             <Orders />
@@ -41,10 +46,13 @@ function AccountPage() {
           <Route path={ROUTES.WISHLIST}>
             <Wishlist />
           </Route>
+          <Route path={ROUTES.ACCOUNT}>
+            <MyAccount />
+          </Route>
         </Switch>
       </div>
     </div>
   );
 }
 
-export default withAuthorization(AccountPage)
+export default withAuthorization(AccountPage);

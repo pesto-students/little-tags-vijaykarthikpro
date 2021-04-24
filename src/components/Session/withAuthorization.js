@@ -1,13 +1,17 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import FirebaseContext from "../Firebase/context";
 import * as ROUTES from "../../constants/routes";
+import Login from '../Login/Login';
 import './withAuthorization.scss';
 
 const withAuthorization = (Component) => {
+  
   const NewComponent = (props) => {
     const firebase = useContext(FirebaseContext);
+    const [showLogin, setShowLogin] = useState(true);
+    const showLoginModal = () => setShowLogin(!showLogin);
 
     const next = (authUser) => {
       if (!authUser) {
@@ -22,7 +26,8 @@ const withAuthorization = (Component) => {
     return props.authUser ? (
       <Component {...props} />
     ) : (<div className="authorization-container">
-        <p>You need to login in to access this page</p>
+        <p>Please login in to access this page</p>
+        <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
     </div>
     );
   };

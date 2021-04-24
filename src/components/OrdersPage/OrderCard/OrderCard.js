@@ -3,10 +3,10 @@ import "./OrderCard.scss";
 
 export default function OrderCard({ ordersData }) {
   const displayOrder = () => {
-    return ordersData.map((item) => {
-      const { image, title, price } = item;
+    return ordersData.map((item,id) => {
+      const { image, title, price, address :{ name, area, town, city, pincode, state, mobile } } = item;
       return (
-        <div className="card-main">
+        <div className="card-main" key={id}>
           <div className="card-top">
             <div>
               <span className="order-title">{title}</span>
@@ -28,42 +28,34 @@ export default function OrderCard({ ordersData }) {
             <div className="address-section">
               <span className="order-title">Address</span>
               <div className="address-content">
-                <div>XYZ</div>
-                <div>28, Camp, </div>
-                <div>Pune, Maharshtra</div>
-                <div>444602</div>
+                <div>{name}</div>
+                <div>{area}</div>
+                <div>{town}</div>
+                <div>
+                  {city}
+                  <span>-{pincode}</span>
+                </div>
+                <div>{state}</div>
+                <div>
+                  <span>Mobile : </span>
+                  {mobile}
+                </div>
               </div>
             </div>
             <div className="price-section">
               <span className="order-title">Price details</span>
               <div className="price-details">
                 <div className="price-title">
-                  <li>List Price</li>
                   <li>Selling Price</li>
                   <li>Shiping Fee</li>
                   <li>Total amount</li>
                 </div>
                 <div className="price">
-                  <li>$3000</li>
-                  <li>$2000</li>
+                  <li>$ {price}</li>
                   <li>Free</li>
-                  <li>$2000</li>
+                  <li>$ {price}</li>
                 </div>
               </div>
-              {/* <div className="order-price">
-                <div className="price-list">
-                  List Price-<span>$3000</span>
-                </div>
-                <div className="price-list">
-                  Selling Price-<span>$2000</span>
-                </div>
-                <div className="price-list">
-                  Shipping Fee-<span>Free</span>
-                </div>
-                <div className="price-list">
-                  Total amount-<span>$2000</span>
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

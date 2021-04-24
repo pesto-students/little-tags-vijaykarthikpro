@@ -1,0 +1,70 @@
+@mixin no-select {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+
+.address-radio {
+  width: 20px;
+  height: 20px;
+}
+
+
+.address-card {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    margin: 10px 0 10px 0;
+    border-radius: 10px;
+    width: 100%;
+    border: 1px black solid;
+    align-self: flex-start;
+
+    .address-details {
+
+      .header {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .default-address {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    
+        h3 {
+          margin-bottom: 5px;
+        }
+      }
+
+    }
+  
+    .action-buttons {
+      display:flex;
+      width: 100%;
+      justify-content: space-between;
+      margin-top: 10px;
+    
+      .remove-btn {
+        @include no-select();
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+        transform: scale(1);
+    
+        &:active {
+          transform: scale(0.96);
+          transition: 0.1s;
+        }
+      }
+      
+    }
+}
+  
+
+
+
+
+

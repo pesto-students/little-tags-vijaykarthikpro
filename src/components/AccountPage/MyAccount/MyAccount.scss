@@ -1,0 +1,17 @@
+.my-account {
+  .card-content {
+    color: black;
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+
+    .card-element {
+      background-color: white;
+      width: 200px;
+      height: 100px;
+      margin: 20px;
+      padding: 20px;
+      text-align: center;
+    }
+  }
+}

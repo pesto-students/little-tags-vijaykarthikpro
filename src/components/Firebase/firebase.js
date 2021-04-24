@@ -25,16 +25,31 @@ class Firebase {
 
   user = (uid) => this.db.ref(`users/${uid}`);
 
+  getDbRef = () => this.db.ref();
+
+  saveDataToDatabase = (uid, key, value) => {
+    this.user(uid).update({ [key]: value });
+  };
+
   doSignOut = () => this.auth.signOut();
 
   onAuthChangeListener = (next, fallback = () => {}) => {
     return this.auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        console.log(`authUser: listener: ${authUser}`);
-        next(authUser);
+        this.user(authUser.uid)
+        .get()
+          .then((snapshot) => {
+            const dbUser = snapshot.val();
+            const user = {
+              uid: authUser.uid,
+              email: authUser.email,
+              emailVerified: authUser.emailVerified,
+              ...dbUser,
+            };
+            next(user);
+          });
       } else {
         fallback();
-        //TODO: handle case if user is not logged in
       }
     });
   };
