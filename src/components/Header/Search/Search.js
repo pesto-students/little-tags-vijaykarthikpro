@@ -8,12 +8,9 @@ export default function Search() {
   const [searchItem, setSearchItem] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-  console.log("searchResults: ",searchResults);
-
   const handleSearchInput = (e) => {
     e.preventDefault();
     setSearchItem(e.target.value);
-    // console.log();
   };
 
   useEffect(() =>{
