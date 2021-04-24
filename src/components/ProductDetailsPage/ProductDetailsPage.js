@@ -16,7 +16,7 @@ import Products from "../../data/products";
 import FirebaseContext from '../Firebase/context';
 import Login from '../Login/Login';
 // import Carousel from '../carousel/Carousel'
-// import SimilarProducts from "../SimilarProducts/SimilarProducts";
+import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
 export default function ProductDetailsPage() {
 
@@ -191,7 +191,7 @@ export default function ProductDetailsPage() {
         </div>
       </div>
       {/* <Carousel /> */}
-      {/* <SimilarProducts /> */}
+      <SimilarProducts />
       <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
     </div>
   );

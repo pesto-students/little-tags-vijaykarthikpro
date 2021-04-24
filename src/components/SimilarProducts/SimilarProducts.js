@@ -13,7 +13,7 @@ export default function SimilarProducts() {
   const displayTitleText = (title) => {
     const words = title.split(" ");
     if (words.length > 4) {
-      const letters = title.substring(0, 23);
+      const letters = title.substring(0, 20);
       return <span className="title">{`${letters}...`}</span>;
     } else {
       return <span className="title">{title}</span>;
