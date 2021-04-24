@@ -12,7 +12,7 @@ const products = [
   {
     id: 2,
     title: "Mens Cotton Jacket",
-    price: 550.99,
+    price: 1550.99,
     description:
       "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
     category: "men clothing",
@@ -170,7 +170,7 @@ const products = [
   {
     id: 19,
     title: "DANVOUY Womens T Shirt Casual Cotton Short",
-    price: 420.99,
+    price: 2420.99,
     description:
       "95%Cotton,5%Spandex, Features: Casual, Short Sleeve, Letter Print,V-Neck,Fashion Tees, The fabric is soft and has some stretch., Occasion: Casual/Office/Beach/School/Home/Street. Season: Spring,Summer,Autumn,Winter.",
     category: "women clothing",
@@ -206,7 +206,7 @@ const products = [
   {
     id: 23,
     title: "Men's Yellow T Shirt Pattern",
-    price: 620.99,
+    price: 4620.99,
     description:
       "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "men clothing",

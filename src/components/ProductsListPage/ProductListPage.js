@@ -7,27 +7,10 @@ import Card from "../Card/Card";
 
 export default function ProductListPage() {
   const [data, setData] = useState(products);
+  const [isChecked, SetIsChceked] = useState(false);
 
   let location = useLocation();
   let pathName = location.pathname.split("/")[2];
-
-  const handleCategory = (e) => {
-    const categoryData = products.filter(
-      (product) => product.category === e.target.value
-    );
-    setData(categoryData);
-  };
-
-  const handlePrice = (e) => {
-    console.log(e.target.name);
-    const priceData = data.filter((product) => {
-      if (product.price >= 300 && product.price <= 1000) return product;
-      else if (product.price > 1000 && product.price <= 3000) return product;
-      else if (product.price > 3000 && product.price <= 5000) return product;
-      return null;
-    });
-    setData(priceData);
-  };
 
   useEffect(() => {
     const isPathMatching = (path) => {
@@ -42,6 +25,46 @@ export default function ProductListPage() {
       setData(filteredProducts);
     }
   }, [pathName]);
+
+  useEffect(() => {});
+
+  const handleCategory = (e) => {
+    const categoryData = products.filter(
+      (product) => product.category === e.target.value
+    );
+    setData(categoryData);
+  };
+
+  const handlePrice = (e) => {
+    let priceRange = e.target.name;
+    console.log(priceRange, "priceRange");
+    console.log(e.target.checked, "is checked");
+    // SetIsChceked(!isChecked);
+    if (priceRange) {
+      if (priceRange === "low") {
+        const priceData = data.filter(
+          (product) => product.price >= 300 && product.price <= 1000
+        );
+        setData(priceData);
+      } else if (priceRange === "middle") {
+        const priceData = data.filter(
+          (product) => product.price > 1000 && product.price <= 3000
+        );
+        setData(priceData);
+      } else if (priceRange === "high") {
+        const priceData = data.filter(
+          (product) => product.price > 3000 && product.price <= 5000
+        );
+        setData(priceData);
+      }
+    } else {
+      // setData(products);
+    }
+  };
+
+  // useEffect(() => {
+  //   handlePrice();
+  // });
 
   return (
     <div className="list-container">
@@ -102,27 +125,45 @@ export default function ProductListPage() {
           <ul>
             <li>
               <label>
-                <input type="checkbox" name="low" onChange={handlePrice} />
+                <input
+                  type="checkbox"
+                  name="low"
+                  // checked={isChecked}
+                  onChange={handlePrice}
+                  // onClick={handleClick}
+                />
                 <span>300-1000</span>
               </label>
             </li>
             <li>
               <label>
-                <input type="checkbox" name="middle" onChange={handlePrice} />
+                <input
+                  type="checkbox"
+                  name="middle"
+                  // checked={isChecked}
+                  onChange={handlePrice}
+                  // onClick={handleClick}
+                />
                 <span>1000-3000</span>
               </label>
             </li>
             <li>
               <label>
-                <input type="checkbox" name="high" onChange={handlePrice} />
+                <input
+                  type="checkbox"
+                  name="high"
+                  // checked={isChecked}
+                  onChange={handlePrice}
+                  // onClick={handleClick}
+                />
                 <span>3000-5000</span>
               </label>
             </li>
           </ul>
         </div>
         <div>
-          <span className="main-title">Color</span>
-          <ul>
+          {/* <span className="main-title">Color</span> */}
+          {/* <ul>
             <li>
               <label>
                 <input type="checkbox" />
@@ -147,7 +188,7 @@ export default function ProductListPage() {
                 <span>Blue</span>
               </label>
             </li>
-          </ul>
+          </ul> */}
         </div>
       </div>
 
