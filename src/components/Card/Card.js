@@ -30,7 +30,7 @@ export default function Card({ productsData }) {
       const { id, image, title, price } = item;
       return (
         <div className="card" key={id}>
-          <Link key={id} to={`/product-details/${id}`}>
+          <Link key={id} to={`/product-details/${title}`}>
             <div className="card-img">
               <img src={image} alt="product-card" />
             </div>
@@ -57,7 +57,7 @@ export default function Card({ productsData }) {
     <>
       <div className="main-content">{displayProducts()}</div>
       <Switch>
-        <Route path="/product-details/:id">
+        <Route path="/product-details/:title">
           <ProductDetailsPage />
         </Route>
       </Switch>

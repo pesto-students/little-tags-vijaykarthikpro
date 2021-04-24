@@ -6,7 +6,7 @@ import Dropdown from "./Dropdown/Dropdown";
 import Login from "../Login/Login";
 import Burger from "../Burger/Burger";
 import AppLogo from "../../assets/icons/logo-symbol.png";
-import SearchIcon from "../../assets/icons/search.svg";
+// import SearchIcon from "../../assets/icons/search.svg";
 import CartIcon from "../../assets/icons/cart.svg";
 import GlobeIcon from "../../assets/icons/globe.svg";
 import WishlistIcon from "../../assets/icons/wishlist.svg";
@@ -54,7 +54,7 @@ export default function Header() {
             <img className="burger-icon" src={Menu} alt="menu-icon" />
             <Burger showMenu={menuClick} handleMenuClick={handleMenuClick} />
           </div>
-          <div>
+          <div className="logo">
             <Link to="/" className="left nav-links">
               <img src={AppLogo} alt="app-logo" />
               <span className="title">Style Beast</span>

@@ -25,7 +25,7 @@ export default function SimilarProducts() {
           const { id, image, title, price } =  item
           return (
             <div className="card" key={id}>
-              <Link key={id} to={`/product-details/${id}`}>
+              <Link key={id} to={`/product-details/${title}`}>
                 <div className="card-img">
                   <img src={image} alt="" />
                 </div>
