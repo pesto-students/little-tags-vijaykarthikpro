@@ -17,7 +17,9 @@ export default function Search() {
   };
 
   useEffect(() =>{
-    const currentResult = ProductsData.filter(({ title }) => title.indexOf(searchItem.toLowerCase()) !== -1 );
+    const currentResult = ProductsData.filter(({ title }) => {
+      return  title.match(searchItem);
+    });
     setSearchResults(currentResult);
   },[searchItem]);
 
