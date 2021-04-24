@@ -1,24 +1,31 @@
 import React, { useState } from "react";
 import SearchIcon from "../../../assets/icons/search.svg";
+import ProductData from "../../../data/products";
+import { Link } from "react-router-dom";
 import "./Search.scss";
-
-// const searchCategory = [
-//   { category: "men jackets" },
-//   { category: "women jackets" },
-//   { category: "electornics" },
-//   { category: "jewellery" },
-//   { category: "t-shirts" },
-// ];
 
 export default function Search() {
   const [searchItem, setSearchItem] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const handleSearchInput = (e) => {
+    e.preventDefault();
     setSearchItem(e.target.value);
+    const currentResult = ProductData.filter((product) => {
+      return product.title.match(e.target.value);
+    });
+    setSearchResults(currentResult);
+    // console.log();
   };
 
-  const displaySearchResult = (item) => {
-    return <div>Search result</div>;
+  const displaySearchResult = () => {
+    searchResults.map((item, index) => {
+      return (
+        <li key={index}>
+          <Link className="dropdown-link">{item.title}</Link>
+        </li>
+      );
+    });
   };
 
   return (
@@ -31,7 +38,7 @@ export default function Search() {
       />
       <img className="search-icon" src={SearchIcon} alt="search-icon" />
       {!searchItem ? null : (
-        <div className="search-result">{displaySearchResult(searchItem)}</div>
+        <div className="search-result">{displaySearchResult()}</div>
       )}
     </div>
   );

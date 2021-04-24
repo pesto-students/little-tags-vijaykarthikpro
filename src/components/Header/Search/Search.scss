@@ -1,4 +1,7 @@
 .search-main {
+  display: flex;
+  align-items: center;
+
   input[type="text"] {
     width: 300px;
     padding: 10px;
