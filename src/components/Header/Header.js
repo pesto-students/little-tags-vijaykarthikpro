@@ -16,6 +16,7 @@ import Menu from "../../assets/icons/menu.svg";
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
   const [isHamburgerMenuOpen, setHamBurgerMenu] = useState(false);
+  const languageData = useSelector((state) => state.sessionState.data);
 
   const isUserLoggedIn = useSelector(
     (state) => state.sessionState.isUserLoggedIn
@@ -70,14 +71,14 @@ export default function Header() {
           </div>
           <div className="category-links">
             <Link to="/products/men" className="nav-links">
-              Men
+              {languageData.men}
             </Link>
             <Link to="/products/women" className="nav-links">
-              Women
+              {languageData.women}
             </Link>
-            <Link to="/products/offers" className="nav-links">
+            {/* <Link to="/products/offers" className="nav-links">
               Offers
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="right">
