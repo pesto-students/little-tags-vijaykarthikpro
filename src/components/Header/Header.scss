@@ -26,20 +26,17 @@
         }
       }
 
-
-
       .logo {
-
         img {
           width: 40px;
           height: 40px;
         }
 
         .title {
-            padding-left: 10px;
-            font-family: "Gloria Hallelujah";
-            font-size: 25px;
-            // padding: 0px 20px 0 20px;
+          padding-left: 10px;
+          font-family: "Gloria Hallelujah";
+          font-size: 25px;
+          // padding: 0px 20px 0 20px;
         }
       }
 
@@ -48,11 +45,9 @@
       }
     }
 
-
     .right {
       display: flex;
       align-items: center;
-      
 
       .search-bar {
         display: flex;
@@ -60,7 +55,6 @@
         align-items: center;
         border-radius: 20px;
         background-color: white;
-
       }
 
       button {
@@ -83,8 +77,6 @@
       }
     }
 
-    
-
     .nav-links {
       color: white;
       text-decoration: none;
@@ -101,6 +93,20 @@
     background: white;
     z-index: 2;
     filter: drop-shadow(1px 1px 1px black);
+
+    .language-options {
+      display: flex;
+      flex-direction: column;
+
+      .language-item {
+        padding: 10px 10px 5px 10px;
+        font-size: 16px;
+
+        &:hover {
+          font-weight: 600;
+        }
+      }
+    }
 
     li {
       cursor: pointer;
@@ -156,25 +162,18 @@
   }
 }
 
-
-@media  screen and (max-width: 1200px) { 
+@media screen and (max-width: 1200px) {
   .website-header {
     .navbar {
-
       .left {
-
         .category-links {
           display: none;
         }
-
       }
 
       .right {
         // overflow: hidden;
       }
-     
     }
   }
-  
 }
-

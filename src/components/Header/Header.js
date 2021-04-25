@@ -6,7 +6,6 @@ import Dropdown from "./Dropdown/Dropdown";
 import Login from "../Login/Login";
 import Burger from "../Burger/Burger";
 import AppLogo from "../../assets/icons/logo-symbol.png";
-// import SearchIcon from "../../assets/icons/search.svg";
 import CartIcon from "../../assets/icons/cart.svg";
 import GlobeIcon from "../../assets/icons/globe.svg";
 import WishlistIcon from "../../assets/icons/wishlist.svg";
@@ -17,6 +16,7 @@ import Menu from "../../assets/icons/menu.svg";
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
   const [isHamburgerMenuOpen, setHamBurgerMenu] = useState(false);
+  const languageData = useSelector((state) => state.sessionState.data);
 
   const isUserLoggedIn = useSelector(
     (state) => state.sessionState.isUserLoggedIn
@@ -26,8 +26,8 @@ export default function Header() {
 
   const handleBurgerClose = () => {
     setHamBurgerMenu(!isHamburgerMenuOpen);
-    // event.stopPropagation();
   };
+
   const renderProfileIcon = () => {
     if (isUserLoggedIn) {
       return (
@@ -47,15 +47,21 @@ export default function Header() {
     }
   };
 
-
-
   return (
     <div className="website-header">
       <nav className="navbar">
         <div className="left">
-          <div className="hamburger-menu" >
-            <img className="burger-icon" src={Menu} alt="menu-icon" onClick={handleBurgerClose}/>
-            <Burger showMenu={isHamburgerMenuOpen} handleBurgerClose={handleBurgerClose} />
+          <div className="hamburger-menu">
+            <img
+              className="burger-icon"
+              src={Menu}
+              alt="menu-icon"
+              onClick={handleBurgerClose}
+            />
+            <Burger
+              showMenu={isHamburgerMenuOpen}
+              handleBurgerClose={handleBurgerClose}
+            />
           </div>
           <div className="logo">
             <Link to="/" className="left nav-links">
@@ -65,21 +71,19 @@ export default function Header() {
           </div>
           <div className="category-links">
             <Link to="/products/men" className="nav-links">
-              Men
+              {languageData.men}
             </Link>
             <Link to="/products/women" className="nav-links">
-              Women
+              {languageData.women}
             </Link>
-            <Link to="/products/offers" className="nav-links">
+            {/* <Link to="/products/offers" className="nav-links">
               Offers
-            </Link>
+            </Link> */}
           </div>
         </div>
         <div className="right">
           <div className="search-bar">
             <Search />
-            {/* <input type="text" placeholder="Search items..." />
-            <img className="search-icon" src={SearchIcon} alt="search-icon" /> */}
           </div>
           <div className="menu-item">
             <Link to="/" className="nav-links">
