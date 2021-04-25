@@ -1,8 +1,30 @@
 import * as ACTIONS from "../constants/actionTypes";
+import dataEN from "../data/languageData/en.json";
+import dataHN from "../data/languageData/hin.json";
 
 const initialState = {
   authUser: null,
   isUserLoggedIn: false,
+  language: "EN",
+  data: dataEN,
+};
+
+const setLanguage = (state, action) => {
+  let data;
+  switch (action.language) {
+    case "EN":
+      data = dataEN;
+      break;
+    case "HI":
+      data = dataHN;
+      break;
+    default:
+      break;
+  }
+  return {
+    ...state,
+    ...{ language: action.language, data: data },
+  };
 };
 
 export default function sessionReducer(state = initialState, action) {
@@ -25,6 +47,11 @@ export default function sessionReducer(state = initialState, action) {
         },
       };
     }
+
+    case ACTIONS.SET_LANGUAGE: {
+      return setLanguage(state, action);
+    }
+
     default:
       return state;
   }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import FirebaseContext from "../../Firebase/context";
 import PropTypes from "prop-types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLanguage } from "../../../actions";
 import { Link } from "react-router-dom";
 import { ProfileItems } from "./MenuItems";
 import { LanguageItems } from "./MenuItems";
@@ -11,6 +12,7 @@ export default function Dropdown({ type }) {
   const [click, setClick] = useState(false);
   const [menuItems, setMenuItems] = useState([]);
   const user = useSelector((state) => state.sessionState.authUser);
+  const dispatch = useDispatch();
 
   const firebase = useContext(FirebaseContext);
 
@@ -22,8 +24,16 @@ export default function Dropdown({ type }) {
     }
   }, [type, user]);
 
+  useEffect(() => {});
+
   const handleLogout = () => {
     firebase.doSignOut();
+  };
+
+  const handleLanguage = (e) => {
+    let language = e.target.id;
+    console.log("button Clicked", e.target.id);
+    dispatch(setLanguage(language));
   };
 
   const displayDropDownList = () => {
@@ -57,21 +67,39 @@ export default function Dropdown({ type }) {
         </div>
       );
     } else {
-      const languageMenu = menuItems.map((item, index) => {
-        return (
-          <li key={index}>
-            <Link
-              className="dropdown-link"
-              to={item.path}
-              onClick={() => setClick(!click)}
-            >
-              {item.title}
-            </Link>
-          </li>
-        );
-      });
+      // const languageMenu = menuItems.map((item, index) => {
+      //   return (
+      //     <li key={index}>
+      //       <Link
+      //         className="dropdown-link"
+      //         to={item.path}
+      //         onClick={() => setClick(!click)}
+      //       >
+      //         {item.title}
+      //       </Link>
+      //     </li>
+      //   );
+      // });
 
-      return <div className="item-padding">{languageMenu}</div>;
+      return (
+        <div className="language-options">
+          {/* {languageMenu} */}
+          <button
+            className="language-item"
+            id="HI"
+            onClick={(e) => handleLanguage(e)}
+          >
+            Hindi
+          </button>
+          <button
+            className="language-item"
+            id="EN"
+            onClick={(e) => handleLanguage(e)}
+          >
+            English
+          </button>
+        </div>
+      );
     }
   };
 

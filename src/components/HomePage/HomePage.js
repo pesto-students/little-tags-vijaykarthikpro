@@ -1,7 +1,8 @@
 import React from "react";
 import "./HomePage.scss";
 import { Link } from "react-router-dom";
-// import Routes from '../../constants/routes'
+//import Routes from "../../constants/routes";
+import { useSelector } from "react-redux";
 import Banner from "../../assets/images/banner-style-beast.png";
 import MenPortrait from "../../assets/images/men-portrait.svg";
 import WomenPortrait from "../../assets/images/women-portrait.svg";
@@ -11,17 +12,19 @@ import ElectronicsImg from "../../assets/images/electronics.svg";
 import JeweleryImg from "../../assets/images/jewelery.svg";
 
 export default function HomePage() {
+  const languageData = useSelector((state) => state.sessionState.data);
+
   return (
     <div className="home-container">
       <div className="banner-section">
         <img className="banner" src={Banner} alt="banner" />
       </div>
       <div className="collection-section">
-        <h1>COLLECTIONS</h1>
+        <h1>{languageData.collections}</h1>
         <div className="collections">
           <Link to="/products/men" className="nav-links">
             <div className="men">
-              <h2>MEN</h2>
+              <h2>{languageData.menFashion}</h2>
               <img src={MenPortrait} alt="men-portrait" />
             </div>
           </Link>
@@ -32,37 +35,37 @@ export default function HomePage() {
           </p>
           <Link to="/products/women" className="nav-links">
             <div className="women">
-              <h2>WOMEN</h2>
+              <h2>{languageData.womenFashion}</h2>
               <img src={WomenPortrait} alt="women-portrait" />
             </div>
           </Link>
         </div>
       </div>
       <div className="categories">
-        <h1>CATEGORIES TO BAG</h1>
+        <h1>{languageData.categories}</h1>
         <div className="categories-to-add">
           <Link to="/products/jackets" className="nav-links">
             <div>
               <img src={JacketsImg} alt="jacket" />
-              <h2>Jackets</h2>
+              <h2>{languageData.jacket}</h2>
             </div>
           </Link>
           <Link to="/products/tshirts" className="nav-links">
             <div>
               <img src={TshirtsImg} alt="t-shirt" />
-              <h2>T-shirts</h2>
+              <h2>{languageData.tshirts}</h2>
             </div>
           </Link>
           <Link to="/products/electronics" className="nav-links">
             <div>
               <img src={ElectronicsImg} alt="electronics" />
-              <h2>Electronics</h2>
+              <h2>{languageData.electronics}</h2>
             </div>
           </Link>
           <Link to="/products/jewellery" className="nav-links">
             <div>
               <img src={JeweleryImg} alt="jewellery" />
-              <h2>Jewellery</h2>
+              <h2>{languageData.jewellery}</h2>
             </div>
           </Link>
         </div>
