@@ -9,7 +9,7 @@ const initialState = {
   data: dataEN,
 };
 
-const setLanguage = (state, action) => {
+const setLanguage = (state = initialState, action) => {
   let data;
   switch (action.language) {
     case "EN":

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import SearchIcon from "../../../assets/icons/search.svg";
 import ProductsData from "../../../data/products";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import "./Search.scss";
 export default function Search() {
   const [searchItem, setSearchItem] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  // const languageData = useSelector((state) => state.sessionState.data);
+  const languageData = useSelector((state) => state.sessionState.data);
 
   const handleSearchInput = (e) => {
     e.preventDefault();
@@ -48,7 +48,7 @@ export default function Search() {
         type="text"
         value={searchItem}
         onChange={handleSearchInput}
-        placeholder="Search items...."
+        placeholder={languageData.searchText}
       />
       <img className="search-icon" src={SearchIcon} alt="search-icon" />
       {searchItem.length === 0 ? null : (
