@@ -54,7 +54,7 @@ export default function Address({ isCheckout, selectAddressForShipping }) {
     const isDefaultAvailable = userAddresses.filter(({ isDefault }) =>
       isDefault ? true : false
     );
-    console.log(isDefaultAvailable);
+ 
     setShowForm(false);
     e.preventDefault();
     let isCurrentAddressDefault = false;

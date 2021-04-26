@@ -25,8 +25,6 @@ export default function ProductListPage() {
   let location = useLocation();
   let pathName = location.pathname.split("/")[2];
 
-  // console.log("filtered Data: ",data);
-
   useEffect(() => {
     const isPathMatching = (path) => {
       return Object.keys(routePathMap).includes(path);
@@ -74,13 +72,11 @@ export default function ProductListPage() {
         if(checked) {
 
           setIsChceked({...isChecked, low: true});
-          console.log("***category Data: ",categoryData);
 
           const filteredData = categoryData.filter(
             (product) => product.price >= 300 && product.price <= 1000
           )
 
-          console.log("low price filtered data: ", filteredData);
           if(filteredData.length === 0) {
             alert("No match found!!");
           } else{
