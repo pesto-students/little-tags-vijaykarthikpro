@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import { useSelector } from "react-redux";
 import SearchIcon from "../../../assets/icons/search.svg";
 import ProductsData from "../../../data/products";
 import { Link } from "react-router-dom";
@@ -7,29 +8,35 @@ import "./Search.scss";
 export default function Search() {
   const [searchItem, setSearchItem] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  // const languageData = useSelector((state) => state.sessionState.data);
 
   const handleSearchInput = (e) => {
     e.preventDefault();
     setSearchItem(e.target.value);
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     const currentResult = ProductsData.filter(({ title }) => {
-      return  title.match(searchItem);
+      return title.match(searchItem);
     });
     setSearchResults(currentResult);
-  },[searchItem]);
+  }, [searchItem]);
 
-  const handleSearchClick = () =>{
-    setSearchItem('');
+  const handleSearchClick = () => {
+    setSearchItem("");
     setSearchResults([]);
-  }
+  };
 
   const displaySearchResult = () => {
     return searchResults.map((item, index) => {
       return (
         <li key={index} onClick={handleSearchClick}>
-          <Link to={`/product-details/${item.title}`} className="dropdown-search-items">{item.title}</Link>
+          <Link
+            to={`/product-details/${item.title}`}
+            className="dropdown-search-items"
+          >
+            {item.title}
+          </Link>
         </li>
       );
     });
@@ -41,7 +48,7 @@ export default function Search() {
         type="text"
         value={searchItem}
         onChange={handleSearchInput}
-        placeholder="Search items..."
+        placeholder="Search items...."
       />
       <img className="search-icon" src={SearchIcon} alt="search-icon" />
       {searchItem.length === 0 ? null : (

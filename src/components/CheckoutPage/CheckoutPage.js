@@ -6,7 +6,7 @@ import withAuthorization from '../Session/withAuthorization';
 import FirebaseContext from '../Firebase/context';
 import { SIZES } from "../../Utils";
 import Address from '../Address/Address';
-
+import Checkout from "../Payment/Checkout"; 
 
 function CheckoutPage() {
 
@@ -25,6 +25,7 @@ function CheckoutPage() {
   const [totalPrice, setTotalPrice] = useState(cartItemsTotalPrice);
   const [showSelectAddress,setShowSelectAddress] = useState(false);
   const [shippingAddress, setShippingAddress] = useState({});
+
 
   useEffect(()=>{
     setTotalItems(cart.length);
@@ -137,17 +138,10 @@ function CheckoutPage() {
 
   const handlePlaceOrder = () => {
 
-    if(cart.length !== 0) {
-      if(Object.keys(shippingAddress).length !== 0) {
-        const orders = cart.map((item)=>{
-          return {...item, address: shippingAddress}
-        });
-        dispatch(confirmOrder(orders));
-        dispatch(removeCartItems());
-        setTotalPrice(0);
-        alert("Order placed successfully");
-      } else {
-        alert("selected shipping address");
+    if(cart.length !== 0 ) {
+      setShowSelectAddress(true);
+      if(showSelectAddress && Object.keys(shippingAddress).length === 0 ) {
+        alert("select address for shipping");
       }
     } else {
       alert("Add items to cart");
@@ -155,6 +149,21 @@ function CheckoutPage() {
     
   }
 
+
+  const handlePaymentSuccess = () =>{
+    const orders = cart.map((item)=>{
+      return {...item, address: shippingAddress}
+    });
+    dispatch(confirmOrder(orders));
+    dispatch(removeCartItems());
+    setTotalPrice(0);
+    setShowSelectAddress(false);
+    alert("Order placed successfully");
+  }
+
+  const handlePaymentFailure = () =>{
+    alert("Payment Failed!!");
+  }
 
 
 
@@ -186,7 +195,10 @@ function CheckoutPage() {
               <span className="total-amount">₹ {parseInt(totalPrice).toFixed(2)}</span>
             </div>
           </div>
-          <button onClick={handlePlaceOrder}>PLACE ORDER</button>
+          {Object.keys(shippingAddress).length !== 0 && cart.length !==0 ? 
+          <Checkout amount={totalPrice} handlePaymentSuccess={handlePaymentSuccess} handlePaymentFailure={handlePaymentFailure}/> :
+          <button onClick={handlePlaceOrder}>PLACE ORDER</button> }
+          
         </div>
       </div>
   </div>);

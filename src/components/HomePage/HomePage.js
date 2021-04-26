@@ -1,7 +1,8 @@
 import React from "react";
 import "./HomePage.scss";
 import { Link } from "react-router-dom";
-// import Routes from '../../constants/routes'
+//import Routes from "../../constants/routes";
+// import { useSelector } from "react-redux";
 import Banner from "../../assets/images/banner-style-beast.png";
 import MenPortrait from "../../assets/images/men-portrait.svg";
 import WomenPortrait from "../../assets/images/women-portrait.svg";
@@ -11,6 +12,8 @@ import ElectronicsImg from "../../assets/images/electronics.svg";
 import JeweleryImg from "../../assets/images/jewelery.svg";
 
 export default function HomePage() {
+  // const languageData = useSelector((state) => state.sessionState.data);
+
   return (
     <div className="home-container">
       <div className="banner-section">
@@ -39,30 +42,30 @@ export default function HomePage() {
         </div>
       </div>
       <div className="categories">
-        <h1>CATEGORIES TO BAG</h1>
+        <h1>CATEGORIES</h1>
         <div className="categories-to-add">
           <Link to="/products/jackets" className="nav-links">
             <div>
               <img src={JacketsImg} alt="jacket" />
-              <h2>Jackets</h2>
+              <h2>JACKETS</h2>
             </div>
           </Link>
           <Link to="/products/tshirts" className="nav-links">
             <div>
               <img src={TshirtsImg} alt="t-shirt" />
-              <h2>T-shirts</h2>
+              <h2>T-SHIRTS</h2>
             </div>
           </Link>
           <Link to="/products/electronics" className="nav-links">
             <div>
               <img src={ElectronicsImg} alt="electronics" />
-              <h2>Electronics</h2>
+              <h2>ELECTRONICS</h2>
             </div>
           </Link>
           <Link to="/products/jewellery" className="nav-links">
             <div>
               <img src={JeweleryImg} alt="jewellery" />
-              <h2>Jewellery</h2>
+              <h2>JEWELLERY</h2>
             </div>
           </Link>
         </div>

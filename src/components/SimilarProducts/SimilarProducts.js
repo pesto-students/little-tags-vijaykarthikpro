@@ -5,7 +5,6 @@ import ProductsData from '../../data/products';
 import './SimilarProducts.scss';
 
 const onlyFourProducts = ProductsData.filter((_,index) => index < 4);
-console.log("onlyFourProducts: ",onlyFourProducts);
 
 export default function SimilarProducts() {
 

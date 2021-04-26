@@ -15,7 +15,8 @@ import {
   REMOVE_CART_ITEMS,
   REMOVE_WISHLIST_ITEMS,
   SET_ORDERS_FROM_FIREBASE,
-  REMOVE_ORDERS
+  REMOVE_ORDERS,
+  SET_LANGUAGE,
 } from "../constants/actionTypes";
 
 // User actions
@@ -28,6 +29,11 @@ export const setAuthUser = (authUser, isUserLoggedIn) => ({
 
 export const removeAuthUser = () => ({
   type: REMOVE_AUTH_USER,
+});
+
+export const setLanguage = (language) => ({
+  type: SET_LANGUAGE,
+  language,
 });
 
 export const setAddress = (address) => ({
@@ -54,14 +60,14 @@ export const updateItemInCart = (id, size, quantity) => ({
 });
 
 export const removeOrders = () => ({
-  type: REMOVE_ORDERS
-})
+  type: REMOVE_ORDERS,
+});
 
 // Orders actions
 
 export const confirmOrder = (orders) => ({
   type: CONFIRM_ORDER,
-  orders
+  orders,
 });
 
 export const cancelOrder = (id) => ({
@@ -71,8 +77,8 @@ export const cancelOrder = (id) => ({
 
 export const setOrdersFromFirebase = (orders) => ({
   type: SET_ORDERS_FROM_FIREBASE,
-  orders
-})
+  orders,
+});
 
 // wishlist actions
 
