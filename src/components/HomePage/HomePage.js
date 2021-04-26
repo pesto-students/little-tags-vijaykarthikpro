@@ -3,7 +3,7 @@ import "./HomePage.scss";
 import { Link } from "react-router-dom";
 //import Routes from "../../constants/routes";
 // import { useSelector } from "react-redux";
-import Banner from "../../assets/images/banner-style-beast.png";
+import Banner from "../../assets/images/style-beast-hero-image.svg";
 import MenPortrait from "../../assets/images/men-portrait.svg";
 import WomenPortrait from "../../assets/images/women-portrait.svg";
 import JacketsImg from "../../assets/images/jackets.svg";
