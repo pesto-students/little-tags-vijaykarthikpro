@@ -19,7 +19,7 @@ function CheckoutPage() {
   const dispatch = useDispatch(); 
   const [totalItems, setTotalItems] = useState(cart.length);
   const cartItemsTotalPrice = cart.reduce((acc, product)=>{
-    return acc += product.price; 
+    return acc += parseFloat(product.price * product.quantity); 
   },0)
 
   const [totalPrice, setTotalPrice] = useState(cartItemsTotalPrice);
@@ -66,6 +66,9 @@ function CheckoutPage() {
           quantity -= 1;
           setTotalPrice(totalPrice - price)
           dispatch(updateItemInCart(uniqueId,size,(quantity)))
+        } else {
+          dispatch(removeItemFromCart(uniqueId));
+          setTotalPrice(totalPrice - price);
         }
       }
 
@@ -188,15 +191,15 @@ function CheckoutPage() {
               <span className="total-amount">TOTAL AMOUNT</span>
             </div>
             <div className="right">
-              <span>₹ {parseInt(totalPrice).toFixed(2)}</span>
+              <span>₹ {parseFloat(totalPrice).toFixed(2)}</span>
               <span>₹ 500</span>
               <span>₹ 0</span>
               <span>FREE</span>
-              <span className="total-amount">₹ {parseInt(totalPrice).toFixed(2)}</span>
+              <span className="total-amount">₹ {parseFloat(totalPrice).toFixed(2)}</span>
             </div>
           </div>
           {Object.keys(shippingAddress).length !== 0 && cart.length !==0 ? 
-          <Checkout amount={totalPrice} handlePaymentSuccess={handlePaymentSuccess} handlePaymentFailure={handlePaymentFailure}/> :
+          <Checkout amount={parseFloat(totalPrice).toFixed(2)} handlePaymentSuccess={handlePaymentSuccess} handlePaymentFailure={handlePaymentFailure}/> :
           <button onClick={handlePlaceOrder}>PLACE ORDER</button> }
           
         </div>
