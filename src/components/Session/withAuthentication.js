@@ -22,7 +22,7 @@ const withAuthentication = (Component) => {
     const firebase = useContext(FirebaseContext);
 
     const next = async (authUser) => {
-      // console.log("next function called from with Authentication:", authUser);
+      
       const userDetails = {
         uid: authUser.uid,
         email: authUser.email,

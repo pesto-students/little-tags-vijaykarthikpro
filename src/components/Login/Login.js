@@ -42,7 +42,7 @@ export default function Login({ showLogin, handleModalOpen }) {
     firebase
       .doFacebookSignIn()
       .then((authUser) => {
-        console.log("Facebook auth", authUser);
+        
         const userDetails = {
           email: authUser.email,
           name: authUser.displayName,
