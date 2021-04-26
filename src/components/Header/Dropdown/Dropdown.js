@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import FirebaseContext from "../../Firebase/context";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
-import { setLanguage } from "../../../actions";
+import { useSelector } from "react-redux";
+// import { setLanguage } from "../../../actions";
 import { Link } from "react-router-dom";
 import { ProfileItems } from "./MenuItems";
 import { LanguageItems } from "./MenuItems";
@@ -12,7 +12,7 @@ export default function Dropdown({ type }) {
   const [click, setClick] = useState(false);
   const [menuItems, setMenuItems] = useState([]);
   const user = useSelector((state) => state.sessionState.authUser);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const firebase = useContext(FirebaseContext);
 
@@ -31,9 +31,9 @@ export default function Dropdown({ type }) {
   };
 
   const handleLanguage = (e) => {
-    let language = e.target.id;
-    console.log("button Clicked", e.target.id);
-    dispatch(setLanguage(language));
+    // let language = e.target.id;
+    // console.log("button Clicked", e.target.id);
+    // dispatch(setLanguage(language));
   };
 
   const displayDropDownList = () => {
