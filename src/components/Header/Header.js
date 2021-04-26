@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Header.scss";
 import Dropdown from "./Dropdown/Dropdown";
+import * as ROUTES from "../../constants/routes";
 import Login from "../Login/Login";
 import Burger from "../Burger/Burger";
 import AppLogo from "../../assets/icons/logo-symbol.png";
@@ -16,6 +17,8 @@ import Menu from "../../assets/icons/menu.svg";
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false);
   const [isHamburgerMenuOpen, setHamBurgerMenu] = useState(false);
+  const cart = useSelector((state) => state.cartState.cart);
+  const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const languageData = useSelector((state) => state.sessionState.data);
 
   const isUserLoggedIn = useSelector(
@@ -23,7 +26,6 @@ export default function Header() {
   );
 
   const showLoginModal = () => setShowLogin(!showLogin);
-
   const handleBurgerClose = () => {
     setHamBurgerMenu(!isHamburgerMenuOpen);
   };
@@ -32,7 +34,7 @@ export default function Header() {
     if (isUserLoggedIn) {
       return (
         <div className="menu-item">
-          <Link to="/account" className="nav-links">
+          <Link to={ROUTES.ACCOUNT} className="nav-links">
             <img src={ProfileIcon} alt="profile-icon" />
           </Link>
           <Dropdown type="profile" />
@@ -64,17 +66,17 @@ export default function Header() {
             />
           </div>
           <div className="logo">
-            <Link to="/" className="left nav-links">
+            <Link to={ROUTES.HOME} className="left nav-links">
               <img src={AppLogo} alt="app-logo" />
               <span className="title">Style Beast</span>
             </Link>
           </div>
           <div className="category-links">
-            <Link to="/products/men" className="nav-links">
-              {languageData.men} {/* Men */}
+            <Link to={ROUTES.MEN} className="nav-links">
+              {languageData.men}
             </Link>
-            <Link to="/products/women" className="nav-links">
-              {languageData.women} {/* Women */}
+            <Link to={ROUTES.WOMEN} className="nav-links">
+              {languageData.women}
             </Link>
             {/* <Link to="/products/offers" className="nav-links">
               Offers
@@ -86,18 +88,24 @@ export default function Header() {
             <Search />
           </div>
           <div className="menu-item">
-            <Link to="/" className="nav-links">
+            <div className="nav-links">
               <img src={GlobeIcon} alt="globe-icon" />
-            </Link>
-            <Dropdown type="language" />
+              <Dropdown type="language" />
+            </div>
           </div>
           {renderProfileIcon()}
-          <Link to="/account/wishlist" className="nav-links">
+          <Link to={ROUTES.WISHLIST} className="cart-icon nav-links">
             <img src={WishlistIcon} alt="wishlist-icon" />
+            {wishlist.length > 0 ? (
+              <div className="cart-count">{wishlist.length}</div>
+            ) : null}
           </Link>
 
-          <Link to="/checkout" className="nav-links">
+          <Link to={ROUTES.CHECKOUT} className="cart-icon nav-links">
             <img src={CartIcon} alt="cart-icon" />
+            {cart.length > 0 ? (
+              <div className="cart-count">{cart.length}</div>
+            ) : null}
           </Link>
         </div>
       </nav>
