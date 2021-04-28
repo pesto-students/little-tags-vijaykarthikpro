@@ -34,12 +34,6 @@
       @include styles.flex-row-center;
       padding: 40px;
 
-      img {
-        width: 300px;
-        height: 400px;
-        object-fit: cover;
-        border-radius: 10px;
-      }
     }
 
     .description {
