@@ -13,18 +13,19 @@ import ProductDetailsImg from "../../assets/images/product-details-img.svg";
 import CartIcon from "../../assets/icons/cart-filled.svg";
 import WishlistIcon from "../../assets/icons/wishlist-filled.svg";
 import Products from "../../data/products";
-import FirebaseContext from '../Firebase/context';
-import Login from '../Login/Login';
-// import Carousel from '../carousel/Carousel'
+import FirebaseContext from "../Firebase/context";
+import Login from "../Login/Login";
+import Carousel from "../Carousel/Carousel";
 import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
 export default function ProductDetailsPage(props) {
-
-  const cart = useSelector(state => state.cartState.cart);
-  const wishlist = useSelector(state => state.wishlistState.wishlist);
+  const cart = useSelector((state) => state.cartState.cart);
+  const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
-  const user = useSelector(state => state.sessionState.authUser);
-  const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
+  const user = useSelector((state) => state.sessionState.authUser);
+  const isUserLoggedIn = useSelector(
+    (state) => state.sessionState.isUserLoggedIn
+  );
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
@@ -38,6 +39,7 @@ export default function ProductDetailsPage(props) {
   let location = useLocation();
   let title = location.pathname.split("/")[2];
 
+  console.log("product information", product);
   useEffect(() => {
     Products.map((product) => {
       if (product.title.toString() === title) {
@@ -45,11 +47,9 @@ export default function ProductDetailsPage(props) {
       }
       return null;
     });
-
   }, [title]);
 
-
-/*   useEffect(() => {
+  /*   useEffect(() => {
     setAddToCart(cart.includes(product));
     setAddToWishlist(wishlist.includes(product));
 
@@ -62,30 +62,33 @@ export default function ProductDetailsPage(props) {
     })
   }, [cart, id, product, wishlist]); */
 
-  useEffect(()=>{
-    if(isUserLoggedIn) {
+  useEffect(() => {
+    if (isUserLoggedIn) {
       firebase.saveDataToDatabase(user.uid, "cart", cart);
       firebase.saveDataToDatabase(user.uid, "wishlist", wishlist);
     }
-  },[cart, firebase, isUserLoggedIn, user, wishlist])
+  }, [cart, firebase, isUserLoggedIn, user, wishlist]);
 
   const displaySizes = () => {
     const sizesList = Object.values(SIZES);
     return sizesList.map((size, id) => {
-      if(size === selectedSize) {
+      if (size === selectedSize) {
         return (
-          <span key={id} className="size selected" onClick={() => setSelectedSize(size)}>
+          <span
+            key={id}
+            className="size selected"
+            onClick={() => setSelectedSize(size)}
+          >
             {size}
           </span>
         );
       } else {
         return (
-        <span key={id} className="size" onClick={() => setSelectedSize(size)}>
-          {size}
-        </span>
-      );
+          <span key={id} className="size" onClick={() => setSelectedSize(size)}>
+            {size}
+          </span>
+        );
       }
-      
     });
   };
 
@@ -99,17 +102,16 @@ export default function ProductDetailsPage(props) {
   };
 
   const handleAddToCartClick = () => {
-    if(isUserLoggedIn) {
+    if (isUserLoggedIn) {
       setShowLogin(false);
       setAddToCart(!isAddToCart);
     } else {
       setShowLogin(true);
     }
-    
   };
 
   const handleAddToWishlistClick = () => {
-    if(isUserLoggedIn) {
+    if (isUserLoggedIn) {
       setShowLogin(false);
       setAddToWishlist(!isAddToWishlist);
     } else {
@@ -117,29 +119,28 @@ export default function ProductDetailsPage(props) {
     }
   };
 
-  useEffect(() =>{
+  useEffect(() => {
     if (isAddToCart) {
       product.size = selectedSize;
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToCart(product));
-      
     } else {
-      if(isUserLoggedIn) {
+      if (isUserLoggedIn) {
         dispatch(removeItemFromCart(product.uniqueId));
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
 
-  useEffect(()=>{
+  useEffect(() => {
     if (isAddToWishlist) {
       product.size = selectedSize;
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
     } else {
-      if(isUserLoggedIn) {
+      if (isUserLoggedIn) {
         dispatch(removeItemFromWishlist(product.uniqueId));
       }
     }
@@ -150,10 +151,14 @@ export default function ProductDetailsPage(props) {
     <div className="product-details-container">
       <div className="details">
         <div className="image-carousel">
-          <img
-            src={product.image ? product.image : ProductDetailsImg}
-            alt="products"
-          />
+          {product.imageCarousel.length !== 0 ? (
+            <Carousel slides={product.imageCarousel} />
+          ) : (
+            <img
+              src={product.image ? product.image : ProductDetailsImg}
+              alt="products"
+            />
+          )}
         </div>
         <div className="description">
           <h3 className="title">{product.title ? product.title : "Jacket"}</h3>

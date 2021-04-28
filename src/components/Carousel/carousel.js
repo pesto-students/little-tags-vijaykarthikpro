@@ -1,71 +1,64 @@
-import ProductDetailsImg from '../../assets/images/product-details-img.svg'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import "./Carousel.scss";
 
+export default function Carousel({ slides }) {
+  const [current, setCurrent] = useState(0);
+  const length = slides.length;
 
-var slideIndex = 1;
+  const nextSlide = () => {
+    setCurrent(current === length - 1 ? 0 : current + 1);
+  };
 
-export default function Carousel() {
+  const prevSlide = () => {
+    setCurrent(current === 0 ? length - 1 : current - 1);
+  };
 
-    
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName(".mySlides");
-  var dots = document.getElementsByClassName(".dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
+  const currentSlide = (n) => {
+    setCurrent(n);
+  };
+  if (!Array.isArray(slides) || slides.length <= 0) {
+    return null;
   }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
- /*  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active"; */
-}
-
-
-
-return (<div>
-        <div class="slideshow-container">
-
-<div className="mySlides fade">
-  <div className="numbertext">1 / 3</div>
-  <img src={ProductDetailsImg} alt="" />
-  <div className="text">Caption Text</div>
-</div>
-
-<div className="mySlides fade">
-  <div className="numbertext">2 / 3</div>
-  <img src={ProductDetailsImg} alt="" />
-  <div className="text">Caption Two</div>
-</div>
-
-<div className="mySlides fade">
-  <div className="numbertext">3 / 3</div>
-  <img src={ProductDetailsImg} alt="" />
-  <div className="text">Caption Three</div>
-</div>
-
-<button className="prev" onclick={plusSlides(-1)}>&#10094;</button>
-<button className="next" onclick={plusSlides(1)}>&#10095;</button>
-
-</div>
-<br/>
-
-<div>
-  <span className="dot" onclick={currentSlide(1)}></span> 
-  <span className="dot" onclick={currentSlide(2)}></span> 
-  <span className="dot" onclick={currentSlide(3)}></span> 
-</div>
-</div>
-    )
+  return (
+    <div>
+      CAROUSEL
+      <section className="slider">
+        {/* <FaArrowCircleLeft className="left-arrow" onClick={prevSlide} />
+        <FaArrowCircleRight className="right-arrow" onClick={nextSlide} /> */}
+        {slides.map((slide, index) => {
+          return (
+            <div
+              className={index === current ? "slide active" : "slide"}
+              key={index}
+            >
+              {index === current && (
+                <img src={slide.image} alt="product images" className="image" />
+              )}
+            </div>
+          );
+        })}
+      </section>
+      <div className="app">
+        <span
+          className={current === 0 ? "dot active" : "dot"}
+          onClick={() => {
+            currentSlide(0);
+          }}
+        ></span>
+        <span
+          className={current === 1 ? "dot active" : "dot"}
+          onClick={() => {
+            currentSlide(1);
+          }}
+        ></span>
+        <span
+          className={current === 2 ? "dot active" : "dot"}
+          onClick={() => {
+            currentSlide(2);
+          }}
+        ></span>
+      </div>
+    </div>
+  );
 }
