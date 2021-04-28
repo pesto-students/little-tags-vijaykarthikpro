@@ -9,7 +9,6 @@ import {
 } from "../../actions";
 import { SIZES } from "../../Utils";
 import "./ProductDetailsPage.scss";
-import ProductDetailsImg from "../../assets/images/product-details-img.svg";
 import CartIcon from "../../assets/icons/cart-filled.svg";
 import WishlistIcon from "../../assets/icons/wishlist-filled.svg";
 import Products from "../../data/products";
@@ -18,7 +17,8 @@ import Login from "../Login/Login";
 import Carousel from "../Carousel/Carousel";
 import SimilarProducts from "../SimilarProducts/SimilarProducts";
 
-export default function ProductDetailsPage(props) {
+export default function ProductDetailsPage() {
+
   const cart = useSelector((state) => state.cartState.cart);
   const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
@@ -39,7 +39,6 @@ export default function ProductDetailsPage(props) {
   let location = useLocation();
   let title = location.pathname.split("/")[2];
 
-  console.log("product information", product);
   useEffect(() => {
     Products.map((product) => {
       if (product.title.toString() === title) {
@@ -49,18 +48,6 @@ export default function ProductDetailsPage(props) {
     });
   }, [title]);
 
-  /*   useEffect(() => {
-    setAddToCart(cart.includes(product));
-    setAddToWishlist(wishlist.includes(product));
-
-    cart.map((item)=>{
-      if(item.id === product.id ) {
-        setSelectedSize(product.size);
-        setQuantityCount(product.quantity);
-      }
-      return null;
-    })
-  }, [cart, id, product, wishlist]); */
 
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -151,11 +138,11 @@ export default function ProductDetailsPage(props) {
     <div className="product-details-container">
       <div className="details">
         <div className="image-carousel">
-          {product.imageCarousel.length !== 0 ? (
+          {product.hasOwnProperty('imageCarousel') ? (
             <Carousel slides={product.imageCarousel} />
           ) : (
             <img
-              src={product.image ? product.image : ProductDetailsImg}
+              src={product.image}
               alt="products"
             />
           )}
@@ -195,7 +182,6 @@ export default function ProductDetailsPage(props) {
           </div>
         </div>
       </div>
-      {/* <Carousel /> */}
       <SimilarProducts />
       <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
     </div>
