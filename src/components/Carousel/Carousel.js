@@ -1,71 +1,67 @@
-import ProductDetailsImg from '../../assets/images/product-details-img.svg'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import LeftArrow from '../../assets/icons/left-arrow.svg';
+import RightArrow from '../../assets/icons/right-arrow.svg';
+import "./Carousel.scss";
 
+export default function Carousel({ slides }) {
 
-var slideIndex = 1;
+  const [current, setCurrent] = useState(0);
 
-export default function Carousel() {
+  const nextSlide = () => {
+    setCurrent((current + 1) % slides.length);
+  };
 
-    
-showSlides(slideIndex);
+  const prevSlide = () => {
+    setCurrent((current - 1 + slides.length) % slides.length);
+  };
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
+  const currentSlide = (n) => {
+    setCurrent(n);
+  };
+ 
 
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName(".mySlides");
-  var dots = document.getElementsByClassName(".dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
+  const showSlides = () => {
+    return slides.map((slide, index) => {
+      return (
+        <div
+          className={index === current ? "slide active" : "slide"}
+          key={index}
+        >
+          {index === current && (
+            <img className="product-image" src={slide.image} alt="product"  />
+          )}
+        </div>
+      );
+    })
   }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
+
+  const showEllipsis = () =>{
+
+    return slides.map((_, index) =>{
+      return (<span
+        className={current === index ? "dot active" : "dot"}
+        onClick={() => {
+          currentSlide(index);
+        }}
+      ></span>)
+    })
   }
- /*  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active"; */
+
+  return (
+    <div>
+      <section className="slider">
+          <img className="arrows" src={LeftArrow} alt="left-arrow" onClick={prevSlide}/>
+          {showSlides()}
+          <img className="arrows" src={RightArrow} alt="right-arrow" onClick={nextSlide}/>
+      </section>
+      <div className="ellipsis">
+        {showEllipsis()}
+      </div>
+    </div>
+  );
 }
 
-
-
-return (<div>
-        <div class="slideshow-container">
-
-<div className="mySlides fade">
-  <div className="numbertext">1 / 3</div>
-  <img src={ProductDetailsImg} alt="" />
-  <div className="text">Caption Text</div>
-</div>
-
-<div className="mySlides fade">
-  <div className="numbertext">2 / 3</div>
-  <img src={ProductDetailsImg} alt="" />
-  <div className="text">Caption Two</div>
-</div>
-
-<div className="mySlides fade">
-  <div className="numbertext">3 / 3</div>
-  <img src={ProductDetailsImg} alt="" />
-  <div className="text">Caption Three</div>
-</div>
-
-<button className="prev" onclick={plusSlides(-1)}>&#10094;</button>
-<button className="next" onclick={plusSlides(1)}>&#10095;</button>
-
-</div>
-<br/>
-
-<div>
-  <span className="dot" onclick={currentSlide(1)}></span> 
-  <span className="dot" onclick={currentSlide(2)}></span> 
-  <span className="dot" onclick={currentSlide(3)}></span> 
-</div>
-</div>
-    )
+Carousel.propTypes = {
+  slides: PropTypes.array.isRequired
 }
