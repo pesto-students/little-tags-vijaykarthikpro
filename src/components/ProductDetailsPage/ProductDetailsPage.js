@@ -16,9 +16,9 @@ import FirebaseContext from "../Firebase/context";
 import Login from "../Login/Login";
 import Carousel from "../Carousel/Carousel";
 import SimilarProducts from "../SimilarProducts/SimilarProducts";
+import Toast from "../Toast/Toast";
 
 export default function ProductDetailsPage() {
-
   const cart = useSelector((state) => state.cartState.cart);
   const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
@@ -32,6 +32,7 @@ export default function ProductDetailsPage() {
   const [isAddToWishlist, setAddToWishlist] = useState(false);
   const [selectedSize, setSelectedSize] = useState(SIZES.XS);
   const [showLogin, setShowLogin] = useState(false);
+  const [toast, setToast] = useState("");
 
   const showLoginModal = () => setShowLogin(!showLogin);
 
@@ -47,7 +48,6 @@ export default function ProductDetailsPage() {
       return null;
     });
   }, [title]);
-
 
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -136,15 +136,13 @@ export default function ProductDetailsPage() {
 
   return (
     <div className="product-details-container">
+      <Toast toastMessage={toast} />
       <div className="details">
         <div className="image-carousel">
-          {product.hasOwnProperty('imageCarousel') ? (
+          {product.hasOwnProperty("imageCarousel") ? (
             <Carousel slides={product.imageCarousel} />
           ) : (
-            <img
-              src={product.image}
-              alt="products"
-            />
+            <img src={product.image} alt="products" />
           )}
         </div>
         <div className="description">
