@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import closeIcon from '../../../assets/icons/clear.svg'
 import './AddressForm.scss';
+import States from '../../../data/states.json';
 
 export default function AddressForm({ handleFormSubmit, handleFormClose, isDefaultAddress }) {
 
@@ -9,25 +10,30 @@ export default function AddressForm({ handleFormSubmit, handleFormClose, isDefau
     return (<div className="address-form-modal">
         <div className="outer">
         <div className="address-form-header">
-            <h4>Add Address</h4>
+            <span className="add-address">Add Address</span>
             <img className="close-icon" src={closeIcon} alt="close" onClick={handleFormClose}/>
         </div>
         <div className="form-fields">
           <form onSubmit={handleFormSubmit}>
-            <input type="text" name="name" placeholder="Name" required/>
+            <input type="text" name="name" placeholder="Name*" required/>
 
-            <input type="text" name="mobile" placeholder="Mobile" required/>
+            <input type="text" name="mobile" placeholder="Mobile*" required/>
 
-            <div className="pincode">
-              <input type="text" name="pincode" placeholder="Pincode" required/>
-              <input type="text" name="state" placeholder="State" id="state" required/>
+            <div className="state-pincode">
+              <input type="text" name="pincode" placeholder="Pincode*" required/>
+              <select className="states" required>
+              <option className="default-option" value="" disabled selected hidden>Select State</option>
+                {Object.values(States).map((state) =>{
+                  return <option>{state}</option>
+                })}
+              </select>
             </div>
 
-            <input type="text" name="area" placeholder="Area" required/>
+            <input type="text" name="area" placeholder="Area*" required/>
 
-            <input type="text" name="town" placeholder="Town" required/>
+            <input type="text" name="town" placeholder="Town*" required/>
 
-            <input type="text" name="city" placeholder="City" required/>
+            <input type="text" name="city" placeholder="City*" required/>
             {!isDefaultAddress && <li>
               <input type="checkbox" />
               <span>Make this my default address</span>

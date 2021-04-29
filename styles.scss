@@ -18,3 +18,12 @@ $logo-color: radial-gradient(#f2e205, #d99e32, #d98723);
 @mixin link-style {
   text-decoration: none;
 }
+
+@mixin make-text-color-gold {
+  background: -webkit-radial-gradient(#f2e205, #d99e32, #d98723);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+
