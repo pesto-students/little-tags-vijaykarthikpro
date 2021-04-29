@@ -1,3 +1,5 @@
+@use '../../../../styles.scss' as styles;
+
 .address-form-modal {
     position: fixed;
     top: 0;
@@ -28,7 +30,8 @@
             background-color: black;
             color: white;
             border: 1px white solid;
-            border-radius: 10px 10px 0 0;
+            border-radius: 5px 5px 0 0;
+
 
             .close-icon {
                 width: 25px;
@@ -47,9 +50,9 @@
                 flex-direction: column;
                 padding: 10px;
                 width: 100%;
-                border-radius: 0 0 10px 10px;
+                border-radius: 0 0 5px 5px;
             
-                input {
+                input[type="text"], select {
                     border: 1px grey solid;
                     border-radius: 4px;
                     outline: none;
@@ -69,13 +72,33 @@
                     margin: 10px 0 10px 0;
                 }
     
-                .pincode {
+                .state-pincode {
                     display: flex;
+                    
+
+                    .states{
+                        flex: 1;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        -o-appearance: none;
+                        appearance: none;
+                        background-image: url('../../../assets/icons/dropdown-arrow.svg');
+                        background-position: 95% center;
+                        background-repeat: no-repeat;
+                        background-size: 10px;
+                        outline: none;
+
+                        &:invalid {
+                            color: grey;
+                        }
+
+                    }
+                    
                 }
             
                 li {
                     list-style: none;
-                    margin: 10px 0 10px 0;
+                    margin: 10px 10px 10px 0;
                 }
             }
 
