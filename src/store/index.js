@@ -31,9 +31,9 @@ const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
-store.subscribe(/* throttleFunction( */() => {
+store.subscribe(() => {
     saveState(store.getState());
-});/* ,1000)) */
+});
 
 
 export default store;

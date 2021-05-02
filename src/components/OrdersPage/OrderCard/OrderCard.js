@@ -11,7 +11,7 @@ export default function OrderCard({ ordersData }) {
             <div>
               <span className="order-title">{title}</span>
               <p>Color-Black</p>
-              <span className="order-title"> $ {price}</span>
+              <span className="order-title"> ₹ {price}</span>
               <div className="subtitle-size">
                 Ordered -<span>1st Thu, 2021</span>
               </div>
@@ -51,9 +51,9 @@ export default function OrderCard({ ordersData }) {
                   <li>Total amount</li>
                 </div>
                 <div className="price">
-                  <li>$ {price}</li>
+                  <li>₹ {price}</li>
                   <li>Free</li>
-                  <li>$ {price}</li>
+                  <li>₹ {price}</li>
                 </div>
               </div>
             </div>

@@ -5,7 +5,7 @@ const Toast = (props) => {
   const { toastMessage } = props;
 
   return (
-    <div className="notification-container success">
+    <div className="notification-container">
       <div>
         <p className="notification-message">{toastMessage}</p>
       </div>

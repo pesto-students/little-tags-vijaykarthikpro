@@ -37,7 +37,7 @@ export const throttleFunction=(func, delay)=>{
     
     return (...args) => {
 
-      let now = new Date().getTime(); 
+      const now = new Date().getTime(); 
         
       if(now - prev> delay){ 
         prev = now;

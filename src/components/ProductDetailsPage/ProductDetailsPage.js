@@ -19,13 +19,12 @@ import SimilarProducts from "../SimilarProducts/SimilarProducts";
 import Toast from "../Toast/Toast";
 
 export default function ProductDetailsPage() {
+
   const cart = useSelector((state) => state.cartState.cart);
   const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
   const user = useSelector((state) => state.sessionState.authUser);
-  const isUserLoggedIn = useSelector(
-    (state) => state.sessionState.isUserLoggedIn
-  );
+  const isUserLoggedIn = useSelector((state) => state.sessionState.isUserLoggedIn);
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
@@ -37,14 +36,12 @@ export default function ProductDetailsPage() {
   const showLoginModal = () => setShowLogin(!showLogin);
 
   const dispatch = useDispatch();
-  let location = useLocation();
-  let title = location.pathname.split("/")[2];
+  const location = useLocation();
+  const title = location.pathname.split("/")[2];
 
   useEffect(() => {
-    Products.map((product) => {
-      if (product.title.toString() === title) {
-        setProduct(product);
-      }
+    Products.map((item) => {
+      if (item.title.toString() === title) setProduct(item);
       return null;
     });
   }, [title]);
@@ -61,27 +58,17 @@ export default function ProductDetailsPage() {
     return sizesList.map((size, id) => {
       if (size === selectedSize) {
         return (
-          <span
-            key={id}
-            className="size selected"
-            onClick={() => setSelectedSize(size)}
-          >
-            {size}
-          </span>
+          <span key={id} className="size selected" onClick={() => setSelectedSize(size)}> {size} </span>
         );
       } else {
         return (
-          <span key={id} className="size" onClick={() => setSelectedSize(size)}>
-            {size}
-          </span>
+          <span key={id} className="size" onClick={() => setSelectedSize(size)}> {size} </span>
         );
       }
     });
   };
 
-  const increaseCount = () => {
-    setQuantityCount(quantityCount + 1);
-  };
+  const increaseCount = () => setQuantityCount(quantityCount + 1);
 
   const decreaseCount = () => {
     const countValue = quantityCount < 2 ? 1 : quantityCount - 1;
@@ -112,11 +99,7 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToCart(product));
-    } else {
-      if (isUserLoggedIn) {
-        dispatch(removeItemFromCart(product.uniqueId));
-      }
-    }
+    } else if (isUserLoggedIn) dispatch(removeItemFromCart(product.uniqueId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
 
@@ -126,11 +109,8 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
-    } else {
-      if (isUserLoggedIn) {
-        dispatch(removeItemFromWishlist(product.uniqueId));
-      }
-    }
+    } else if (isUserLoggedIn) dispatch(removeItemFromWishlist(product.uniqueId));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToWishlist]);
 
@@ -168,13 +148,13 @@ export default function ProductDetailsPage() {
             <button className="cart" onClick={handleAddToCartClick}>
               <img src={CartIcon} alt="cart-icon" />
               <span className="cart-btn-text">
-                {!isAddToCart ? "Add to Cart" : "Remove from Cart"}
+                {isAddToCart ? "Remove from Cart" : "Add to Cart"}
               </span>
             </button>
             <button className="wishlist" onClick={handleAddToWishlistClick}>
               <img src={WishlistIcon} alt="wishlist-icon" />
               <span className="wishlist-btn-text">
-                {!isAddToWishlist ? "Add to Wishlist" : "Remove from Wishlist"}
+                {isAddToWishlist ? "Remove from Wishlist" :  "Add to Wishlist"}
               </span>
             </button>
           </div>

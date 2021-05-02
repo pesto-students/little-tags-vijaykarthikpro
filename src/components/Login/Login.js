@@ -96,9 +96,9 @@ export default function Login({ showLogin, handleModalOpen }) {
   return (
     <>
       {showLogin ? (<div>
-        {!errorMessage ?  
-            (<Dialog handleModalClose={handleModalClose} displayContent={loginOptions}/>) 
-          : (<Dialog handleModalClose={handleModalClose} displayContent={showErrorMessage}/>)}
+        {errorMessage ?  
+        (<Dialog handleModalClose={handleModalClose} displayContent={showErrorMessage}/>) :
+        (<Dialog handleModalClose={handleModalClose} displayContent={loginOptions}/>)  }
       </div>
       ) : null
       }

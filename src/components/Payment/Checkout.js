@@ -18,12 +18,13 @@ export default function Checkout({ amount, handlePaymentSuccess, handlePaymentFa
   const openCheckout = () =>{
 
     
-    let options = {
+    const options = {
       "key": "rzp_test_rfJ2UUKhSoQAbb",
       "amount": amount * 100, 
       "name": "Style Beast",
       "description": "Purchase Description",
       "image": LogoSymbol,
+      // eslint-disable-next-line func-names
       "handler": function (response){
         if(response.razorpay_payment_id) {
           handlePaymentSuccess();
@@ -44,12 +45,13 @@ export default function Checkout({ amount, handlePaymentSuccess, handlePaymentFa
       }
     };
       
-    let rzp = new window.Razorpay(options);
+    const rzp = new window.Razorpay(options);
     rzp.open();
 
   }
 
  
+  // eslint-disable-next-line consistent-return
   return (
     <div>
       <button onClick={openCheckout}>Pay Rs. {amount}</button> 

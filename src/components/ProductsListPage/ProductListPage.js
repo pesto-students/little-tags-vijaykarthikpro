@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import "./ProductListPage.scss";
@@ -6,6 +7,7 @@ import { routePathMap } from "../../Utils";
 import Card from "../Card/Card";
 
 export default function ProductListPage() {
+  
   const [data, setData] = useState(products);
   const [routeFilteredData, setRouteFilteredData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
@@ -22,8 +24,8 @@ export default function ProductListPage() {
     high: false,
     category: false,
     price: false});
-  let location = useLocation();
-  let pathName = location.pathname.split("/")[2];
+  const location = useLocation();
+  const pathName = location.pathname.split("/")[2];
 
   useEffect(() => {
     const isPathMatching = (path) => {
@@ -44,7 +46,7 @@ export default function ProductListPage() {
 
 
   const handleCategory = (e) => {
-    let { target: { value }} = e;
+    const { target: { value }} = e;
     
     setIsChceked({...isChecked, category: true});
    
@@ -61,8 +63,8 @@ export default function ProductListPage() {
   };
 
   const handlePrice = (e) => {
-    let priceRange = e.target.name;
-    let checked = e.target.checked;
+    const priceRange = e.target.name;
+    const checked = e.target.checked;
 
 
     setIsChceked({...isChecked, price : true});
@@ -272,33 +274,6 @@ export default function ProductListPage() {
           </ul>
         </div>
         <div>
-          {/* <span className="main-title">Color</span> */}
-          {/* <ul>
-            <li>
-              <label>
-                <input type="checkbox" />
-                <span>White</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                <span>Black</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                <span>Red</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" />
-                <span>Blue</span>
-              </label>
-            </li>
-          </ul> */}
         </div>
       </div>
 

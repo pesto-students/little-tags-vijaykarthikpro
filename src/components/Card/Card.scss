@@ -20,10 +20,10 @@
       transform: scale(1.02);
       transition: 0.2s;
       filter: drop-shadow(10px 10px 10px black); 
+    }
 
-      .wishlist-btn {
-        visibility: visible;
-      }
+    .card-link {
+      text-decoration: none;
     }
 
     .card-img {
@@ -50,6 +50,7 @@
       .title {
         font-size: 15px;
         padding-bottom: 10px;
+        color: white;
       }
 
       .price {
@@ -70,30 +71,4 @@
     }
   }
 }
-.wishlist-btn {
-  width: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  visibility: hidden;
-  outline: none;
-  border: 0;
-  border-radius: 5px;
 
-  &:hover {
-    background: linear-gradient(to right, #d99e32, #d98723);
-  }
-
-  img {
-    width: 18px;
-    height: 18px;
-  }
-
-  .wishlist-btn-text {
-    margin-left: 10px;
-    font-family: "Poppins", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-  }
-}
