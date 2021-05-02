@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PropTypes from 'prop-types';
 import { setAddress } from "../../actions";
+import FirebaseContext from '../Firebase/context';
 import AddressCard from "./AddressCard/AddressCard";
 import "./Address.scss";
-import FirebaseContext from '../Firebase/context';
 import AddressForm from "./AddressFormModal/AddressForm";
 
 export default function Address({ isCheckout, selectAddressForShipping }) {
@@ -31,7 +31,7 @@ export default function Address({ isCheckout, selectAddressForShipping }) {
 
   const handleMakeDefaultAddress = (id) =>{
 
-    let updatedAddresses = userAddresses.map((address, index) => {
+    const updatedAddresses = userAddresses.map((address, index) => {
       if(index !== id) {
         return { ...address, isDefault: false}
       }
@@ -42,7 +42,7 @@ export default function Address({ isCheckout, selectAddressForShipping }) {
   }
 
   const handleRemoveAddress = (id) => {
-    let updatedAddresses = userAddresses.filter((_,index) => index !== id );
+    const updatedAddresses = userAddresses.filter((_,index) => index !== id );
     setUserAddresses(updatedAddresses);
   }
 
@@ -51,9 +51,7 @@ export default function Address({ isCheckout, selectAddressForShipping }) {
   }
 
   function handleFormSubmit(e) {
-    const isDefaultAvailable = userAddresses.filter(({ isDefault }) =>
-      isDefault ? true : false
-    );
+    const isDefaultAvailable = userAddresses.filter(({ isDefault }) => isDefault );
  
     setShowForm(false);
     e.preventDefault();

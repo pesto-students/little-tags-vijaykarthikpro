@@ -4,7 +4,7 @@ const initialState = {
     orders: []
 }
 
-export default function cartReducer(state = initialState, action) {
+export default function orderReducer(state = initialState, action) {
     
     switch(action.type) {
         case ACTIONS.CONFIRM_ORDER : {

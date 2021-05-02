@@ -1,6 +1,6 @@
 import * as ACTIONS from "../constants/actionTypes";
-import dataEN from "../data/languageData/en.json";
-import dataHN from "../data/languageData/hin.json";
+import dataEN from "../data/languageData/en";
+import dataHN from "../data/languageData/hin";
 
 const initialState = {
   authUser: null,
@@ -23,7 +23,7 @@ const setLanguage = (state = initialState, action) => {
   }
   return {
     ...state,
-    ...{ language: action.language, data: data },
+    ...{ language: action.language, data },
   };
 };
 

@@ -4,7 +4,7 @@ const initialState = {
     wishlist: []
 }
 
-export default function cartReducer(state = initialState, action) {
+export default function wishlistReducer(state = initialState, action) {
     
     switch(action.type) {
         case ACTIONS.ADD_ITEM_TO_WISHLIST : {

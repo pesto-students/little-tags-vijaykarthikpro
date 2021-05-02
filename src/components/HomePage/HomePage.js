@@ -1,8 +1,8 @@
 import React from "react";
 import "./HomePage.scss";
 import { Link } from "react-router-dom";
-import * as ROUTES from "../../constants/routes";
 import { useSelector } from "react-redux";
+import * as ROUTES from "../../constants/routes";
 import Banner from "../../assets/images/style-beast-hero-image.svg";
 import MenPortrait from "../../assets/images/men-portrait.svg";
 import WomenPortrait from "../../assets/images/women-portrait.svg";

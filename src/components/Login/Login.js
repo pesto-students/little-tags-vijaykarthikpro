@@ -1,16 +1,21 @@
 import React, { useState, useContext } from "react";
+import PropTypes from "prop-types";
 import { saveToLocalStorage } from "../../Utils";
 import { setAuthUser } from "../../actions";
-import PropTypes from "prop-types";
 import FirebaseContext from "../Firebase/context";
 import FbIcon from "../../assets/icons/fb-logo.svg";
 import GoogleIcon from "../../assets/icons/google-logo.svg";
 import Dialog from '../Dialog/Dialog';
+import Toast from '../Toast/Toast';
 import "./Login.scss";
 
+const GREEN_COLOR = '#32CD32';
+
 export default function Login({ showLogin, handleModalOpen }) {
+
   const firebase = useContext(FirebaseContext);
   const [errorMessage, setErrorMessage] = useState("");
+  const [toast, setToast] = useState([]);
 
   const handleGoogleSignIn = () => {
     firebase
@@ -24,7 +29,7 @@ export default function Login({ showLogin, handleModalOpen }) {
 
         saveToLocalStorage("authUser", userDetails);
         setAuthUser(userDetails);
-
+        setToast([...toast, {id: new Date().getTime(), description: 'Successfully Logged In !', backgroundColor: GREEN_COLOR}])
         handleModalOpen();
 
         return firebase.user(authUser.user.uid).update({
@@ -53,6 +58,7 @@ export default function Login({ showLogin, handleModalOpen }) {
         setAuthUser(userDetails);
 
         handleModalOpen();
+        setToast([...toast, {id: new Date().getTime(), description: 'Successfully Logged In !', backgroundColor: GREEN_COLOR}])
 
         return firebase.user(authUser.user.uid).set({
           email: authUser.user.email,
@@ -96,12 +102,13 @@ export default function Login({ showLogin, handleModalOpen }) {
   return (
     <>
       {showLogin ? (<div>
-        {!errorMessage ?  
-            (<Dialog handleModalClose={handleModalClose} displayContent={loginOptions}/>) 
-          : (<Dialog handleModalClose={handleModalClose} displayContent={showErrorMessage}/>)}
+        {errorMessage ?  
+        (<Dialog handleModalClose={handleModalClose} displayContent={showErrorMessage}/>) :
+        (<Dialog handleModalClose={handleModalClose} displayContent={loginOptions}/>)  }
       </div>
       ) : null
       }
+       <Toast toastList={toast} position="top-right" autoDelete dismissTime="4000" />
     </>
   );
 }

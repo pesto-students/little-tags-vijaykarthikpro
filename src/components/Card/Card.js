@@ -30,25 +30,18 @@ export default function Card({ productsData }) {
       const { id, image, title, price } = item;
       return (
         <div className="card" key={id}>
-          <Link key={id} to={`/product-details/${title}`}>
+          <Link className="card-link" key={id} to={`/product-details/${title}`}>
             <div className="card-img">
               <img src={image} alt="product-card" />
             </div>
+            <div className="card-header">
+              {displayTitleText(title)}
+              <p className="price">
+                <span>₹</span>
+                <span className="price-text">{price}</span>
+              </p>
+            </div>
           </Link>
-          <div className="card-header">
-            {displayTitleText(title)}
-            <p className="price">
-              <span>₹</span>
-              <span className="price-text">{price}</span>
-            </p>
-            {/* <button
-              className="wishlist-btn"
-              onClick={() => setWishlist(!isWishlist)}
-            >
-              {wishlistIcon()}
-              <span className="wishlist-btn-text">Add to Wishlist</span>
-            </button> */}
-          </div>
         </div>
       );
     });
@@ -79,7 +72,7 @@ Card.defaultProps = {
         "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
       category: "men clothing",
       image:
-        "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg",
+        "https://i.ibb.co/vmSrPnm/black-tshirt-main.jpg",
     },
   ],
 };

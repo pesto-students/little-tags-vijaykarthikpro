@@ -115,6 +115,7 @@
             justify-content: space-between;
             align-items: flex-start;
             width: 100%;
+            margin-bottom: 10px;
   
             .main-details {
               @include styles.flex-column-center;
@@ -180,6 +181,7 @@
             @include styles.flex-row-center();
             justify-content: space-between;
             font-weight: 600;
+            padding-top: 10px;
             cursor: pointer;
   
             .remove-btn {

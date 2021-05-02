@@ -19,7 +19,7 @@ export default function cartReducer(state = initialState, action) {
             return { ...state, cart : filteredCart } 
         }
         case ACTIONS.UPDATE_CART_ITEM : {
-            let { cart } = state;
+            const { cart } = state;
             const { id, size, quantity } = action
             const udpatedCart = cart.map((item) => {
                 if(item.uniqueId === id) {
