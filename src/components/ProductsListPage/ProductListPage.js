@@ -5,10 +5,14 @@ import "./ProductListPage.scss";
 import products from "../../data/products";
 import { routePathMap } from "../../Utils";
 import Card from "../Card/Card";
+import Toast from '../Toast/Toast';
+
+const WHITE_COLOR = '#FFFFFF';
 
 export default function ProductListPage() {
   
   const [data, setData] = useState(products);
+  const [toast, setToast] = useState([]);
   const [routeFilteredData, setRouteFilteredData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [lowPriceData, setLowPriceData] = useState([]);
@@ -80,7 +84,7 @@ export default function ProductListPage() {
           )
 
           if(filteredData.length === 0) {
-            alert("No match found!!");
+            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
           } else{
             setLowPriceData(filteredData);
           }
@@ -102,7 +106,7 @@ export default function ProductListPage() {
           );
 
           if(filteredData.length === 0) {
-            alert("No match found!!");
+            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
           } else{
             setMediumPriceData(filteredData);
           }
@@ -121,7 +125,7 @@ export default function ProductListPage() {
           );
 
           if(filteredData.length === 0) {
-            alert("No match found!!");
+            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
           } else{
             setHighPriceData(filteredData);
           }
@@ -168,7 +172,7 @@ export default function ProductListPage() {
   //   handlePrice();
   // });
 
-  return (
+  return (<div>
     <div className="list-container">
       <div className="filter">
         <div className="filter-heading-row">
@@ -280,7 +284,9 @@ export default function ProductListPage() {
       <div className="card-container">
         <Card productsData={data} />
       </div>
-      
+     
+    </div>
+    <Toast toastList={toast} position="bottom-left" autoDelete dismissTime="4000" /> 
     </div>
   );
 }

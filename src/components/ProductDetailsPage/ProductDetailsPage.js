@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,6 +19,9 @@ import Carousel from "../Carousel/Carousel";
 import SimilarProducts from "../SimilarProducts/SimilarProducts";
 import Toast from "../Toast/Toast";
 
+
+const GREEN_COLOR = '#32CD32';
+
 export default function ProductDetailsPage() {
 
   const cart = useSelector((state) => state.cartState.cart);
@@ -31,7 +35,8 @@ export default function ProductDetailsPage() {
   const [isAddToWishlist, setAddToWishlist] = useState(false);
   const [selectedSize, setSelectedSize] = useState(SIZES.XS);
   const [showLogin, setShowLogin] = useState(false);
-  const [toast, setToast] = useState("");
+  const [toast, setToast] = useState([]);
+  const [toastPosition, setToastPosition] = useState('top-right');
 
   const showLoginModal = () => setShowLogin(!showLogin);
 
@@ -99,6 +104,7 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToCart(product));
+      setToast([...toast, {id: new Date().getTime(), description: 'Added To Cart', backgroundColor: GREEN_COLOR}]);
     } else if (isUserLoggedIn) dispatch(removeItemFromCart(product.uniqueId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
@@ -109,6 +115,7 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
+      setToast([...toast, {id: new Date().getTime(), description: 'Added To Wishlist', backgroundColor: GREEN_COLOR}]);
     } else if (isUserLoggedIn) dispatch(removeItemFromWishlist(product.uniqueId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -116,7 +123,6 @@ export default function ProductDetailsPage() {
 
   return (
     <div className="product-details-container">
-      <Toast toastMessage={toast} />
       <div className="details">
         <div className="image-carousel">
           {product.hasOwnProperty("imageCarousel") ? (
@@ -162,6 +168,7 @@ export default function ProductDetailsPage() {
       </div>
       <SimilarProducts />
       <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
+      <Toast toastList={toast} position={toastPosition} autoDelete dismissTime="4000" />
     </div>
   );
 }

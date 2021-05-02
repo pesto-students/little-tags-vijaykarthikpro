@@ -4,6 +4,9 @@ import { removeItemFromWishlist, addItemToCart } from '../../actions';
 import "./Wishlist.scss";
 import FirebaseContext from '../Firebase/context';
 import withAuthorization from "../Session/withAuthorization";
+import Toast from '../Toast/Toast';
+
+const GREEN_COLOR = '#32CD32';
 
 function Wishlist() {
 
@@ -14,6 +17,7 @@ function Wishlist() {
   const isUserLoggedIn = useSelector(state => state.sessionState.isUserLoggedIn);
   const dispatch = useDispatch();
   const [totalItems, setTotalItems] = useState(wishlist.length);
+  const [toast, setToast] = useState([]);
 
   useEffect(() => {
     setTotalItems(wishlist.length);
@@ -48,13 +52,16 @@ function Wishlist() {
                 onClick={() => {
                   dispatch(addItemToCart(product));
                   dispatch(removeItemFromWishlist(uniqueId));
+                  setToast([...toast, {id: new Date().getTime(), description: 'Added to cart !', backgroundColor: GREEN_COLOR}]);
                 }}
               >
                 Add to bag
               </span>
               <span
                 className="remove-btn"
-                onClick={() => dispatch(removeItemFromWishlist(uniqueId))}
+                onClick={() => {
+                  dispatch(removeItemFromWishlist(uniqueId));
+                }}
               >
                 Remove
               </span>
@@ -71,6 +78,7 @@ function Wishlist() {
         <h3 className="bold-title">My Wishlist ( {totalItems} items )</h3>
         {displayWishlistItems()}
       </div>
+      <Toast toastList={toast} position="top-right" autoDelete dismissTime="4000" />
     </div>
   );
 }

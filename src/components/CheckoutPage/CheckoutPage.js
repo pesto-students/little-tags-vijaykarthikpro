@@ -8,6 +8,10 @@ import FirebaseContext from '../Firebase/context';
 import { SIZES } from "../../Utils";
 import Address from '../Address/Address';
 import Checkout from "../Payment/Checkout"; 
+import Toast from '../Toast/Toast';
+
+const WHITE_COLOR = '#FFFFFF';
+const GREEN_COLOR = '#32CD32';
 
 function CheckoutPage() {
 
@@ -22,7 +26,8 @@ function CheckoutPage() {
   const cartItemsTotalPrice = cart.reduce((acc, product)=>{
     return (acc += parseFloat(product.price * product.quantity)); 
   },0)
-
+  const [toast, setToast] = useState([]);
+  const [toastPosition, setToastPosition] = useState('top-right');
   const [totalPrice, setTotalPrice] = useState(cartItemsTotalPrice);
   const [showSelectAddress,setShowSelectAddress] = useState(false);
   const [shippingAddress, setShippingAddress] = useState({});
@@ -144,10 +149,12 @@ function CheckoutPage() {
     if(cart.length) {
       setShowSelectAddress(true);
       if(showSelectAddress && Object.keys(shippingAddress).length === 0 ) {
-        alert("select address for shipping");
+        setToastPosition('top-middle');
+        setToast([...toast, {id: new Date().getTime(), description: 'Select address for shipping!' , backgroundColor: WHITE_COLOR}]);
       }
     } else {
-      alert("Add items to cart");
+      setToastPosition('top-middle')
+      setToast([...toast, {id: new Date().getTime(), description: 'Add items to cart!', backgroundColor: WHITE_COLOR}]);
     }
     
   }
@@ -161,11 +168,13 @@ function CheckoutPage() {
     dispatch(removeCartItems());
     setTotalPrice(0);
     setShowSelectAddress(false);
-    alert("Order placed successfully");
+    setToastPosition('top-middle')
+    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: GREEN_COLOR}]);
   }
 
   const handlePaymentFailure = () =>{
-    alert("Payment Failed!!");
+    setToastPosition('top-middle')
+    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: GREEN_COLOR}]);
   }
 
 
@@ -201,9 +210,9 @@ function CheckoutPage() {
           {Object.keys(shippingAddress).length !== 0 && cart.length !==0 ? 
           <Checkout amount={parseFloat(totalPrice).toFixed(2)} handlePaymentSuccess={handlePaymentSuccess} handlePaymentFailure={handlePaymentFailure}/> :
           <button onClick={handlePlaceOrder}>PLACE ORDER</button> }
-          
         </div>
       </div>
+      <Toast toastList={toast} position={toastPosition} autoDelete dismissTime="4000" />
   </div>);
 }
 
