@@ -5,12 +5,11 @@ import "./ProductListPage.scss";
 import products from "../../data/products";
 import { routePathMap } from "../../Utils";
 import Card from "../Card/Card";
-import Toast from '../Toast/Toast';
+import Toast from "../Toast/Toast";
 
-const WHITE_COLOR = '#FFFFFF';
+const WHITE_COLOR = "#FFFFFF";
 
 export default function ProductListPage() {
-  
   const [data, setData] = useState(products);
   const [toast, setToast] = useState([]);
   const [routeFilteredData, setRouteFilteredData] = useState([]);
@@ -18,16 +17,19 @@ export default function ProductListPage() {
   const [lowPriceData, setLowPriceData] = useState([]);
   const [mediumPriceData, setMediumPriceData] = useState([]);
   const [highPriceData, setHighPriceData] = useState([]);
+  // const [showFilters, setShowFilters] = useState(true);
+
   const [isChecked, setIsChceked] = useState({
-    jacket: false, 
-    electronics: false, 
-    tshirt: false, 
-    jewellery: false, 
-    low: false, 
-    medium: false, 
+    jacket: false,
+    electronics: false,
+    tshirt: false,
+    jewellery: false,
+    low: false,
+    medium: false,
     high: false,
     category: false,
-    price: false});
+    price: false,
+  });
   const location = useLocation();
   const pathName = location.pathname.split("/")[2];
 
@@ -44,21 +46,49 @@ export default function ProductListPage() {
       setRouteFilteredData(filteredProducts);
       setCategoryData(filteredProducts);
       setData(filteredProducts);
-
     }
   }, [pathName]);
 
-
   const handleCategory = (e) => {
-    const { target: { value }} = e;
-    
-    setIsChceked({...isChecked, category: true});
-   
-    if(value === 'jacket') setIsChceked({...isChecked, jacket: true, electronics: false, tshirt: false, jewellery: false});
-    if(value === 'electronics') setIsChceked({...isChecked, jacket: false, electronics: true, tshirt: false, jewellery: false});
-    if(value === 'tshirt') setIsChceked({...isChecked, jacket: false, electronics: false, tshirt: true, jewellery: false});
-    if(value === 'jewellery') setIsChceked({...isChecked, jacket: false, electronics: false, tshirt: false, jewellery: true});
-    
+    const {
+      target: { value },
+    } = e;
+
+    setIsChceked({ ...isChecked, category: true });
+
+    if (value === "jacket")
+      setIsChceked({
+        ...isChecked,
+        jacket: true,
+        electronics: false,
+        tshirt: false,
+        jewellery: false,
+      });
+    if (value === "electronics")
+      setIsChceked({
+        ...isChecked,
+        jacket: false,
+        electronics: true,
+        tshirt: false,
+        jewellery: false,
+      });
+    if (value === "tshirt")
+      setIsChceked({
+        ...isChecked,
+        jacket: false,
+        electronics: false,
+        tshirt: true,
+        jewellery: false,
+      });
+    if (value === "jewellery")
+      setIsChceked({
+        ...isChecked,
+        jacket: false,
+        electronics: false,
+        tshirt: false,
+        jewellery: true,
+      });
+
     const category = products.filter(
       (product) => product.category === e.target.value
     );
@@ -70,111 +100,124 @@ export default function ProductListPage() {
     const priceRange = e.target.name;
     const checked = e.target.checked;
 
+    setIsChceked({ ...isChecked, price: true });
 
-    setIsChceked({...isChecked, price : true});
+    if (priceRange === "low") {
+      if (checked) {
+        setIsChceked({ ...isChecked, low: true });
 
-      if (priceRange === "low") {
-        
-        if(checked) {
+        const filteredData = categoryData.filter(
+          (product) => product.price >= 300 && product.price <= 1000
+        );
 
-          setIsChceked({...isChecked, low: true});
-
-          const filteredData = categoryData.filter(
-            (product) => product.price >= 300 && product.price <= 1000
-          )
-
-          if(filteredData.length === 0) {
-            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
-          } else{
-            setLowPriceData(filteredData);
-          }
-          
-
+        if (filteredData.length === 0) {
+          setToast([
+            ...toast,
+            {
+              id: new Date().getTime(),
+              description: "No match found !",
+              backgroundColor: WHITE_COLOR,
+            },
+          ]);
         } else {
-          setIsChceked({...isChecked, low: false});
-          setLowPriceData([]);
+          setLowPriceData(filteredData);
         }
-        
-      } else if (priceRange === "medium") {
-
-        if(checked) {
-
-          setIsChceked({...isChecked, medium: true});
-
-          const filteredData = categoryData.filter(
-            (product) => product.price > 1000 && product.price <= 3000
-          );
-
-          if(filteredData.length === 0) {
-            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
-          } else{
-            setMediumPriceData(filteredData);
-          }
-
-        } else {
-          setIsChceked({...isChecked, medium: false});
-          setMediumPriceData([]);
-        }
-        
-      } else if (priceRange === "high") {
-        if(checked) {
-          setIsChceked({...isChecked, high: true});
-
-          const filteredData = categoryData.filter(
-            (product) => product.price > 3000 && product.price <= 5000
-          );
-
-          if(filteredData.length === 0) {
-            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
-          } else{
-            setHighPriceData(filteredData);
-          }
-         
-        } else {
-          setIsChceked({...isChecked, high: false});
-          setHighPriceData([]);
-
-        }
+      } else {
+        setIsChceked({ ...isChecked, low: false });
+        setLowPriceData([]);
       }
-      
+    } else if (priceRange === "medium") {
+      if (checked) {
+        setIsChceked({ ...isChecked, medium: true });
+
+        const filteredData = categoryData.filter(
+          (product) => product.price > 1000 && product.price <= 3000
+        );
+
+        if (filteredData.length === 0) {
+          setToast([
+            ...toast,
+            {
+              id: new Date().getTime(),
+              description: "No match found !",
+              backgroundColor: WHITE_COLOR,
+            },
+          ]);
+        } else {
+          setMediumPriceData(filteredData);
+        }
+      } else {
+        setIsChceked({ ...isChecked, medium: false });
+        setMediumPriceData([]);
+      }
+    } else if (priceRange === "high") {
+      if (checked) {
+        setIsChceked({ ...isChecked, high: true });
+
+        const filteredData = categoryData.filter(
+          (product) => product.price > 3000 && product.price <= 5000
+        );
+
+        if (filteredData.length === 0) {
+          setToast([
+            ...toast,
+            {
+              id: new Date().getTime(),
+              description: "No match found !",
+              backgroundColor: WHITE_COLOR,
+            },
+          ]);
+        } else {
+          setHighPriceData(filteredData);
+        }
+      } else {
+        setIsChceked({ ...isChecked, high: false });
+        setHighPriceData([]);
+      }
+    }
   };
 
-  useEffect(() =>{
-    if(lowPriceData.length === 0 && mediumPriceData.length === 0 && highPriceData.length === 0) {
-
+  useEffect(() => {
+    if (
+      lowPriceData.length === 0 &&
+      mediumPriceData.length === 0 &&
+      highPriceData.length === 0
+    ) {
       setData(categoryData);
-      
     } else {
-
       setData([...lowPriceData, ...mediumPriceData, ...highPriceData]);
-      
     }
-  },[lowPriceData, mediumPriceData, highPriceData, categoryData, isChecked, routeFilteredData]);
+  }, [
+    lowPriceData,
+    mediumPriceData,
+    highPriceData,
+    categoryData,
+    isChecked,
+    routeFilteredData,
+  ]);
 
-
-  const handleClearFiltering = () =>{
-   
+  const handleClearFiltering = () => {
     setIsChceked({
-      jacket: false, 
-      electronics: false, 
-      tshirt: false, 
-      jewellery: false, 
-      low: false, 
-      medium: false, 
+      jacket: false,
+      electronics: false,
+      tshirt: false,
+      jewellery: false,
+      low: false,
+      medium: false,
       high: false,
       category: false,
-      price: false});
+      price: false,
+    });
 
     setData(routeFilteredData);
     setCategoryData(routeFilteredData);
-  }
+  };
   // useEffect(() => {
   //   handlePrice();
   // });
-
-  return (<div>
-    <div className="list-container">
-      <div className="filter">
+  const showFilter = () => {
+    return (
+      <div>
         <div className="filter-heading-row">
           <h2>FILTERS</h2>
           <button onClick={handleClearFiltering}>clear</button>
@@ -277,16 +320,31 @@ export default function ProductListPage() {
             </li>
           </ul>
         </div>
-        <div>
+        <div></div>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <button
+        className="filter-btn"
+        //  onClick={() => setShowFilters()}
+      >
+        FILTERS
+      </button>
+      <div className="list-container">
+        <div className="filter">{showFilter()}</div>
+        <div className="card-container">
+          <Card productsData={data} />
         </div>
       </div>
-
-      <div className="card-container">
-        <Card productsData={data} />
-      </div>
-     
-    </div>
-    <Toast toastList={toast} position="bottom-left" autoDelete dismissTime="4000" /> 
+      <Toast
+        toastList={toast}
+        position="bottom-left"
+        autoDelete
+        dismissTime="4000"
+      />
     </div>
   );
 }
