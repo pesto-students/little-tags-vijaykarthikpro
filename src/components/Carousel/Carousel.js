@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import LeftArrow from '../../assets/icons/left-arrow.svg';
 import RightArrow from '../../assets/icons/right-arrow.svg';
 import "./Carousel.scss";
+import ImageLoader from '../Loader/ImageLoader';
 
 export default function Carousel({ slides }) {
 
@@ -52,7 +53,10 @@ export default function Carousel({ slides }) {
     <div>
       <section className="slider">
           <img className="arrows" src={LeftArrow} alt="left-arrow" onClick={prevSlide}/>
-          {showSlides()}
+          <div className="slides">
+            <ImageLoader className="background-loader" />
+            {showSlides()}
+          </div>
           <img className="arrows" src={RightArrow} alt="right-arrow" onClick={nextSlide}/>
       </section>
       <div className="ellipsis">

@@ -17,23 +17,33 @@
     }
   }
 
+  .slides {
+    width: 300px;
+    height: 400px;
+    position: relative;
 
-  .slide {
-    opacity: 0;
-    transition-duration: 1s ease;
-
-    .product-image {
-      width: 300px;
-      height: 400px;
-      object-fit: contain;
-      border-radius: 10px;
-    }
-  }
+    .slide {
+      opacity: 0;
+      transition-duration: 1s ease;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
   
-  .active {
-    opacity: 1;
-    transition-duration: 1s;
-    transform: scale(1.05);
+      .product-image {
+        width: 300px;
+        height: 400px;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+    }
+
+    
+    .active {
+      opacity: 1;
+      transition-duration: 1s;
+      transform: scale(1.05);
+    }
   }
 }
 

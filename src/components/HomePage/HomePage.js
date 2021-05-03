@@ -10,6 +10,7 @@ import JacketsImg from "../../assets/images/jackets.svg";
 import TshirtsImg from "../../assets/images/tshirts.svg";
 import ElectronicsImg from "../../assets/images/electronics.svg";
 import JeweleryImg from "../../assets/images/jewelery.svg";
+import Loader from '../Loader/Loader';
 
 export default function HomePage() {
   const languageData = useSelector((state) => state.sessionState.data);
@@ -71,6 +72,7 @@ export default function HomePage() {
           </Link>
         </div>
       </div>
+      <Loader />
     </div>
   );
 }
