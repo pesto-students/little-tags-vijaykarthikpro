@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import FirebaseContext from "../../Firebase/context";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useSelector, useDispatch } from "react-redux";
+import FirebaseContext from "../../Firebase/context";
 import { setLanguage } from "../../../actions";
-import { Link } from "react-router-dom";
-import { ProfileItems } from "./MenuItems";
-import { LanguageItems } from "./MenuItems";
+import { ProfileItems, LanguageItems } from "./MenuItems";
 import "../Header.scss";
 
 export default function Dropdown({ type }) {
@@ -31,7 +30,7 @@ export default function Dropdown({ type }) {
   };
 
   const handleLanguage = (e) => {
-    let language = e.target.id;
+    const language = e.target.id;
     console.log("button Clicked", e.target.id);
     dispatch(setLanguage(language));
   };

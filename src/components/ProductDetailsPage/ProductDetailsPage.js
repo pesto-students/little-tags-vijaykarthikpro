@@ -19,16 +19,16 @@ import Carousel from "../Carousel/Carousel";
 import SimilarProducts from "../SimilarProducts/SimilarProducts";
 import Toast from "../Toast/Toast";
 
-
-const GREEN_COLOR = '#32CD32';
+const GREEN_COLOR = "#32CD32";
 
 export default function ProductDetailsPage() {
-
   const cart = useSelector((state) => state.cartState.cart);
   const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
   const user = useSelector((state) => state.sessionState.authUser);
-  const isUserLoggedIn = useSelector((state) => state.sessionState.isUserLoggedIn);
+  const isUserLoggedIn = useSelector(
+    (state) => state.sessionState.isUserLoggedIn
+  );
   const [quantityCount, setQuantityCount] = useState(1);
   const [product, setProduct] = useState({});
   const [isAddToCart, setAddToCart] = useState(false);
@@ -36,7 +36,6 @@ export default function ProductDetailsPage() {
   const [selectedSize, setSelectedSize] = useState(SIZES.XS);
   const [showLogin, setShowLogin] = useState(false);
   const [toast, setToast] = useState([]);
-  const [toastPosition, setToastPosition] = useState('top-right');
 
   const showLoginModal = () => setShowLogin(!showLogin);
 
@@ -63,11 +62,21 @@ export default function ProductDetailsPage() {
     return sizesList.map((size, id) => {
       if (size === selectedSize) {
         return (
-          <span key={id} className="size selected" onClick={() => setSelectedSize(size)}> {size} </span>
+          <span
+            key={id}
+            className="size selected"
+            onClick={() => setSelectedSize(size)}
+          >
+            {" "}
+            {size}{" "}
+          </span>
         );
       } else {
         return (
-          <span key={id} className="size" onClick={() => setSelectedSize(size)}> {size} </span>
+          <span key={id} className="size" onClick={() => setSelectedSize(size)}>
+            {" "}
+            {size}{" "}
+          </span>
         );
       }
     });
@@ -104,7 +113,14 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToCart(product));
-      setToast([...toast, {id: new Date().getTime(), description: 'Added To Cart', backgroundColor: GREEN_COLOR}]);
+      setToast([
+        ...toast,
+        {
+          id: new Date().getTime(),
+          description: "Added To Cart",
+          backgroundColor: GREEN_COLOR,
+        },
+      ]);
     } else if (isUserLoggedIn) dispatch(removeItemFromCart(product.uniqueId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
@@ -115,8 +131,16 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
-      setToast([...toast, {id: new Date().getTime(), description: 'Added To Wishlist', backgroundColor: GREEN_COLOR}]);
-    } else if (isUserLoggedIn) dispatch(removeItemFromWishlist(product.uniqueId));
+      setToast([
+        ...toast,
+        {
+          id: new Date().getTime(),
+          description: "Added To Wishlist",
+          backgroundColor: GREEN_COLOR,
+        },
+      ]);
+    } else if (isUserLoggedIn)
+      dispatch(removeItemFromWishlist(product.uniqueId));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToWishlist]);
@@ -160,7 +184,7 @@ export default function ProductDetailsPage() {
             <button className="wishlist" onClick={handleAddToWishlistClick}>
               <img src={WishlistIcon} alt="wishlist-icon" />
               <span className="wishlist-btn-text">
-                {isAddToWishlist ? "Remove from Wishlist" :  "Add to Wishlist"}
+                {isAddToWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
               </span>
             </button>
           </div>
@@ -168,7 +192,12 @@ export default function ProductDetailsPage() {
       </div>
       <SimilarProducts />
       <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
-      <Toast toastList={toast} position={toastPosition} autoDelete dismissTime="4000" />
+      <Toast
+        toastList={toast}
+        position="top-right"
+        autoDelete
+        dismissTime="4000"
+      />
     </div>
   );
 }
