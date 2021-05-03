@@ -1,11 +1,11 @@
 import React from "react";
-import { Link/* , Switch, Route */ } from "react-router-dom";
+import { Link /* , Switch, Route */ } from "react-router-dom";
 import * as ROUTES from "../../constants/routes";
 import "./Burger.scss";
 import AppLogo from "../../assets/icons/logo-symbol.png";
-import CloseIcon from '../../assets/icons/clear.svg';
+import CloseIcon from "../../assets/icons/clear.svg";
 
-export default function Burger({ showMenu, handleMenuClick, handleBurgerClose }) {
+export default function Burger({ showMenu, handleBurgerClose }) {
   return (
     <>
       {showMenu ? (
@@ -16,11 +16,18 @@ export default function Burger({ showMenu, handleMenuClick, handleBurgerClose })
                 <img className="logo" src={AppLogo} alt="app-logo" />
                 <span className="title">Style Beast</span>
               </div>
-              <img className="close-icon" src={CloseIcon} alt="close" onClick={handleBurgerClose}/>
+              <img
+                className="close-icon"
+                src={CloseIcon}
+                alt="close"
+                onClick={handleBurgerClose}
+              />
             </div>
             <div className="line-divider"></div>
             <div className="burger-list">
-              <span className="animate__animated animate__bounce infinite">Categories</span>
+              <span className="animate__animated animate__bounce infinite">
+                Categories
+              </span>
               <ul>
                 <li>
                   <Link to={ROUTES.MEN} className="nav-links">

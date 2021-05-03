@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, { useEffect, useState, useContext } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItemFromCart, addItemToWishlist, updateItemInCart, confirmOrder, removeCartItems } from '../../actions';
@@ -7,6 +8,10 @@ import FirebaseContext from '../Firebase/context';
 import { SIZES } from "../../Utils";
 import Address from '../Address/Address';
 import Checkout from "../Payment/Checkout"; 
+import Toast from '../Toast/Toast';
+
+const WHITE_COLOR = '#FFFFFF';
+const GREEN_COLOR = '#32CD32';
 
 function CheckoutPage() {
 
@@ -19,13 +24,13 @@ function CheckoutPage() {
   const dispatch = useDispatch(); 
   const [totalItems, setTotalItems] = useState(cart.length);
   const cartItemsTotalPrice = cart.reduce((acc, product)=>{
-    return acc += parseFloat(product.price * product.quantity); 
+    return (acc += parseFloat(product.price * product.quantity)); 
   },0)
-
+  const [toast, setToast] = useState([]);
+  const [toastPosition, setToastPosition] = useState('top-right');
   const [totalPrice, setTotalPrice] = useState(cartItemsTotalPrice);
   const [showSelectAddress,setShowSelectAddress] = useState(false);
   const [shippingAddress, setShippingAddress] = useState({});
-
 
   useEffect(()=>{
     setTotalItems(cart.length);
@@ -43,14 +48,15 @@ function CheckoutPage() {
   const displayCartItems = () => {
 
     return cart.map((product)=>{
-      let { uniqueId, title, price, image, quantity = 1, size = 'XS' } = product;
+      const { uniqueId, title, price, image, size = 'XS' } = product;
+      let { quantity = 1 } = product; 
 
       const sizes = Object.values(SIZES).map((item,id) => {
         return <option key={id}>{item}</option>
       });
 
       const handleSizeSelection = (e) => {
-        let sizeSelected = e.target.value;
+        const sizeSelected = e.target.value;
         dispatch(updateItemInCart(uniqueId, sizeSelected, quantity))
       }
 
@@ -61,12 +67,11 @@ function CheckoutPage() {
       }
 
       const handleQuantityDecrease = () =>{
-        const minimumQuantity = quantity === 1 ? true : false;
-        if(!minimumQuantity) {
+        if(quantity > 1) {
           quantity -= 1;
           setTotalPrice(totalPrice - price)
           dispatch(updateItemInCart(uniqueId,size,(quantity)))
-        } else {
+        } else if(quantity === 1){
           dispatch(removeItemFromCart(uniqueId));
           setTotalPrice(totalPrice - price);
         }
@@ -141,31 +146,35 @@ function CheckoutPage() {
 
   const handlePlaceOrder = () => {
 
-    if(cart.length !== 0 ) {
+    if(cart.length) {
       setShowSelectAddress(true);
       if(showSelectAddress && Object.keys(shippingAddress).length === 0 ) {
-        alert("select address for shipping");
+        setToastPosition('top-middle');
+        setToast([...toast, {id: new Date().getTime(), description: 'Select address for shipping!' , backgroundColor: WHITE_COLOR}]);
       }
     } else {
-      alert("Add items to cart");
+      setToastPosition('top-middle')
+      setToast([...toast, {id: new Date().getTime(), description: 'Add items to cart!', backgroundColor: WHITE_COLOR}]);
     }
     
   }
 
 
   const handlePaymentSuccess = () =>{
-    const orders = cart.map((item)=>{
+    const confirmOrders = cart.map((item)=>{
       return {...item, address: shippingAddress}
     });
-    dispatch(confirmOrder(orders));
+    dispatch(confirmOrder(confirmOrders));
     dispatch(removeCartItems());
     setTotalPrice(0);
     setShowSelectAddress(false);
-    alert("Order placed successfully");
+    setToastPosition('top-middle')
+    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: GREEN_COLOR}]);
   }
 
   const handlePaymentFailure = () =>{
-    alert("Payment Failed!!");
+    setToastPosition('top-middle')
+    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: GREEN_COLOR}]);
   }
 
 
@@ -177,7 +186,7 @@ function CheckoutPage() {
           <button onClick={()=> setShowSelectAddress(true)}>Address</button>
         </div>
         {!showSelectAddress && <span className="bold-title">My Shopping Bag ( {totalItems} items )</span>}
-        {!showSelectAddress ? displayCartItems() : displayAddressSelection()}
+        {showSelectAddress ? displayAddressSelection() : displayCartItems()}
       </div>
       <div className="price-column">
         <span className="bold-title">Price Details ( {totalItems} items )</span>
@@ -201,9 +210,9 @@ function CheckoutPage() {
           {Object.keys(shippingAddress).length !== 0 && cart.length !==0 ? 
           <Checkout amount={parseFloat(totalPrice).toFixed(2)} handlePaymentSuccess={handlePaymentSuccess} handlePaymentFailure={handlePaymentFailure}/> :
           <button onClick={handlePlaceOrder}>PLACE ORDER</button> }
-          
         </div>
       </div>
+      <Toast toastList={toast} position={toastPosition} autoDelete dismissTime="4000" />
   </div>);
 }
 

@@ -24,25 +24,18 @@ export default function SimilarProducts() {
           const { id, image, title, price } =  item
           return (
             <div className="card" key={id}>
-              <Link key={id} to={`/product-details/${title}`}>
+              <Link className="card-link" key={id} to={`/product-details/${title}`}>
                 <div className="card-img">
                   <img src={image} alt="" />
                 </div>
-              </Link>
               <div className="card-header">
                 {displayTitleText(title)}
                 <p className="price">
                   <span>$</span>
                   <span className="price-text">{price}</span>
                 </p>
-                {/* <button
-                  className="wishlist-btn"
-                  onClick={() => setWishlist(!isWishlist)}
-                >
-                  {wishlistIcon()}
-                  <span className="wishlist-btn-text">Add to Wishlist</span>
-                </button> */}
               </div>
+              </Link>
             </div>
           );
         });

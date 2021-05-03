@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import SearchIcon from "../../../assets/icons/search.svg";
 import ProductsData from "../../../data/products";
-import { Link } from "react-router-dom";
+
 import "./Search.scss";
 
 export default function Search() {

@@ -7,6 +7,7 @@ export default function Address() {
   const orders = useSelector(state=> state.ordersState.orders);
   const wishlist = useSelector(state=> state.wishlistState.wishlist);
   const cart = useSelector(state => state.cartState.cart);
+
   return (
     <div className="my-account">
       <div className="welcome-user">

@@ -5,9 +5,9 @@ import "./AccountPage.scss";
 import Orders from "../OrdersPage/Orders";
 import Wishlist from "../Wishlist/Wishlist";
 import Address from "../Address/Address";
-import MyAccount from "./MyAccount/MyAccount";
 import * as ROUTES from "../../constants/routes";
 import withAuthorization from "../Session/withAuthorization";
+import MyAccount from "./MyAccount/MyAccount";
 
 function AccountPage() {
   const firebase = useContext(FirebaseContext);

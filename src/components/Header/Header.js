@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "./Header.scss";
-import Dropdown from "./Dropdown/Dropdown";
 import * as ROUTES from "../../constants/routes";
 import Login from "../Login/Login";
 import Burger from "../Burger/Burger";
@@ -11,8 +10,9 @@ import CartIcon from "../../assets/icons/cart.svg";
 import GlobeIcon from "../../assets/icons/globe.svg";
 import WishlistIcon from "../../assets/icons/wishlist.svg";
 import ProfileIcon from "../../assets/icons/person.svg";
-import Search from "./Search/Search";
 import Menu from "../../assets/icons/menu.svg";
+import Dropdown from "./Dropdown/Dropdown";
+import Search from "./Search/Search";
 
 export default function Header() {
   const [showLogin, setShowLogin] = useState(false);

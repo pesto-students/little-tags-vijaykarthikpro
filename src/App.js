@@ -8,7 +8,6 @@ import AccountPage from "./components/AccountPage/AccountPage";
 import ProductsListPage from "./components/ProductsListPage/ProductListPage";
 import ProductDetailsPage from "./components/ProductDetailsPage/ProductDetailsPage";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
-// import Wishlist from "./components/Wishlist/Wishlist";
 import withAuthentication from "./components/Session/withAuthentication";
 
 function App() {

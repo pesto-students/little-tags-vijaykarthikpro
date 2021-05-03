@@ -26,13 +26,32 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint src"
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+      "kentcdodds"
+    ],
+    "plugins": [
+      "react",
+      "react-hooks"
+    ],
+    "rules": {
+      "no-return-assign": "warn",
+      "no-shadow": "warn",
+      "consistent-return": "warn",
+      "no-nested-ternary": "warn",
+      "no-unneeded-ternary": "warn",
+      "import/no-duplicates": "warn",
+      "max-statements-per-line": "warn",
+      "no-duplicate-imports": "warn",
+      "prefer-const": "warn",
+      "no-negated-condition": "warn",
+      "no-alert": "warn",
+      "react/jsx-uses-vars": "error",
+      "react/jsx-uses-react": "error"
+    }
   },
   "browserslist": {
     "production": [
@@ -47,6 +66,8 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-kentcdodds": "^18.0.0",
+    "eslint-plugin-react": "^7.23.2",
     "redux-devtools": "^3.7.0"
   }
 }

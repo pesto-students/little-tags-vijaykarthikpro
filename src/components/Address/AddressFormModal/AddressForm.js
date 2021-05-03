@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import closeIcon from '../../../assets/icons/clear.svg'
 import './AddressForm.scss';
-import States from '../../../data/states.json';
+import States from '../../../data/states';
 
 export default function AddressForm({ handleFormSubmit, handleFormClose, isDefaultAddress }) {
 

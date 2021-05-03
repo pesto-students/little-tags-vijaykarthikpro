@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,9 +17,11 @@ import FirebaseContext from "../Firebase/context";
 import Login from "../Login/Login";
 import Carousel from "../Carousel/Carousel";
 import SimilarProducts from "../SimilarProducts/SimilarProducts";
+import Toast from "../Toast/Toast";
+
+const GREEN_COLOR = "#32CD32";
 
 export default function ProductDetailsPage() {
-
   const cart = useSelector((state) => state.cartState.cart);
   const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
@@ -32,22 +35,20 @@ export default function ProductDetailsPage() {
   const [isAddToWishlist, setAddToWishlist] = useState(false);
   const [selectedSize, setSelectedSize] = useState(SIZES.XS);
   const [showLogin, setShowLogin] = useState(false);
+  const [toast, setToast] = useState([]);
 
   const showLoginModal = () => setShowLogin(!showLogin);
 
   const dispatch = useDispatch();
-  let location = useLocation();
-  let title = location.pathname.split("/")[2];
+  const location = useLocation();
+  const title = location.pathname.split("/")[2];
 
   useEffect(() => {
-    Products.map((product) => {
-      if (product.title.toString() === title) {
-        setProduct(product);
-      }
+    Products.map((item) => {
+      if (item.title.toString() === title) setProduct(item);
       return null;
     });
   }, [title]);
-
 
   useEffect(() => {
     if (isUserLoggedIn) {
@@ -66,22 +67,22 @@ export default function ProductDetailsPage() {
             className="size selected"
             onClick={() => setSelectedSize(size)}
           >
-            {size}
+            {" "}
+            {size}{" "}
           </span>
         );
       } else {
         return (
           <span key={id} className="size" onClick={() => setSelectedSize(size)}>
-            {size}
+            {" "}
+            {size}{" "}
           </span>
         );
       }
     });
   };
 
-  const increaseCount = () => {
-    setQuantityCount(quantityCount + 1);
-  };
+  const increaseCount = () => setQuantityCount(quantityCount + 1);
 
   const decreaseCount = () => {
     const countValue = quantityCount < 2 ? 1 : quantityCount - 1;
@@ -112,11 +113,15 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToCart(product));
-    } else {
-      if (isUserLoggedIn) {
-        dispatch(removeItemFromCart(product.uniqueId));
-      }
-    }
+      setToast([
+        ...toast,
+        {
+          id: new Date().getTime(),
+          description: "Added To Cart",
+          backgroundColor: GREEN_COLOR,
+        },
+      ]);
+    } else if (isUserLoggedIn) dispatch(removeItemFromCart(product.uniqueId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
 
@@ -126,11 +131,17 @@ export default function ProductDetailsPage() {
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
-    } else {
-      if (isUserLoggedIn) {
-        dispatch(removeItemFromWishlist(product.uniqueId));
-      }
-    }
+      setToast([
+        ...toast,
+        {
+          id: new Date().getTime(),
+          description: "Added To Wishlist",
+          backgroundColor: GREEN_COLOR,
+        },
+      ]);
+    } else if (isUserLoggedIn)
+      dispatch(removeItemFromWishlist(product.uniqueId));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToWishlist]);
 
@@ -138,13 +149,10 @@ export default function ProductDetailsPage() {
     <div className="product-details-container">
       <div className="details">
         <div className="image-carousel">
-          {product.hasOwnProperty('imageCarousel') ? (
+          {product.hasOwnProperty("imageCarousel") ? (
             <Carousel slides={product.imageCarousel} />
           ) : (
-            <img
-              src={product.image}
-              alt="products"
-            />
+            <img src={product.image} alt="products" />
           )}
         </div>
         <div className="description">
@@ -170,13 +178,13 @@ export default function ProductDetailsPage() {
             <button className="cart" onClick={handleAddToCartClick}>
               <img src={CartIcon} alt="cart-icon" />
               <span className="cart-btn-text">
-                {!isAddToCart ? "Add to Cart" : "Remove from Cart"}
+                {isAddToCart ? "Remove from Cart" : "Add to Cart"}
               </span>
             </button>
             <button className="wishlist" onClick={handleAddToWishlistClick}>
               <img src={WishlistIcon} alt="wishlist-icon" />
               <span className="wishlist-btn-text">
-                {!isAddToWishlist ? "Add to Wishlist" : "Remove from Wishlist"}
+                {isAddToWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
               </span>
             </button>
           </div>
@@ -184,6 +192,12 @@ export default function ProductDetailsPage() {
       </div>
       <SimilarProducts />
       <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
+      <Toast
+        toastList={toast}
+        position="top-right"
+        autoDelete
+        dismissTime="4000"
+      />
     </div>
   );
 }

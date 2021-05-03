@@ -1,9 +1,12 @@
-import React from "react";
+import React,{ useState} from "react";
 import PropTypes from 'prop-types';
 import "./AddressCard.scss";
+import Toast from '../../Toast/Toast';
+
+const WHITE_COLOR = '#FFFFFF';
 
 export default function AddressCard({ addressData, handleMakeDefaultAddress, handleRemoveAddress, selectAddressForShipping, isCheckout }) {
-
+  const [toast, setToast] = useState([]);
 
   const displayAddress = () => {
 
@@ -30,7 +33,7 @@ export default function AddressCard({ addressData, handleMakeDefaultAddress, han
 
       const handleRemove = () =>{
         if(isDefault) {
-          alert("Make any other address as default and then remove this address!");
+          setToast([...toast, {id: new Date().getTime(), description: 'Make any other address as default and then remove this address!', backgroundColor: WHITE_COLOR}]);
         } else {
           handleRemoveAddress(id);
         }
@@ -61,15 +64,14 @@ export default function AddressCard({ addressData, handleMakeDefaultAddress, han
             </div>
             <div className="action-buttons">
               
-              {!isDefault ?
-                <span className="remove-btn" onClick={handleMakeDefault}>Make Default</span> :
-                <div></div>
+              {isDefault ? <div></div> :
+                <span className="remove-btn" onClick={handleMakeDefault}>Make Default</span> 
               }
 
               <span className="remove-btn" onClick={handleRemove}>Remove</span> 
             </div>
             </div>
-          
+            <Toast toastList={toast} position="top-right" autoDelete dismissTime="4000" /> 
         </div>
       );
     });
