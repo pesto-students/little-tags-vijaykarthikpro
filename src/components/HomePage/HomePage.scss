@@ -136,7 +136,7 @@
 
 @media screen and (min-width: 0px) and (max-width: 500px) {
   .home-container {
-    .section-1 {
+    .collection-section {
       .collections {
         h2 {
           color: white;
@@ -145,7 +145,7 @@
           margin: 50px 0;
           padding: 10px;
           color: white;
-          border: 4px white solid;
+          border: 2px white solid;
           border-radius: 10px;
         }
       }
@@ -159,7 +159,7 @@
 
 @media screen and (min-width: 501px) and (max-width: 873px) {
   .home-container {
-    .section-1 {
+    .collection-section {
       .collections {
         .men {
           h2 {
@@ -174,7 +174,7 @@
           margin: 50px 0;
           padding: 10px;
           color: white;
-          border: 4px white solid;
+          border: 2px white solid;
           border-radius: 10px;
         }
       }
@@ -196,7 +196,7 @@
           margin: 50px 0;
           padding: 10px;
           color: black;
-          border: 4px black solid;
+          border: 2px black solid;
           border-radius: 10px;
           display: none;
         }

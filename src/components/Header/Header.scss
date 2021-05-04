@@ -201,6 +201,37 @@
         // overflow: hidden;
       }
     }
+
+    .nav-links {
+      color: white;
+      text-decoration: none;
+      padding: 10px;
+    }
+  }
+}
+
+@media screen and (min-width:600px) and (max-width: 1200px) {
+  .website-header {
+    width: 100vw;
+
+    // border: 1px red solid;
+    .navbar {
+      .left {
+        .category-links {
+          display: none;
+        }
+      }
+
+      .right {
+        padding: 0;
+        // overflow: hidden;
+
+        .search-bar {
+          // display: none;
+          width: 200px;
+        }
+      }
+    }
   }
 }
 

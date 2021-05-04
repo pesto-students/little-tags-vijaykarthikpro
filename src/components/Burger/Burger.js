@@ -28,7 +28,7 @@ export default function Burger({ showMenu, handleBurgerClose }) {
               <span className="animate__animated animate__bounce infinite">
                 Categories
               </span>
-              <ul>
+              <ul onClick={handleBurgerClose}>
                 <li>
                   <Link to={ROUTES.MEN} className="nav-links">
                     MEN
