@@ -8,7 +8,7 @@ export default function OrderCard({ ordersData }) {
       return (
         <div className="card-main" key={id}>
           <div className="card-top">
-            <div>
+            <div className="order-details">
               <span className="order-title">{title}</span>
               <p>Color-Black</p>
               <span className="order-title"> ₹ {price}</span>

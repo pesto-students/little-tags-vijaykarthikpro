@@ -74,8 +74,8 @@ function Wishlist() {
 
   return (
     <div className="wishlist-container">
+      <span className="my-wishlist-heading">My Wishlist ( {totalItems} items )</span>
       <div className="wishlist">
-        <h3 className="bold-title">My Wishlist ( {totalItems} items )</h3>
         {displayWishlistItems()}
       </div>
       <Toast toastList={toast} position="top-right" autoDelete dismissTime="4000" />
