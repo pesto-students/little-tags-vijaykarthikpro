@@ -83,3 +83,28 @@
   //   font-size: 15px;
   // }
 }
+
+@media screen and (max-width: 600px) {
+  .order-main {
+    .card-main {
+      .order-title {
+        white-space: pre-wrap;
+        border: 2px red solid;
+        //width: 50px;
+      }
+      .card-bottom {
+        flex-direction: column;
+        .address-section {
+          flex-direction: row;
+          justify-content: space-between;
+          border: 2px red solid;
+          .address-content {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
