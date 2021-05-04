@@ -26,21 +26,21 @@ export default function ProductListPage() {
   const location = useLocation();
   const pathName = location.pathname.split('/')[2];
 
-  // useEffect(() => {
-  //   const isPathMatching = (path) => {
-  //     return Object.keys(routePathMap).includes(path);
-  //   };
+  useEffect(() => {
+    const isPathMatching = (path) => {
+      return Object.keys(routePathMap).includes(path);
+    };
 
-  //   if (isPathMatching(pathName)) {
-  //     const filteredProducts = products.filter((product) => {
-  //       if (product.category === routePathMap[pathName]) return product;
-  //       return null;
-  //     });
-  //     setRouteFilteredData(filteredProducts);
-  //     // setCategoryData(filteredProducts);
-  //     setData(filteredProducts);
-  //   }
-  // }, [pathName]);
+    if (isPathMatching(pathName)) {
+      const filteredProducts = products.filter((product) => {
+        if (product.category === routePathMap[pathName]) return product;
+        return null;
+      });
+      setRouteFilteredData(filteredProducts);
+      // setCategoryData(filteredProducts);
+      setData(filteredProducts);
+    }
+  }, [pathName]);
 
   // const handleCategory = (e) => {
   //   const {
