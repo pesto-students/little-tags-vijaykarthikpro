@@ -1,45 +1,46 @@
 /* eslint-disable max-lines-per-function */
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import "./ProductListPage.scss";
-import products from "../../data/products";
-import { routePathMap } from "../../Utils";
-import Card from "../Card/Card";
-import Toast from "../Toast/Toast";
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import './ProductListPage.scss';
+import products from '../../data/products';
+import { routePathMap } from '../../Utils';
+import Card from '../Card/Card';
+import Toast from '../Toast/Toast';
 
 // const WHITE_COLOR = "#FFFFFF";
 
 export default function ProductListPage() {
   const [data, setData] = useState(products);
-  const [toast/* , setToast */] = useState([]);
+  const [toast /* , setToast */] = useState([]);
   const [routeFilteredData, setRouteFilteredData] = useState([]);
+
   // const [categoryData, setCategoryData] = useState([]);
   // const [lowPriceData, setLowPriceData] = useState([]);
   // const [mediumPriceData, setMediumPriceData] = useState([]);
   // const [highPriceData, setHighPriceData] = useState([]);
-  // const [priceFilteredData, setPriceFilteredData] = useState([]); 
+  // const [priceFilteredData, setPriceFilteredData] = useState([]);
   // const [showFilters, setShowFilters] = useState(true);
-  const [selectedCategory , setSelectedCategory] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedPrice, setSelectedPrice] = useState([]);
 
   const location = useLocation();
-  const pathName = location.pathname.split("/")[2];
+  const pathName = location.pathname.split('/')[2];
 
-  useEffect(() => {
-    const isPathMatching = (path) => {
-      return Object.keys(routePathMap).includes(path);
-    };
+  // useEffect(() => {
+  //   const isPathMatching = (path) => {
+  //     return Object.keys(routePathMap).includes(path);
+  //   };
 
-    if (isPathMatching(pathName)) {
-      const filteredProducts = products.filter((product) => {
-        if (product.category === routePathMap[pathName]) return product;
-        return null;
-      });
-      setRouteFilteredData(filteredProducts);
-      // setCategoryData(filteredProducts);
-      setData(filteredProducts);
-    }
-  }, [pathName]);
+  //   if (isPathMatching(pathName)) {
+  //     const filteredProducts = products.filter((product) => {
+  //       if (product.category === routePathMap[pathName]) return product;
+  //       return null;
+  //     });
+  //     setRouteFilteredData(filteredProducts);
+  //     // setCategoryData(filteredProducts);
+  //     setData(filteredProducts);
+  //   }
+  // }, [pathName]);
 
   // const handleCategory = (e) => {
   //   const {
@@ -188,15 +189,14 @@ export default function ProductListPage() {
   //   routeFilteredData,
   // ]);
 
-  useEffect(()=>{
-    if(selectedPrice.length === 0 && routeFilteredData.length !== 0){
-      setData(routeFilteredData);
-    } 
+  useEffect(() => {
+    if (selectedPrice.length === 0 && routeFilteredData.length !== 0) {
+      // setData(routeFilteredData);
+    }
     // else if(selectedPrice.length !== 0 && routeFilteredData.length !== 0) {
     //       setData(priceFilteredData);
     // }
-  },[selectedPrice, routeFilteredData]);
-
+  }, [selectedPrice, routeFilteredData]);
 
   // useEffect(()=>{
   //   if(selectedPrice.includes('low')) {
@@ -213,7 +213,6 @@ export default function ProductListPage() {
   //   }
   // },[selectedPrice, priceFilteredData, data])
 
-
   // useEffect(()=>{
   //   if(selectedPrice.includes('medium')) {
 
@@ -221,7 +220,7 @@ export default function ProductListPage() {
   //     setPriceFilteredData([...priceFilteredData, ...filteredData]);
 
   //   } else if(!selectedPrice.includes('medium')) {
-      
+
   //     const filteredData = data.filter((product) =>product.price >= 1000 && product.price <= 3000);
   //     const removeMediumPriceData = priceFilteredData.filter((product) => !filteredData.includes(product));
 
@@ -244,7 +243,6 @@ export default function ProductListPage() {
   //   }
   // },[selectedPrice, priceFilteredData, data]);
 
-
   // useEffect(()=>{
   //   if(selectedPrice.length == 0) {
   //     setData(routeFilteredData);
@@ -254,13 +252,29 @@ export default function ProductListPage() {
   // },[selectedPrice])
 
   const handleClearFiltering = () => {
-
     setData(routeFilteredData);
     // setCategoryData(routeFilteredData);
   };
   // useEffect(() => {
   //   handlePrice();
   // });
+  useEffect(() => {
+    let filteredProducts = products;
+    if (selectedCategory !== '') {
+      filteredProducts = products.filter(
+        ({ category }) => category === selectedCategory
+      );
+    }
+    if (selectedPrice.length) {
+      if (selectedPrice.includes('low')) {
+        filteredProducts = filteredProducts.filter(
+          ({ price }) => price >= 300 && price <= 1000
+        );
+      }
+    }
+    setData(filteredProducts);
+  }, [selectedCategory, selectedPrice]);
+
   const showFilter = () => {
     return (
       <div>
@@ -278,7 +292,9 @@ export default function ProductListPage() {
                   name="category"
                   value="jacket"
                   checked={selectedCategory === 'jacket'}
-                  onChange={()=>{ setSelectedCategory('jacket');}}
+                  onChange={() => {
+                    setSelectedCategory('jacket');
+                  }}
                 />
                 <span>Jackets</span>
               </label>
@@ -290,7 +306,9 @@ export default function ProductListPage() {
                   value="electronics"
                   name="category"
                   checked={selectedCategory === 'electronics'}
-                  onChange={()=>{ setSelectedCategory('electronics');}}
+                  onChange={() => {
+                    setSelectedCategory('electronics');
+                  }}
                 />
                 <span>Electronics</span>
               </label>
@@ -302,7 +320,9 @@ export default function ProductListPage() {
                   name="category"
                   value="tshirt"
                   checked={selectedCategory === 'tshirt'}
-                  onChange={()=>{ setSelectedCategory('tshirt');}}
+                  onChange={() => {
+                    setSelectedCategory('tshirt');
+                  }}
                 />
                 <span>T-shirts</span>
               </label>
@@ -314,7 +334,9 @@ export default function ProductListPage() {
                   name="category"
                   value="jewellery"
                   checked={selectedCategory === 'jewellery'}
-                  onChange={()=>{ setSelectedCategory('jewellery');}}
+                  onChange={() => {
+                    setSelectedCategory('jewellery');
+                  }}
                 />
                 <span>Jewellery</span>
               </label>
@@ -332,11 +354,13 @@ export default function ProductListPage() {
                   id="low"
                   name="low"
                   checked={selectedPrice.includes('low')}
-                  onChange={(e)=> {
-                    if(e.target.checked) {
-                      setSelectedPrice([...selectedPrice, 'low'])
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedPrice([...selectedPrice, 'low']);
                     } else {
-                      const filteredSelectedPrice = selectedPrice.filter((price)=> price !== 'low' );
+                      const filteredSelectedPrice = selectedPrice.filter(
+                        (price) => price !== 'low'
+                      );
                       setSelectedPrice(filteredSelectedPrice);
                     }
                   }}
@@ -352,14 +376,15 @@ export default function ProductListPage() {
                   id="medium"
                   name="medium"
                   checked={selectedPrice.includes('medium')}
-                  onChange={(e)=> {
-                    if(e.target.checked) {
-                      setSelectedPrice([...selectedPrice, 'medium'])
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedPrice([...selectedPrice, 'medium']);
                     } else {
-                      const filteredSelectedPrice = selectedPrice.filter((price)=> price !== 'medium' );
+                      const filteredSelectedPrice = selectedPrice.filter(
+                        (price) => price !== 'medium'
+                      );
                       setSelectedPrice(filteredSelectedPrice);
                     }
-                    
                   }}
                   // onClick={handleClick}
                 />
@@ -373,14 +398,15 @@ export default function ProductListPage() {
                   id="high"
                   name="high"
                   checked={selectedPrice.includes('high')}
-                  onChange={(e)=> {
-                    if(e.target.checked) {
-                      setSelectedPrice([...selectedPrice, 'high'])
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedPrice([...selectedPrice, 'high']);
                     } else {
-                      const filteredSelectedPrice = selectedPrice.filter((price)=> price !== 'high' );
+                      const filteredSelectedPrice = selectedPrice.filter(
+                        (price) => price !== 'high'
+                      );
                       setSelectedPrice(filteredSelectedPrice);
                     }
-                    
                   }}
                   // onClick={handleClick}
                 />
