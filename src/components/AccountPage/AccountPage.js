@@ -35,7 +35,6 @@ function AccountPage() {
         </Link>
       </div>
       <div className="account-content">
-        {/* <MyAccount /> */}
         <Switch>
           <Route path={ROUTES.ORDERS}>
             <Orders />

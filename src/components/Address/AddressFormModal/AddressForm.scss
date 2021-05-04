@@ -74,7 +74,7 @@
     
                 .state-pincode {
                     display: flex;
-                    
+                    flex-direction: row;
 
                     .states{
                         flex: 1;
@@ -107,3 +107,22 @@
         
     }
 }
+
+@media screen and (max-width: 500px) {
+    .address-form-modal {
+        .outer {
+            width: 300px;
+
+            .form-fields {
+                form {
+                    .state-pincode {
+                        display: flex;
+                        flex-direction: column; 
+                    }
+                }
+            }
+        }
+    }
+}
+
+
