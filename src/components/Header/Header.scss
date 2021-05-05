@@ -187,7 +187,6 @@
   .website-header {
     width: 100vw;
 
-    // border: 1px red solid;
     .navbar {
       .left {
         .category-links {
@@ -197,8 +196,8 @@
 
       .right {
         padding: 0;
-        // overflow: hidden;
       }
+
     }
 
     .nav-links {
@@ -213,7 +212,6 @@
   .website-header {
     width: 100vw;
 
-    // border: 1px red solid;
     .navbar {
       .left {
         .category-links {
@@ -236,10 +234,9 @@
 
 @media screen and (max-width: 600px) {
   .website-header {
-    // border: 2px red solid;
+
     .navbar {
       padding: 22px;
-      // border: 2px red solid;
 
       .left {
         padding: 0px;
@@ -259,7 +256,6 @@
       }
 
       .right {
-        // border: 2px red solid;
         padding: 0;
         .search-bar {
           display: none;

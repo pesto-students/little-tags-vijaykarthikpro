@@ -40,6 +40,7 @@ export default function Carousel({ slides }) {
 
     return slides.map((_, index) =>{
       return (<span
+        key={index}
         className={current === index ? "dot active" : "dot"}
         onClick={() => {
           currentSlide(index);

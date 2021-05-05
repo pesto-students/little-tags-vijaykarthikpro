@@ -6,7 +6,7 @@ import FirebaseContext from '../Firebase/context';
 import withAuthorization from "../Session/withAuthorization";
 import Toast from '../Toast/Toast';
 
-const GREEN_COLOR = '#32CD32';
+const LOGO_COLOR = "#D99E32"
 
 function Wishlist() {
 
@@ -52,7 +52,7 @@ function Wishlist() {
                 onClick={() => {
                   dispatch(addItemToCart(product));
                   dispatch(removeItemFromWishlist(uniqueId));
-                  setToast([...toast, {id: new Date().getTime(), description: 'Added to cart !', backgroundColor: GREEN_COLOR}]);
+                  setToast([...toast, {id: new Date().getTime(), description: 'Added to cart !', backgroundColor: LOGO_COLOR}]);
                 }}
               >
                 Add to bag

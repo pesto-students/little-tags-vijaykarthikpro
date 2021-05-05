@@ -19,9 +19,10 @@ import Carousel from "../Carousel/Carousel";
 import SimilarProducts from "../SimilarProducts/SimilarProducts";
 import Toast from "../Toast/Toast";
 
-const GREEN_COLOR = "#32CD32";
+const LOGO_COLOR = "#D99E32"
 
 export default function ProductDetailsPage() {
+
   const cart = useSelector((state) => state.cartState.cart);
   const wishlist = useSelector((state) => state.wishlistState.wishlist);
   const firebase = useContext(FirebaseContext);
@@ -36,6 +37,7 @@ export default function ProductDetailsPage() {
   const [selectedSize, setSelectedSize] = useState(SIZES.XS);
   const [showLogin, setShowLogin] = useState(false);
   const [toast, setToast] = useState([]);
+  const [category, setCategory] = useState('');
 
   const showLoginModal = () => setShowLogin(!showLogin);
 
@@ -44,9 +46,11 @@ export default function ProductDetailsPage() {
   const title = location.pathname.split("/")[2];
 
   useEffect(() => {
-    Products.map((item) => {
-      if (item.title.toString() === title) setProduct(item);
-      return null;
+    Products.forEach((item) => {
+      if (item.title.toString() === title) {
+        setProduct(item);
+        setCategory(item.category);
+      }
     });
   }, [title]);
 
@@ -109,7 +113,11 @@ export default function ProductDetailsPage() {
 
   useEffect(() => {
     if (isAddToCart) {
-      product.size = selectedSize;
+       if(product.category !== 'electronics') {
+        product.size = selectedSize;
+      } else if(product.category === 'electronics') {
+        product.size = 'One Size';
+      }
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToCart(product));
@@ -118,16 +126,22 @@ export default function ProductDetailsPage() {
         {
           id: new Date().getTime(),
           description: "Added To Cart",
-          backgroundColor: GREEN_COLOR,
+          backgroundColor: LOGO_COLOR,
         },
       ]);
-    } else if (isUserLoggedIn) dispatch(removeItemFromCart(product.uniqueId));
+    } else if (isUserLoggedIn) { 
+      dispatch(removeItemFromCart(product.uniqueId));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToCart]);
 
   useEffect(() => {
     if (isAddToWishlist) {
-      product.size = selectedSize;
+      if(product.category !== 'electronics') {
+        product.size = selectedSize;
+      } else if(product.category === 'electronics') {
+        product.size = 'One Size';
+      }
       product.quantity = quantityCount;
       product.uniqueId = new Date().getTime();
       dispatch(addItemToWishlist(product));
@@ -136,11 +150,12 @@ export default function ProductDetailsPage() {
         {
           id: new Date().getTime(),
           description: "Added To Wishlist",
-          backgroundColor: GREEN_COLOR,
+          backgroundColor: LOGO_COLOR,
         },
       ]);
-    } else if (isUserLoggedIn)
-      dispatch(removeItemFromWishlist(product.uniqueId));
+    } else if (isUserLoggedIn) {
+      dispatch(removeItemFromWishlist(product.uniqueId))
+    };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAddToWishlist]);
@@ -162,8 +177,13 @@ export default function ProductDetailsPage() {
             <span className="price-text">{product.price}</span>
           </h3>
           <p className="description-text">{product.description}</p>
-          <h3 className="size-title">Size</h3>
-          <div className="sizes-list">{displaySizes()}</div>
+          {product.category === 'electronics' ? (<div>
+            <h3 className="size-title">Size</h3>
+            <div className="onesize">One Size</div>
+          </div>) : (<div>
+            <h3 className="size-title">Size</h3>
+            <div className="sizes-list">{displaySizes()}</div>
+          </div>)}
           <h3 className="quantity-title">Quantity</h3>
           <div className="quantity">
             <button className="decrease-button" onClick={decreaseCount}>
@@ -178,19 +198,19 @@ export default function ProductDetailsPage() {
             <button className="cart" onClick={handleAddToCartClick}>
               <img src={CartIcon} alt="cart-icon" />
               <span className="cart-btn-text">
-                {isAddToCart ? "Remove from Cart" : "Add to Cart"}
+                {isAddToCart ? "Added to Cart" : "Add to Cart"}
               </span>
             </button>
             <button className="wishlist" onClick={handleAddToWishlistClick}>
               <img src={WishlistIcon} alt="wishlist-icon" />
               <span className="wishlist-btn-text">
-                {isAddToWishlist ? "Remove from Wishlist" : "Add to Wishlist"}
+                {isAddToWishlist ? "Added to Wishlist" : "Add to Wishlist"}
               </span>
             </button>
           </div>
         </div>
       </div>
-      <SimilarProducts />
+      <SimilarProducts selectedCategory={category}/>
       <Login showLogin={showLogin} handleModalOpen={showLoginModal} />
       <Toast
         toastList={toast}
