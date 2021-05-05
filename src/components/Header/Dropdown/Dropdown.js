@@ -11,8 +11,8 @@ export default function Dropdown({ type }) {
   const [click, setClick] = useState(false);
   const [menuItems, setMenuItems] = useState([]);
   const user = useSelector((state) => state.sessionState.authUser);
+  const languageData = useSelector((state) => state.sessionState.data);
   const dispatch = useDispatch();
-
   const firebase = useContext(FirebaseContext);
 
   useEffect(() => {
@@ -45,7 +45,9 @@ export default function Dropdown({ type }) {
               to={item.path}
               onClick={() => setClick(!click)}
             >
-              {item.title}
+              {item.title === "Account"
+                ? languageData.account
+                : languageData.orders}
             </Link>
           </li>
         );
@@ -60,7 +62,7 @@ export default function Dropdown({ type }) {
           <div className="item-padding">
             {userMenu}
             <div className="logout" onClick={handleLogout}>
-              Logout
+              {languageData.logout}
             </div>
           </div>
         </div>
@@ -88,7 +90,7 @@ export default function Dropdown({ type }) {
             id="HI"
             onClick={(e) => handleLanguage(e)}
           >
-            Hindi
+            हिंदी
           </button>
           <button
             className="language-item"

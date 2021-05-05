@@ -68,7 +68,21 @@
     .search-icon {
       width: 16px;
       height: 16px;
-      margin: 0 10px 0 0;
+      margin: 0 20px 0 0;
+    }
+  }
+}
+
+@media  (min-width: 980px) and (max-width: 1190px) {
+  .search-main {
+    input[type="text"] {
+      width: 200px;
+    }
+
+    .search-icon {
+      width: 16px;
+      height: 16px;
+      margin: 0 40px 0 0;
     }
   }
 }
