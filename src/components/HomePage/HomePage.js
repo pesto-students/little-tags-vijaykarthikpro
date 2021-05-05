@@ -13,7 +13,6 @@ import JeweleryImg from "../../assets/images/jewelery.svg";
 
 export default function HomePage() {
   const languageData = useSelector((state) => state.sessionState.data);
-  console.log("language data: ",languageData);
 
   return (
     <div className="home-container">

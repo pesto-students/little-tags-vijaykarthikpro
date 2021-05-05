@@ -72,12 +72,12 @@ export default function Header() {
             </Link>
           </div>
           <div className="category-links">
-            {/* <Link to={ROUTES.MEN} className="nav-links">
+            <Link to={ROUTES.MEN} className="nav-links">
               {languageData.men}
             </Link>
             <Link to={ROUTES.WOMEN} className="nav-links">
               {languageData.women}
-            </Link> */}
+            </Link>
             {/* <Link to="/products/offers" className="nav-links">
               Offers
             </Link> */}
