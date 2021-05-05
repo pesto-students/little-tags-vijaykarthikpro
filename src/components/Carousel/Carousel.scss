@@ -25,7 +25,7 @@
     .product-image {
       width: 300px;
       height: 400px;
-      object-fit: contain;
+      object-fit: cover;
       border-radius: 10px;
     }
   }
@@ -63,13 +63,15 @@
 
 
 
-
-
-
-// @media screen and (max-width: 600px) {
-//   .left-arrow {
-//     left: -75%;
-//   }
-//   .right-arrow {
-//     right: -75%;
-//
+@media screen and (max-width: 650px) {
+  .slider {
+    .slide {
+      .product-image {
+        width: 220px;
+        height: 300px;
+        object-fit: contain;
+        border-radius: 10px;
+      }
+    }
+  }
+}

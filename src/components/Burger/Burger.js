@@ -25,38 +25,38 @@ export default function Burger({ showMenu, handleBurgerClose }) {
             </div>
             <div className="line-divider"></div>
             <div className="burger-list">
-              <span className="animate__animated animate__bounce infinite">
-                Categories
+              <span>
+                CATEGORIES
               </span>
-              <ul>
+              <ul onClick={handleBurgerClose}>
                 <li>
                   <Link to={ROUTES.MEN} className="nav-links">
-                    MEN
+                    Men
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.WOMEN} className="nav-links">
-                    WOMEN
+                    Women
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.JACKETS} className="nav-links">
-                    JACKETS
+                    Jackets
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.TSHIRTS} className="nav-links">
-                    T-SHIRTS
+                    T-Shirts
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.ELECTRONICS} className="nav-links">
-                    ELECTRONICS
+                    Electronics
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.JEWELLERY} className="nav-links">
-                    JEWELLERY
+                    Jewellery
                   </Link>
                 </li>
               </ul>

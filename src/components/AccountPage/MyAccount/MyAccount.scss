@@ -9,16 +9,26 @@
 
 
 .my-account {
-
+ padding: 30px;
   
   .welcome-user {
-    text-align: center;
-    padding: 30px;
-    font-size: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    font-size: 18px;
+    background-color: black;
+    border-radius: 5px;
+
+    span {
+      // @include make-text-color-gold();
+      padding-right: 10px;
+    }
 
     .username {
-      @include make-text-color-gold();
       text-transform: capitalize;
+      margin-bottom: 10px;
     }
   }
 
@@ -28,10 +38,12 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: space-evenly;
+    margin-top: 20px;
 
 
     .card-element {
-      background-color: white;
+      background-color: black;
+      color: white;
       width: 200px;
       margin: 20px;
       padding: 25px;
@@ -42,12 +54,25 @@
 
       .card-title {
         font-size: 20px;
+        // @include make-text-color-gold();
       }
 
 
       .display-number {
         margin-top: 10px;
         font-size: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .my-account {
+    .welcome-user {
+      font-size: 16px;
+
+      .email {
+        max-width: 300px;
       }
     }
   }

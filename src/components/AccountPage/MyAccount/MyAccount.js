@@ -12,7 +12,8 @@ export default function Address() {
     <div className="my-account">
       <div className="welcome-user">
         {/* <span className="Welcoome">Welcome </span> */}
-        <span className="username">{user.name}</span>
+        <div className="username"><span>Name</span>: {user.name}</div>
+        <div className="email"><span>Email</span>: {user.email}</div>
       </div>
       <div className="card-content">
         <div className="card-element">
