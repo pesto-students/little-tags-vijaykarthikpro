@@ -4,13 +4,13 @@ import "./OrderCard.scss";
 export default function OrderCard({ ordersData }) {
   const displayOrder = () => {
     return ordersData.map((item,id) => {
-      const { image, title, price, address :{ name, area, town, city, pincode, state, mobile } } = item;
+      const { image, title, price, size, quantity, address :{ name, area, town, city, pincode, state, mobile } } = item;
       return (
         <div className="card-main" key={id}>
           <div className="card-top">
             <div className="order-details">
               <span className="order-title">{title}</span>
-              <p>Color-Black</p>
+              <p>Size : {size}, Quantity : {quantity}</p>
               <span className="order-title"> ₹ {price}</span>
               <div className="subtitle-size">
                 Ordered -<span>1st Thu, 2021</span>

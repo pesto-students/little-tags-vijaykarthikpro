@@ -11,7 +11,7 @@ import Checkout from "../Payment/Checkout";
 import Toast from '../Toast/Toast';
 
 const WHITE_COLOR = '#FFFFFF';
-const GREEN_COLOR = '#32CD32';
+const LOGO_COLOR = "#D99E32"
 
 function CheckoutPage() {
 
@@ -48,7 +48,7 @@ function CheckoutPage() {
   const displayCartItems = () => {
 
     return cart.map((product)=>{
-      const { uniqueId, title, price, image, size = 'XS' } = product;
+      const { uniqueId, title, price, image, size = 'XS', category } = product;
       let { quantity = 1 } = product; 
 
       const sizes = Object.values(SIZES).map((item,id) => {
@@ -86,12 +86,15 @@ function CheckoutPage() {
           <div className="item-details">
               <div className="main-details">
                 <span className="bold-title">{title}</span>
-                <div>
-                <span className="details-text">Size : </span>
-                <select defaultValue={size} onChange={handleSizeSelection}>
-                  {sizes}
-                </select>
-                </div>
+                { category === 'electronics' ? (<div>
+                    <span className="details-text">Size : {size}</span>
+                  </div>) : (<div>
+                    <span className="details-text">Size : </span>
+                    <select defaultValue={size} onChange={handleSizeSelection}>
+                      {sizes}
+                    </select>
+                  </div>) 
+                }
                 <span className="quantity-title details-text">Quantity :</span>
                 <div className="quantity">
                   <button className="decrease-button" onClick={handleQuantityDecrease}>
@@ -169,12 +172,12 @@ function CheckoutPage() {
     setTotalPrice(0);
     setShowSelectAddress(false);
     setToastPosition('top-middle')
-    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: GREEN_COLOR}]);
+    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: LOGO_COLOR}]);
   }
 
   const handlePaymentFailure = () =>{
     setToastPosition('top-middle')
-    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: GREEN_COLOR}]);
+    setToast([...toast, {id: new Date().getTime(), description: 'Order placed successfully!', backgroundColor: LOGO_COLOR}]);
   }
 
 
@@ -194,14 +197,12 @@ function CheckoutPage() {
           <div className="price-details">
             <div className="left">
               <span>TOTAL MRP</span>
-              <span>DISCOUNT</span>
               <span>COUPON</span>
               <span>SHIPPING FEE</span>
               <span className="total-amount">TOTAL AMOUNT</span>
             </div>
             <div className="right">
               <span>₹ {parseFloat(totalPrice).toFixed(2)}</span>
-              <span>₹ 500</span>
               <span>₹ 0</span>
               <span>FREE</span>
               <span className="total-amount">₹ {parseFloat(totalPrice).toFixed(2)}</span>
