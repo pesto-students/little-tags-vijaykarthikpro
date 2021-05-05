@@ -434,7 +434,7 @@ const products = [
   {
     id: 21,
     title: "Men's Black T Shirt Casual Cotton",
-    price: 420.99,
+    price: 520.99,
     description:
       "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "men clothing",
@@ -454,7 +454,7 @@ const products = [
   {
     id: 22,
     title: "Men's Yellow T Shirt Pattern",
-    price: 520.99,
+    price: 1190.96,
     description:
       "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "tshirt",
@@ -480,7 +480,7 @@ const products = [
   {
     id: 23,
     title: "Men's Yellow T Shirt Pattern",
-    price: 4620.99,
+    price: 1190.96,
     description:
       "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "men clothing",
@@ -570,7 +570,7 @@ const products = [
   {
     id: 27,
     title: "Mens Casual Slim Fit",
-    price: 620.88,
+    price: 1620.88,
     description:
       "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
     category: "tshirt",
@@ -596,7 +596,7 @@ const products = [
   {
     id: 28,
     title: "Womens Black Casual Slim Fit",
-    price: 450.99,
+    price: 1450.99,
     description:
       "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "women clothing",
@@ -616,7 +616,7 @@ const products = [
   {
     id: 29,
     title: "Womens Black Casual Slim Fit",
-    price: 550.99,
+    price: 1450.99,
     description:
       "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "tshirt",
@@ -716,7 +716,7 @@ const products = [
   {
     id: 34,
     title: "Womens White Casual T Shirt",
-    price: 640.68,
+    price: 3240.68,
     description:
       "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "tshirt",
@@ -736,7 +736,7 @@ const products = [
   {
     id: 35,
     title: "Womens White Casual T Shirt",
-    price: 340.68,
+    price: 3240.68,
     description:
       "95% RAYON 5% SPANDEX, Made in USA or Imported, Do Not Bleach, Lightweight fabric with great stretch for comfort, Ribbed on sleeves and neckline / Double stitching on bottom hem",
     category: "women clothing",

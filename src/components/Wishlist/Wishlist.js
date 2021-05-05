@@ -78,7 +78,7 @@ function Wishlist() {
       <div className="wishlist">
         {displayWishlistItems()}
       </div>
-      <Toast toastList={toast} position="top-right" autoDelete dismissTime="4000" />
+      <Toast toastList={toast} position="top-right" autoDelete dismissTime={4000} />
     </div>
   );
 }
