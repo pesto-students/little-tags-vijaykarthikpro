@@ -108,7 +108,7 @@ export default function Login({ showLogin, handleModalOpen }) {
       </div>
       ) : null
       }
-       <Toast toastList={toast} position="top-right" autoDelete dismissTime="4000" />
+       <Toast toastList={toast} position="top-right" autoDelete dismissTime={4000} />
     </>
   );
 }

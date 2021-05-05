@@ -6,22 +6,17 @@ import products from '../../data/products';
 import { routePathMap, productFilterCategories, productFilterPrices } from '../../Utils';
 import Card from '../Card/Card';
 import Toast from '../Toast/Toast';
+import NoSearchResultsImg from '../../assets/images/no-search-results.svg';
 
 // const WHITE_COLOR = "#FFFFFF";
+let routeFilteredData = [];
 
 export default function ProductListPage() {
   const [data, setData] = useState(products);
   const [toast /* , setToast */] = useState([]);
-  const [routeFilteredData, setRouteFilteredData] = useState([]);
-
-  // const [categoryData, setCategoryData] = useState([]);
-  // const [lowPriceData, setLowPriceData] = useState([]);
-  // const [mediumPriceData, setMediumPriceData] = useState([]);
-  // const [highPriceData, setHighPriceData] = useState([]);
-  // const [priceFilteredData, setPriceFilteredData] = useState([]);
-  // const [showFilters, setShowFilters] = useState(true);
+  // const [routeFilteredData, setRouteFilteredData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedPrice, setSelectedPrice] = useState([]);
+  const [selectedPrice, setSelectedPrice] = useState('');
 
   const location = useLocation();
   const pathName = location.pathname.split('/')[2];
@@ -36,8 +31,8 @@ export default function ProductListPage() {
         if (product.category === routePathMap[pathName]) return product;
         return null;
       });
-      setRouteFilteredData(filteredProducts);
-      // setCategoryData(filteredProducts);
+      // setRouteFilteredData(filteredProducts);
+      routeFilteredData = filteredProducts
       setData(filteredProducts);
     }
   }, [pathName]);
@@ -45,32 +40,31 @@ export default function ProductListPage() {
   const handleClearFiltering = () => {
     setData(routeFilteredData);
     setSelectedCategory('');
-    setSelectedPrice([]);
+    setSelectedPrice('');
   };
 
 
   useEffect(() => {
     let filteredProducts = products;
+    if(selectedCategory === '') {
+      filteredProducts = routeFilteredData;
+    }
     if (selectedCategory !== '') {
       filteredProducts = products.filter(
         ({ category }) => category === selectedCategory
       );
     }
-    if (selectedPrice.length) {
+    if(selectedPrice !== '') {
       productFilterPrices.forEach((prices) => {
-        const { priceRange, from , to } = prices;
-        if (selectedPrice.includes(priceRange)) {
-          filteredProducts = filteredProducts.filter(
-            ({ price }) => price >= from && price <= to
-          );
-
-        } else if(!selectedPrice.includes(priceRange)) {
-          filteredProducts = filteredProducts.filter(
-            ({ price }) => !(price >= from && price <= to)
-          );
-          }
-      })
+            const { priceRange, from , to } = prices;
+            if (selectedPrice === priceRange) {
+              filteredProducts = filteredProducts.filter(
+                ({ price }) => price >= from && price <= to
+              );
+            } 
+          })
     }
+    
     setData(filteredProducts);
   }, [selectedCategory, selectedPrice]);
 
@@ -104,22 +98,13 @@ export default function ProductListPage() {
             <li key={id}>
               <label>
                 <input
-                  type="checkbox"
-                  id={priceRange}
-                  name={priceRange}
-                  checked={selectedPrice.includes(priceRange)}
-                  onChange={(e) => {
-                    if (e.target.checked) {
-                      setSelectedPrice([...selectedPrice, priceRange]);
-                    } else {
-                      const filteredSelectedPrice = selectedPrice.filter(
-                        (price) => price !== priceRange
-                      );
-                      setSelectedPrice(filteredSelectedPrice);
-                    }
-                  }}
+                  type="radio"
+                  name="price"
+                  value={priceRange}
+                  checked={selectedPrice === priceRange}
+                  onChange={() => setSelectedPrice(priceRange)}
                 />
-                <span>{from} - {to}</span>
+                <span>Rs.{from} - Rs.{to}</span>
               </label>
             </li>
           )
@@ -129,22 +114,23 @@ export default function ProductListPage() {
     return (
       <div>
         <div className="filter-heading-row">
-          <h2>FILTERS</h2>
-          <button onClick={handleClearFiltering}>clear</button>
+          <span className="filter-title">FILTERS</span>
+          <button className="clear-button" onClick={handleClearFiltering}>clear all</button>
         </div>
-        <div>
-          <span className="main-title">Categories</span>
-          <ul>
-            {filterCategories()}
-          </ul>
+        <div className="filter-contents">
+          <div className="category-type">
+            <span className="title-headings">Categories</span>
+            <ul>
+              {filterCategories()}
+            </ul>
+          </div>
+          <div className="price-type">
+            <span className="title-headings">Price</span>
+            <ul>
+              {filterPrices()}
+            </ul>
+          </div>
         </div>
-        <div>
-          <span className="main-title">Price</span>
-          <ul>
-            {filterPrices()}
-          </ul>
-        </div>
-        <div></div>
       </div>
     );
   };
@@ -153,8 +139,12 @@ export default function ProductListPage() {
     <div>
       <div className="list-container">
         <div className="filter">{showFilter()}</div>
-        <div className="card-container">
-          <Card productsData={data} />
+        <div className={data.length > 0 ? "card-container" : "card-container background-grey"}>
+          {data.length > 0 ? <Card productsData={data} /> : 
+          <div className="no-results-found">
+            <img className="big-search-icon"src={NoSearchResultsImg} alt="no results found"/>
+            <span>Sorry, We couldn't find any results!</span>
+          </div>}
         </div>
       </div>
       <Toast

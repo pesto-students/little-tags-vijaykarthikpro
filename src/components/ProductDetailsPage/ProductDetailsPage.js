@@ -196,7 +196,7 @@ export default function ProductDetailsPage() {
         toastList={toast}
         position="top-right"
         autoDelete
-        dismissTime="4000"
+        dismissTime={4000}
       />
     </div>
   );

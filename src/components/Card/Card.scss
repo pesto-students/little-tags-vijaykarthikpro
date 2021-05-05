@@ -81,7 +81,13 @@
 
     .card {
       // border: 1px red solid;
-      width: 180px;
+      width: 160px;
+      margin: 10px;
+
+
+      .card-img {
+        height: 160px;
+      }
     }
   }
 }
