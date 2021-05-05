@@ -71,7 +71,7 @@ export default function AddressCard({ addressData, handleMakeDefaultAddress, han
               <span className="remove-btn" onClick={handleRemove}>Remove</span> 
             </div>
             </div>
-            <Toast toastList={toast} position="top-right" autoDelete dismissTime="4000" /> 
+            <Toast toastList={toast} position="top-right" autoDelete dismissTime={4000} /> 
         </div>
       );
     });

@@ -1,35 +1,30 @@
 /* eslint-disable max-lines-per-function */
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import "./ProductListPage.scss";
-import products from "../../data/products";
-import { routePathMap } from "../../Utils";
-import Card from "../Card/Card";
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import './ProductListPage.scss';
+import products from '../../data/products';
+import { routePathMap, productFilterCategories, productFilterPrices } from '../../Utils';
+import Card from '../Card/Card';
 import Toast from '../Toast/Toast';
 
-const WHITE_COLOR = '#FFFFFF';
+// const WHITE_COLOR = "#FFFFFF";
 
 export default function ProductListPage() {
-  
   const [data, setData] = useState(products);
-  const [toast, setToast] = useState([]);
+  const [toast /* , setToast */] = useState([]);
   const [routeFilteredData, setRouteFilteredData] = useState([]);
-  const [categoryData, setCategoryData] = useState([]);
-  const [lowPriceData, setLowPriceData] = useState([]);
-  const [mediumPriceData, setMediumPriceData] = useState([]);
-  const [highPriceData, setHighPriceData] = useState([]);
-  const [isChecked, setIsChceked] = useState({
-    jacket: false, 
-    electronics: false, 
-    tshirt: false, 
-    jewellery: false, 
-    low: false, 
-    medium: false, 
-    high: false,
-    category: false,
-    price: false});
+
+  // const [categoryData, setCategoryData] = useState([]);
+  // const [lowPriceData, setLowPriceData] = useState([]);
+  // const [mediumPriceData, setMediumPriceData] = useState([]);
+  // const [highPriceData, setHighPriceData] = useState([]);
+  // const [priceFilteredData, setPriceFilteredData] = useState([]);
+  // const [showFilters, setShowFilters] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedPrice, setSelectedPrice] = useState([]);
+
   const location = useLocation();
-  const pathName = location.pathname.split("/")[2];
+  const pathName = location.pathname.split('/')[2];
 
   useEffect(() => {
     const isPathMatching = (path) => {
@@ -42,139 +37,97 @@ export default function ProductListPage() {
         return null;
       });
       setRouteFilteredData(filteredProducts);
-      setCategoryData(filteredProducts);
+      // setCategoryData(filteredProducts);
       setData(filteredProducts);
-
     }
   }, [pathName]);
 
-
-  const handleCategory = (e) => {
-    const { target: { value }} = e;
-    
-    setIsChceked({...isChecked, category: true});
-   
-    if(value === 'jacket') setIsChceked({...isChecked, jacket: true, electronics: false, tshirt: false, jewellery: false});
-    if(value === 'electronics') setIsChceked({...isChecked, jacket: false, electronics: true, tshirt: false, jewellery: false});
-    if(value === 'tshirt') setIsChceked({...isChecked, jacket: false, electronics: false, tshirt: true, jewellery: false});
-    if(value === 'jewellery') setIsChceked({...isChecked, jacket: false, electronics: false, tshirt: false, jewellery: true});
-    
-    const category = products.filter(
-      (product) => product.category === e.target.value
-    );
-    setCategoryData(category);
-    setData(category);
-  };
-
-  const handlePrice = (e) => {
-    const priceRange = e.target.name;
-    const checked = e.target.checked;
-
-
-    setIsChceked({...isChecked, price : true});
-
-      if (priceRange === "low") {
-        
-        if(checked) {
-
-          setIsChceked({...isChecked, low: true});
-
-          const filteredData = categoryData.filter(
-            (product) => product.price >= 300 && product.price <= 1000
-          )
-
-          if(filteredData.length === 0) {
-            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
-          } else{
-            setLowPriceData(filteredData);
-          }
-          
-
-        } else {
-          setIsChceked({...isChecked, low: false});
-          setLowPriceData([]);
-        }
-        
-      } else if (priceRange === "medium") {
-
-        if(checked) {
-
-          setIsChceked({...isChecked, medium: true});
-
-          const filteredData = categoryData.filter(
-            (product) => product.price > 1000 && product.price <= 3000
-          );
-
-          if(filteredData.length === 0) {
-            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
-          } else{
-            setMediumPriceData(filteredData);
-          }
-
-        } else {
-          setIsChceked({...isChecked, medium: false});
-          setMediumPriceData([]);
-        }
-        
-      } else if (priceRange === "high") {
-        if(checked) {
-          setIsChceked({...isChecked, high: true});
-
-          const filteredData = categoryData.filter(
-            (product) => product.price > 3000 && product.price <= 5000
-          );
-
-          if(filteredData.length === 0) {
-            setToast([...toast, {id: new Date().getTime(), description: 'No match found !', backgroundColor: WHITE_COLOR}]);
-          } else{
-            setHighPriceData(filteredData);
-          }
-         
-        } else {
-          setIsChceked({...isChecked, high: false});
-          setHighPriceData([]);
-
-        }
-      }
-      
-  };
-
-  useEffect(() =>{
-    if(lowPriceData.length === 0 && mediumPriceData.length === 0 && highPriceData.length === 0) {
-
-      setData(categoryData);
-      
-    } else {
-
-      setData([...lowPriceData, ...mediumPriceData, ...highPriceData]);
-      
-    }
-  },[lowPriceData, mediumPriceData, highPriceData, categoryData, isChecked, routeFilteredData]);
-
-
-  const handleClearFiltering = () =>{
-   
-    setIsChceked({
-      jacket: false, 
-      electronics: false, 
-      tshirt: false, 
-      jewellery: false, 
-      low: false, 
-      medium: false, 
-      high: false,
-      category: false,
-      price: false});
-
+  const handleClearFiltering = () => {
     setData(routeFilteredData);
-    setCategoryData(routeFilteredData);
-  }
-  // useEffect(() => {
-  //   handlePrice();
-  // });
+    setSelectedCategory('');
+    setSelectedPrice([]);
+  };
 
-  return (<div>
-    <div className="list-container">
-      <div className="filter">
+
+  useEffect(() => {
+    let filteredProducts = products;
+    if (selectedCategory !== '') {
+      filteredProducts = products.filter(
+        ({ category }) => category === selectedCategory
+      );
+    }
+    if (selectedPrice.length) {
+      productFilterPrices.forEach((prices) => {
+        const { priceRange, from , to } = prices;
+        if (selectedPrice.includes(priceRange)) {
+          filteredProducts = filteredProducts.filter(
+            ({ price }) => price >= from && price <= to
+          );
+
+        } else if(!selectedPrice.includes(priceRange)) {
+          filteredProducts = filteredProducts.filter(
+            ({ price }) => !(price >= from && price <= to)
+          );
+          }
+      })
+    }
+    setData(filteredProducts);
+  }, [selectedCategory, selectedPrice]);
+
+
+  const showFilter = () => {
+
+    const filterCategories = () =>{
+        return productFilterCategories.map((filter, id)=>{
+          const { displayName, category } = filter
+          return ( <li key={id}>
+            <label>
+              <input
+                type="radio"
+                name="category"
+                value={category}
+                checked={selectedCategory === category}
+                onChange={() => {
+                  setSelectedCategory(category);
+                }}
+              />
+              <span>{displayName}</span>
+            </label>
+          </li>)
+        })
+    }
+
+    const filterPrices = () =>{
+        return productFilterPrices.map((filter, id) => {
+          const { priceRange, from, to } = filter;
+          return (
+            <li key={id}>
+              <label>
+                <input
+                  type="checkbox"
+                  id={priceRange}
+                  name={priceRange}
+                  checked={selectedPrice.includes(priceRange)}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setSelectedPrice([...selectedPrice, priceRange]);
+                    } else {
+                      const filteredSelectedPrice = selectedPrice.filter(
+                        (price) => price !== priceRange
+                      );
+                      setSelectedPrice(filteredSelectedPrice);
+                    }
+                  }}
+                />
+                <span>{from} - {to}</span>
+              </label>
+            </li>
+          )
+        })
+    }
+
+    return (
+      <div>
         <div className="filter-heading-row">
           <h2>FILTERS</h2>
           <button onClick={handleClearFiltering}>clear</button>
@@ -182,111 +135,34 @@ export default function ProductListPage() {
         <div>
           <span className="main-title">Categories</span>
           <ul>
-            <li>
-              <label>
-                <input
-                  type="radio"
-                  name="category"
-                  value="jacket"
-                  checked={isChecked.jacket}
-                  onChange={handleCategory}
-                />
-                <span>Jackets</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  type="radio"
-                  value="electronics"
-                  name="category"
-                  checked={isChecked.electronics}
-                  onChange={handleCategory}
-                />
-                <span>Electronics</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  type="radio"
-                  name="category"
-                  value="tshirt"
-                  checked={isChecked.tshirt}
-                  onChange={handleCategory}
-                />
-                <span>T-shirts</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  type="radio"
-                  name="category"
-                  value="jewellery"
-                  checked={isChecked.jewellery}
-                  onChange={handleCategory}
-                />
-                <span>Jewellery</span>
-              </label>
-            </li>
+            {filterCategories()}
           </ul>
         </div>
         <div>
           <span className="main-title">Price</span>
-
           <ul>
-            <li>
-              <label>
-                <input
-                  type="checkbox"
-                  id="low"
-                  name="low"
-                  checked={isChecked.low}
-                  onChange={handlePrice}
-                  // onClick={handleClick}
-                />
-                <span>300-1000</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  type="checkbox"
-                  id="medium"
-                  name="medium"
-                  checked={isChecked.medium}
-                  onChange={handlePrice}
-                  // onClick={handleClick}
-                />
-                <span>1000-3000</span>
-              </label>
-            </li>
-            <li>
-              <label>
-                <input
-                  type="checkbox"
-                  id="high"
-                  name="high"
-                  checked={isChecked.high}
-                  onChange={handlePrice}
-                  // onClick={handleClick}
-                />
-                <span>3000-5000</span>
-              </label>
-            </li>
+            {filterPrices()}
           </ul>
         </div>
-        <div>
+        <div></div>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <div className="list-container">
+        <div className="filter">{showFilter()}</div>
+        <div className="card-container">
+          <Card productsData={data} />
         </div>
       </div>
-
-      <div className="card-container">
-        <Card productsData={data} />
-      </div>
-     
-    </div>
-    <Toast toastList={toast} position="bottom-left" autoDelete dismissTime="4000" /> 
+      <Toast
+        toastList={toast}
+        position="bottom-left"
+        autoDelete
+        dismissTime={4000}
+      />
     </div>
   );
 }

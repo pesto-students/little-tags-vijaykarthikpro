@@ -11,6 +11,7 @@
     width: 100%;
     padding: 20px;
     border-radius: 5px;
+    border: 1px black solid;
     margin: 10px 0 10px 0;
 
     .order-title {
@@ -29,7 +30,7 @@
         img {
           width: 100%;
           height: 100%;
-          object-fit: cover;
+          object-fit: contain;
           border-radius: 10px;
         }
       }
@@ -82,4 +83,69 @@
   // .subtitle-size {
   //   font-size: 15px;
   // }
+}
+
+@media screen and (max-width: 500px) {
+  .order-main {
+    .card-main {
+      .order-title {
+        white-space: pre-wrap;
+        //width: 50px;
+      }
+
+      .card-top {
+        display: flex;
+        // flex-direction: column-reverse;
+        
+        .order-details {
+          // border: 2px green solid;
+        }
+
+        .order-image {
+
+          width: 200px;
+          height: 150px;
+  
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+          }
+        }
+      }
+      .card-bottom {
+        flex-direction: column;
+        .address-section {
+          // flex-direction: row;
+          justify-content: space-between;
+          margin-bottom: 10px;
+
+          .address-content {
+            // display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+          }
+        }
+
+        .price-section{
+          display: none;
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 500px) and (max-width: 850px) {
+  .order-main {
+    .card-main {
+      .card-bottom {
+        .price-section{
+          .price-details {
+            width: 200px;
+          }
+        }
+      }
+    }
+  }
+  
 }

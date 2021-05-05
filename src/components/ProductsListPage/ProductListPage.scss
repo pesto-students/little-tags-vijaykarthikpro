@@ -2,7 +2,7 @@
 
 .list-container {
   display: flex;
-  min-width: 100vh;
+  min-width: 100vw;
 
   .filter {
     display: flex;
@@ -42,3 +42,25 @@
     padding: 20px;
   }
 }
+
+.filter-btn {
+  background: transparent;
+  color: white;
+  padding: 20px;
+  margin: 5px 10px 5px 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .list-container {
+    width: 100%;
+    // min-width: 100vw;
+    .filter {
+      display: none;
+    }
+
+    .card-container {
+      padding: 0;
+      width: 100%;
+    }
+  }
+} ;

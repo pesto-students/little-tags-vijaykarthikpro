@@ -45,33 +45,37 @@
 }
 
 .wishlist-container {
-  @include styles.flex-row-center;
+  @include styles.flex-column-center;
   align-items: flex-start;
-  background-color: black;
-  color: white;
   font-family: "Poppins", sans-serif;
   width: 100%;
   padding: 30px;
   max-width: 1500px;
   margin: 0 auto;
+  background: white;
  
+  .my-wishlist-heading {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+  }
 
   .bold-title {
     font-weight: 600;
+    margin-bottom: 20px;
+    color: black;
   }
 
   .wishlist {
-    background-color: white;
     color: black;
     width: 100%;
     min-height: 300px;
-    padding: 30px;
     border-radius: 5px;
 
     .item-row {
       @include styles.flex-row-center;
       align-items: stretch;
-      padding: 20px 0 20px 0;
+      padding: 20px 0 0 0;
       height: 200px;
 
       .product-image {

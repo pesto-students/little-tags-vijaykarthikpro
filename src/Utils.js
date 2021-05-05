@@ -31,6 +31,43 @@ export const routePathMap = {
   jackets: "jacket",
 };
 
+export const productFilterCategories = [
+  {
+    displayName: 'Jackets',
+    category: 'jacket'
+  },
+  {
+    displayName: 'Electronics',
+    category: 'electronics'
+  },
+  {
+    displayName: 'T-Shirts',
+    category: 'tshirt'
+  },
+  {
+    displayName: 'Jewellery',
+    category: 'jewellery'
+  }
+]
+
+export const productFilterPrices = [
+  {
+    priceRange: 'low',
+    from: 300,
+    to: 1000
+  },
+  {
+    priceRange: 'medium',
+    from: 1000,
+    to: 3000
+  },
+  {
+    priceRange: 'high',
+    from: 3000,
+    to: 5000
+  }
+]
+
 export const throttleFunction = (func, delay) => {
   let prev = 0;
 
