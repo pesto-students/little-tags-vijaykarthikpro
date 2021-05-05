@@ -136,7 +136,7 @@ export default function Login({ showLogin, handleModalOpen }) {
         toastList={toast}
         position="top-right"
         autoDelete
-        dismissTime="4000"
+        dismissTime={4000}
       />
     </>
   );
