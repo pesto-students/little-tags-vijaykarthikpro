@@ -1,11 +1,14 @@
 import React from "react";
-import { Link /* , Switch, Route */ } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 import * as ROUTES from "../../constants/routes";
 import "./Burger.scss";
 import AppLogo from "../../assets/icons/logo-symbol.png";
 import CloseIcon from "../../assets/icons/clear.svg";
 
 export default function Burger({ showMenu, handleBurgerClose }) {
+  const languageData = useSelector((state) => state.sessionState.data);
+
   return (
     <>
       {showMenu ? (
@@ -25,38 +28,36 @@ export default function Burger({ showMenu, handleBurgerClose }) {
             </div>
             <div className="line-divider"></div>
             <div className="burger-list">
-              <span>
-                CATEGORIES
-              </span>
+              <span>{languageData.categories}</span>
               <ul onClick={handleBurgerClose}>
                 <li>
                   <Link to={ROUTES.MEN} className="nav-links">
-                    Men
+                    {languageData.men}
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.WOMEN} className="nav-links">
-                    Women
+                    {languageData.women}
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.JACKETS} className="nav-links">
-                    Jackets
+                    {languageData.jackets}
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.TSHIRTS} className="nav-links">
-                    T-Shirts
+                    {languageData.tshirts}
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.ELECTRONICS} className="nav-links">
-                    Electronics
+                    {languageData.electronics}
                   </Link>
                 </li>
                 <li>
                   <Link to={ROUTES.JEWELLERY} className="nav-links">
-                    Jewellery
+                    {languageData.jewellery}
                   </Link>
                 </li>
               </ul>

@@ -12,6 +12,12 @@
     "electronics": "ELECTRONICS",
     "tshirts":"T-SHIRTS",
     "jewellery":"JEWELLERY",
-    "login": "LOGIN"
+    "login": "LOGIN",
+    "account" : "Account",
+    "orders" : "Orders",
+    "logout" : "Log Out",
+    "loginAlert" : "Please login to continue!",
+    "googleSignIn" : "Continue with Google",
+    "facebookSignIn" : "Continue with Facebook"
 
 }

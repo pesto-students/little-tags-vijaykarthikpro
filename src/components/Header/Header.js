@@ -19,7 +19,7 @@ export default function Header() {
   const [isHamburgerMenuOpen, setHamBurgerMenu] = useState(false);
   const cart = useSelector((state) => state.cartState.cart);
   const wishlist = useSelector((state) => state.wishlistState.wishlist);
-  // const languageData = useSelector((state) => state.sessionState.data);
+  const languageData = useSelector((state) => state.sessionState.data);
 
   const isUserLoggedIn = useSelector(
     (state) => state.sessionState.isUserLoggedIn
@@ -43,7 +43,7 @@ export default function Header() {
     } else {
       return (
         <div>
-          <button onClick={showLoginModal}>LOGIN</button>
+          <button onClick={showLoginModal}>{languageData.login}</button>
         </div>
       );
     }
