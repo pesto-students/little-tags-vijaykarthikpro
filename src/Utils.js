@@ -65,6 +65,11 @@ export const productFilterPrices = [
     priceRange: 'high',
     from: 3000,
     to: 5000
+  },
+  {
+    priceRange: 'highest',
+    from: 5000,
+    to: 10000
   }
 ]
 

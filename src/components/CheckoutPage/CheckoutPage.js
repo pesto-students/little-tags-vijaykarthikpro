@@ -212,7 +212,7 @@ function CheckoutPage() {
           <button onClick={handlePlaceOrder}>PLACE ORDER</button> }
         </div>
       </div>
-      <Toast toastList={toast} position={toastPosition} autoDelete dismissTime="4000" />
+      <Toast toastList={toast} position={toastPosition} autoDelete dismissTime={4000} />
   </div>);
 }
 
