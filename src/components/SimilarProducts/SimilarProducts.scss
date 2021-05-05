@@ -89,3 +89,20 @@
     
     }
 }
+
+@media screen and (max-width: 600px) {
+    .similar-products-container {
+        .similar-card-container{
+            .similar-products-content {
+                .card {
+                    width: 160px;
+                    margin: 10px;
+                    
+                    .card-img {
+                      height: 160px;
+                    }
+                }
+            }
+        }
+    }
+  }

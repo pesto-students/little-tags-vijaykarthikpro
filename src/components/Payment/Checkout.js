@@ -20,7 +20,7 @@ export default function Checkout({ amount, handlePaymentSuccess, handlePaymentFa
     
     const options = {
       "key": "rzp_test_rfJ2UUKhSoQAbb",
-      "amount": amount * 100, 
+      "amount": parseInt(parseFloat(amount) * 100, 10), 
       "name": "Style Beast",
       "description": "Purchase Description",
       "image": LogoSymbol,
@@ -60,7 +60,7 @@ export default function Checkout({ amount, handlePaymentSuccess, handlePaymentFa
 }
 
 Checkout.propTypes = {
-  amount: PropTypes.number,
+  amount: PropTypes.string,
   handlePaymentSuccess: PropTypes.func,
   handlePaymentFailure: PropTypes.func
 }

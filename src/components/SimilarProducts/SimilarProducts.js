@@ -4,10 +4,12 @@ import ProductsData from '../../data/products';
 // import Card from '../Card/Card';
 import './SimilarProducts.scss';
 
-const onlyFourProducts = ProductsData.filter((_,index) => index < 4);
 
-export default function SimilarProducts() {
 
+export default function SimilarProducts({ selectedCategory }) {
+
+  const filteredData = ProductsData.filter((product) => product.category === selectedCategory );
+  
     
   const displayTitleText = (title) => {
     const words = title.split(" ");
@@ -20,24 +22,27 @@ export default function SimilarProducts() {
   };
 
     const displayProducts = () => {
-        return onlyFourProducts.map((item) => {
+        return filteredData.map((item, index) => {
           const { id, image, title, price } =  item
-          return (
-            <div className="card" key={id}>
-              <Link className="card-link" key={id} to={`/product-details/${title}`}>
-                <div className="card-img">
-                  <img src={image} alt="" />
+          if(index < 4 ){
+            return (
+              <div className="card" key={id}>
+                <Link className="card-link" key={id} to={`/product-details/${title}`}>
+                  <div className="card-img">
+                    <img src={image} alt="" />
+                  </div>
+                <div className="card-header">
+                  {displayTitleText(title)}
+                  <p className="price">
+                    <span>$</span>
+                    <span className="price-text">{price}</span>
+                  </p>
                 </div>
-              <div className="card-header">
-                {displayTitleText(title)}
-                <p className="price">
-                  <span>$</span>
-                  <span className="price-text">{price}</span>
-                </p>
+                </Link>
               </div>
-              </Link>
-            </div>
-          );
+            );
+          }
+          return null;
         });
       };
 
@@ -45,7 +50,6 @@ export default function SimilarProducts() {
     return (<div className="similar-products-container">
         <h1 className="heading">Similar Products</h1>
         <div className="similar-card-container">
-            {/* <Card productsData={onlyFourProducts}/> */}
             <div className="similar-products-content">{displayProducts()}</div>
         </div>
     </div>)

@@ -57,6 +57,10 @@
         padding: 40px 0 40px 0;
       }
 
+      .onesize {
+        @include make-text-color-gold();
+      }
+      
       .sizes-list {
         display: flex;
         flex-direction: row;
@@ -197,6 +201,12 @@
       .description {
         width: 100%;
         margin-left: 50px;
+       
+       
+
+        .title {
+          border: 1px solid red;
+        }
 
         .add-to-buttons {
           display: flex;
@@ -228,14 +238,14 @@
   }
 }
 
-@media screen and (min-width: 650px) and (max-width: 900px) {
+/* @media screen and (min-width: 650px) and (max-width: 900px) {
   .product-details-container {
     min-width: 790px;
   }
   
-}
+} */
 
-@media screen and (min-width: 0px) and (max-width: 400px) {
+@media screen and (min-width: 0px) and (max-width: 600px) {
   .product-details-container {
     .details {
       .description {

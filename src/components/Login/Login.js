@@ -10,7 +10,7 @@ import Dialog from "../Dialog/Dialog";
 import Toast from "../Toast/Toast";
 import "./Login.scss";
 
-const GREEN_COLOR = "#32CD32";
+const LOGO_COLOR = "#D99E32"
 
 export default function Login({ showLogin, handleModalOpen }) {
   const firebase = useContext(FirebaseContext);
@@ -35,7 +35,7 @@ export default function Login({ showLogin, handleModalOpen }) {
           {
             id: new Date().getTime(),
             description: "Successfully Logged In !",
-            backgroundColor: GREEN_COLOR,
+            backgroundColor: LOGO_COLOR,
           },
         ]);
         handleModalOpen();
@@ -70,7 +70,7 @@ export default function Login({ showLogin, handleModalOpen }) {
           {
             id: new Date().getTime(),
             description: "Successfully Logged In !",
-            backgroundColor: GREEN_COLOR,
+            backgroundColor: LOGO_COLOR,
           },
         ]);
 
