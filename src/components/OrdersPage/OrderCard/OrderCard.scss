@@ -47,8 +47,6 @@
         display: flex;
         flex-direction: column;
 
-        .address-content {
-        }
       }
 
       .price-section {
@@ -80,9 +78,6 @@
     }
   }
 
-  // .subtitle-size {
-  //   font-size: 15px;
-  // }
 }
 
 @media screen and (max-width: 500px) {
@@ -90,16 +85,10 @@
     .card-main {
       .order-title {
         white-space: pre-wrap;
-        //width: 50px;
       }
 
       .card-top {
         display: flex;
-        // flex-direction: column-reverse;
-        
-        .order-details {
-          // border: 2px green solid;
-        }
 
         .order-image {
 
@@ -116,13 +105,12 @@
       }
       .card-bottom {
         flex-direction: column;
+
         .address-section {
-          // flex-direction: row;
           justify-content: space-between;
           margin-bottom: 10px;
 
           .address-content {
-            // display: flex;
             flex-wrap: wrap;
             width: 100%;
           }

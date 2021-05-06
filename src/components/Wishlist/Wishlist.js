@@ -43,7 +43,7 @@ function Wishlist() {
                 <span className="details-text">Size : {size}</span>
               </div>
               <div className="price">
-                <span className="bold-title">₹ {price}</span>
+                <span className="price-text">₹ {price}</span>
               </div>
             </div>
             <div className="buttons">

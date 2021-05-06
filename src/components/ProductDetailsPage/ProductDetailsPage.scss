@@ -43,8 +43,9 @@
       justify-content: flex-start;
       padding: 60px 0 0 10px;
 
-      h2 {
+      .title {
         margin-bottom: 10px;
+        width: 80%;
       }
 
       .price-text {
@@ -201,12 +202,6 @@
       .description {
         width: 100%;
         margin-left: 50px;
-       
-       
-
-        .title {
-          border: 1px solid red;
-        }
 
         .add-to-buttons {
           display: flex;
