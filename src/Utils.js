@@ -33,45 +33,49 @@ export const routePathMap = {
 
 export const productFilterCategories = [
   {
-    displayName: 'Jackets',
-    category: 'jacket'
+    displayName: "Jackets",
+    category: "jacket",
+    hindiName: "जैकेट",
   },
   {
-    displayName: 'Electronics',
-    category: 'electronics'
+    displayName: "Electronics",
+    category: "electronics",
+    hindiName: "इलेक्ट्रानिक्स",
   },
   {
-    displayName: 'T-Shirts',
-    category: 'tshirt'
+    displayName: "T-Shirts",
+    category: "tshirt",
+    hindiName: "टी-शर्ट",
   },
   {
-    displayName: 'Jewellery',
-    category: 'jewellery'
-  }
-]
+    displayName: "Jewellery",
+    category: "jewellery",
+    hindiName: "ज्वेलरी",
+  },
+];
 
 export const productFilterPrices = [
   {
-    priceRange: 'low',
+    priceRange: "low",
     from: 300,
-    to: 1000
+    to: 1000,
   },
   {
-    priceRange: 'medium',
+    priceRange: "medium",
     from: 1000,
-    to: 3000
+    to: 3000,
   },
   {
-    priceRange: 'high',
+    priceRange: "high",
     from: 3000,
-    to: 5000
+    to: 5000,
   },
   {
-    priceRange: 'highest',
+    priceRange: "highest",
     from: 5000,
-    to: 10000
-  }
-]
+    to: 10000,
+  },
+];
 
 export const throttleFunction = (func, delay) => {
   let prev = 0;
