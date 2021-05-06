@@ -63,6 +63,7 @@
   .bold-title {
     font-weight: 600;
     margin-bottom: 20px;
+    width: 90%;
     color: black;
   }
 
@@ -76,11 +77,10 @@
       @include styles.flex-row-center;
       align-items: stretch;
       padding: 20px 0 0 0;
-      height: 200px;
 
       .product-image {
-        width: 150px;
-        height: 100%;
+        width: 180px;
+        height: 200px;
 
         img {
           width: 100%;
@@ -102,9 +102,8 @@
         justify-content: space-between;
 
         .item-details {
-          @include styles.flex-row-center;
+          display: flex;
           justify-content: space-between;
-          align-items: flex-start;
           width: 100%;
 
           .main-details {
@@ -167,7 +166,11 @@
           }
 
           .price {
+            .price-text {
+              font-weight: 600;
+            }
           }
+
         }
 
         .buttons {
@@ -175,6 +178,7 @@
           justify-content: space-between;
           font-weight: 600;
           cursor: pointer;
+          padding: 15px 0 0 0;
 
           .remove-btn {
             @include no-select();
@@ -246,18 +250,27 @@
 }
 
 @media screen and (max-width: 600px) {
-  .checkout-container {
+  .wishlist-container {
     @include styles.flex-column-center;
     align-items: flex-start;
-    flex-direction: column-reverse;
 
-    .price-column {
-      width: 100%;
-      margin-bottom: 10px;
+    .bold-title {
+      margin-bottom: 0px;
+      white-space: pre-wrap;
     }
 
-    .cart-list {
-      width: 100%;
+    .wishlist {
+      .item-row {
+       
+        .details-column {
+          width: 70%;
+
+          .item-details {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
     }
   }
 }

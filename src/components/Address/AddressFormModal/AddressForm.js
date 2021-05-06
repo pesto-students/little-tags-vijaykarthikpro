@@ -23,8 +23,8 @@ export default function AddressForm({ handleFormSubmit, handleFormClose, isDefau
               <input type="text" name="pincode" placeholder="Pincode*" required/>
               <select className="states" required>
               <option className="default-option" value="" disabled selected hidden>Select State</option>
-                {Object.values(States).map((state) =>{
-                  return <option>{state}</option>
+                {Object.values(States).map((state, id) =>{
+                  return <option key={id}>{state}</option>
                 })}
               </select>
             </div>
