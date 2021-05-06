@@ -1,7 +1,7 @@
 import React from "react";
 import "./Footer.scss";
 import AppLogo from "../../assets/icons/logo-symbol.png";
-import LoveSymbol from '../../assets/icons/love-symbol.svg';
+import LoveSymbol from "../../assets/icons/love-symbol.svg";
 
 export default function Footer() {
   return (
@@ -19,8 +19,17 @@ export default function Footer() {
       </div>
       <div className="bottom">
         <div className="ft-links">
-          <span>Made with <img src={LoveSymbol} alt="love"/> by Karthik and Rasika</span>
-          
+          <span>
+            Made with <img src={LoveSymbol} alt="love" /> by
+            <a href="https://github.com/vijaykarthikpro" target="_blank">
+              Karthik{" "}
+            </a>{" "}
+            and
+            <a href="https://github.com/Rasika-Hatwar" target="_blank">
+              Rasika
+            </a>
+          </span>
+
           <span></span>
         </div>
         <div className="copyright">
