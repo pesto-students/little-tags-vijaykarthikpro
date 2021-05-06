@@ -18,7 +18,7 @@ export default function Search() {
 
   useEffect(() => {
     const currentResult = ProductsData.filter(({ title }) => {
-      return title.match(searchItem);
+      return title.toLowerCase().match(searchItem.toLowerCase());
     });
     setSearchResults(currentResult);
   }, [searchItem]);
