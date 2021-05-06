@@ -1,0 +1,15 @@
+export const HOME = "/";
+export const ACCOUNT = "/account";
+export const OFFERS = "/offers";
+export const PRODUCT = "/products";
+export const PRODUCT_DETAILS = "/product-details";
+export const CHECKOUT = "/checkout";
+export const WISHLIST = "/account/wishlist";
+export const ORDERS = "/account/orders";
+export const ADDRESS = "/account/address";
+export const MEN = "/products/men";
+export const WOMEN = "/products/women";
+export const JACKETS = "/products/jackets";
+export const TSHIRTS = "/products/tshirts";
+export const ELECTRONICS = "/products/electronics";
+export const JEWELLERY = "/products/jewellery";

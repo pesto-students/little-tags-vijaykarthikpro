@@ -1,0 +1,27 @@
+{
+    "searchText": "आइटम खोजें...",
+    "collections" :"कलेक्शन",
+    "quoteTop":"फैशन फीका पड़ सकता है,",
+    "quoteBottom":"स्टाइल सदाबहार है",
+    "categories": "कैटेगरी",
+    "men": "पुरुष",
+    "women" : "महिलाएं",
+    "menFashion":"पुरुषों का फ़ैशन",
+    "womenFashion": "महिलाओं का फ़ैशन",
+    "jackets":"जैकेट",
+    "electronics": "इलेक्ट्रानिक्स",
+    "tshirts":"टी-शर्ट",
+    "jewellery":"ज्वेलरी",
+    "login": "लॉग इन करें",
+    "account" : "आपका अकाउंट",
+    "orders" : "आपके ऑर्डर",
+    "logout" : "लॉग आउट",
+    "loginAlert" : "जारी रखने के लिए कृपया लॉगिन करें!",
+    "googleSignIn" : "जीमेल अकाउंट से साइन इन करें",
+    "facebookSignIn" : "फेसबुक अकाउंट से साइन इन करें",
+    "price": "मूल्य",
+    "filters":"फिल्टर",
+    "clearAll": "फ़िल्टर हटा दें"
+
+
+}

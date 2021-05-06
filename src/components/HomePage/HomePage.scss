@@ -1,0 +1,206 @@
+@use '../../../styles.scss' as styles;
+
+.home-container {
+  margin: 0 auto;
+  text-align: center;
+
+  .banner-section {
+    .banner {
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+      border: 0;
+    }
+  }
+
+  .collection-section {
+    background-image: url("../../assets/images/Men-women-bg.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 50px;
+
+    h1 {
+      color: black;
+      padding-bottom: 60px;
+    }
+
+    .collections {
+      margin: 0 auto;
+      @include styles.flex-row-center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      width: 80%;
+      max-width: 1500px;
+      .nav-links {
+        text-decoration: none;
+        color: black;
+      }
+      p {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 600;
+        color: black;
+      }
+
+      h2 {
+        color: black;
+        padding-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .men {
+        transform: scale(1);
+        transition: 0.2s;
+
+        &:hover {
+          transform: scale(1.05);
+          transition: 0.2s;
+          filter: drop-shadow(-30px 10px 10px black);
+        }
+
+        &:active {
+          transform: scale(1.02);
+          filter: drop-shadow(-30px 10px 10px black);
+        }
+      }
+
+      .women {
+        transform: scale(1);
+        transition: 0.15s;
+
+        &:hover {
+          transform: scale(1.05);
+          transition: 0.15s;
+          filter: drop-shadow(30px 10px 10px black);
+        }
+
+        &:active {
+          transform: scale(1.02);
+          filter: drop-shadow(30px 10px 10px black);
+        }
+      }
+    }
+  }
+
+  .categories {
+    background-color: white;
+    padding: 50px;
+
+    h1 {
+      color: black;
+      padding-bottom: 80px;
+    }
+
+    .categories-to-add {
+      margin: 0 auto;
+      @include styles.flex-row-center;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      color: black;
+      max-width: 1500px;
+      padding-bottom: 40px;
+
+      .nav-links {
+        text-decoration: none;
+        color: black;
+      }
+
+      img {
+        width: 250px;
+        height: 250px;
+      }
+
+      h2 {
+        font-weight: 600;
+      }
+
+      div {
+        transform: scale(1);
+        transition: 0.15s;
+
+        &:hover {
+          transform: scale(1.05);
+          transition: 0.15s;
+          filter: drop-shadow(20px 10px 10px black);
+        }
+
+        &:active {
+          transform: scale(1.02);
+          filter: drop-shadow(20px 10px 10px black);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 500px) {
+  .home-container {
+    .collection-section {
+      .collections {
+        h2 {
+          color: white;
+        }
+        p {
+          margin: 50px 0;
+          padding: 10px;
+          color: white;
+          border: 2px white solid;
+          border-radius: 10px;
+        }
+      }
+
+      .categories-to-add {
+        justify-content: space-evenly;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 501px) and (max-width: 873px) {
+  .home-container {
+    .collection-section {
+      .collections {
+        .men {
+          h2 {
+            color: black;
+          }
+        }
+
+        h2 {
+          color: white;
+        }
+        p {
+          margin: 50px 0;
+          padding: 10px;
+          color: white;
+          border: 2px white solid;
+          border-radius: 10px;
+        }
+      }
+
+      .categories-to-add {
+        justify-content: space-evenly;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 873px) and (max-width: 1187px) {
+  .home-container {
+    .section-1 {
+      .collections {
+        width: 100%;
+
+        p {
+          margin: 50px 0;
+          padding: 10px;
+          color: black;
+          border: 2px black solid;
+          border-radius: 10px;
+          display: none;
+        }
+      }
+    }
+  }
+}

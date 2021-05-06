@@ -1,0 +1,51 @@
+@use '../../../styles.scss' as styles;
+
+.account-main {
+  display: flex;
+  align-items: stretch;
+  max-width: 1500px;
+  min-height: 100vh;
+  margin: 0 auto;
+
+  .account-aside {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    align-items: flex-start;
+    padding: 20px;
+
+    .nav-links {
+      text-decoration: none;
+      color: white;
+      margin: 10px;
+
+      &:hover {
+        @include styles.make-text-color-gold;
+      }
+    }
+  }
+
+  .account-content {
+    width: 80%;
+    background: white;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .account-main {
+    flex-direction: column;
+    white-space: nowrap;
+
+    .account-aside {
+      border: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .account-content {
+      width: 100%;
+    }
+  }
+}

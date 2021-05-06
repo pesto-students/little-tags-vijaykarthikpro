@@ -1,0 +1,116 @@
+@use "../../../styles.scss" as styles;
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+
+  .outer {
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: black;
+    font-size: 20px;
+    width: 400px;
+    border-radius: 10px;
+
+    .top-section {
+      background-color: black;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px 10px 0 0;
+
+      .logo-item {
+        display: flex;
+        margin: 10px 0 20px 10px;
+
+        img {
+          width: 60px;
+          height: 60px;
+        }
+
+        .title {
+          font-family: "Gloria Hallelujah";
+          font-size: 30px;
+          padding: 0px 15px 0 15px;
+          font-weight: 300;
+          color: white;
+        }
+      }
+
+      .close-modal {
+        font-size: 12px;
+        padding: 10px;
+        box-shadow: 0 11px 20px -6px rgba(70, 93, 169, 0.13);
+        background-color: black;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+
+    .login-options {
+      @include styles.flex-column-center;
+      padding: 30px;
+
+      .box {
+        @include styles.flex-column-center;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        span {
+          font-size: 16px;
+        }
+
+        .google-login {
+          @include styles.flex-row-center;
+          margin-bottom: 10px;
+          cursor: pointer;
+          width: 100%;
+          padding: 5px;
+          border-radius: 20px;
+          background-color: white;
+          border: 1px darkgray solid;
+          justify-content: flex-start;
+          outline: none;
+
+          .google-img {
+            width: 30x;
+            height: 30px;
+            margin: 0 10px 0 10px;
+          }
+        }
+
+        .facebook-login {
+          @include styles.flex-row-center;
+          cursor: pointer;
+          width: 100%;
+          padding: 5px 10px 5px 5px;
+          border-radius: 20px;
+          background-color: white;
+          border: 1px darkgray solid;
+          outline: none;
+
+          .fb-img {
+            width: 30x;
+            height: 30px;
+            margin: 0 10px 0 10px;
+          }
+        }
+      }
+    }
+
+    .login-error {
+      padding: 10px;
+    }
+  }
+}

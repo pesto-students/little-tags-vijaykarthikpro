@@ -1,0 +1,128 @@
+@use '../../../../styles.scss' as styles;
+
+.address-form-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 2;
+
+    .outer {
+        background: white;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        color: black;
+        font-size: 20px;
+        width: 500px;
+        border-radius: 10px;
+
+        .address-form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 10px 20px 10px 20px;
+            background-color: black;
+            color: white;
+            border: 1px white solid;
+            border-radius: 5px 5px 0 0;
+
+
+            .close-icon {
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
+            }
+        }
+
+        .form-fields {
+            padding: 10px;
+
+            form {
+                background-color: white;
+                color: black;
+                display: flex;
+                flex-direction: column;
+                padding: 10px;
+                width: 100%;
+                border-radius: 0 0 5px 5px;
+            
+                input[type="text"], select {
+                    border: 1px grey solid;
+                    border-radius: 4px;
+                    outline: none;
+                    padding: 14px;
+                    margin: 5px;
+                }
+    
+                input[type="submit"] {
+                    color: white;
+                    border: none;
+                    font-size: 15px;
+                    outline: none;
+                    cursor: pointer;
+                    background-color: black;
+                    padding: 10px 15px 10px 15px;
+                    border-radius: 5px;
+                    margin: 10px 0 10px 0;
+                }
+    
+                .state-pincode {
+                    display: flex;
+                    flex-direction: row;
+
+                    .states{
+                        flex: 1;
+                        -webkit-appearance: none;
+                        -moz-appearance: none;
+                        -o-appearance: none;
+                        appearance: none;
+                        background-image: url('../../../assets/icons/dropdown-arrow.svg');
+                        background-position: 95% center;
+                        background-repeat: no-repeat;
+                        background-size: 10px;
+                        outline: none;
+
+                        &:invalid {
+                            color: grey;
+                        }
+
+                    }
+                    
+                }
+            
+                li {
+                    list-style: none;
+                    margin: 10px 10px 10px 0;
+                }
+            }
+
+        }
+
+        
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .address-form-modal {
+        .outer {
+            width: 300px;
+
+            .form-fields {
+                form {
+                    .state-pincode {
+                        display: flex;
+                        flex-direction: column; 
+                    }
+                }
+            }
+        }
+    }
+}
+
+

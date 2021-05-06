@@ -1,0 +1,26 @@
+{
+    "searchText": "Search items...",
+    "collections" :"COLLECTIONS",
+    "quoteTop":"Fashion changes,",
+    "quoteBottom":"but style endures",
+    "categories": "CATEGORIES",
+    "men": "Men",
+    "women" : "Women",
+    "menFashion":"MEN",
+    "womenFashion": "WOMEN",
+    "jackets":"JACKETS",
+    "electronics": "ELECTRONICS",
+    "tshirts":"T-SHIRTS",
+    "jewellery":"JEWELLERY",
+    "login": "LOGIN",
+    "account" : "Account",
+    "orders" : "Orders",
+    "logout" : "Log Out",
+    "loginAlert" : "Please login to continue!",
+    "googleSignIn" : "Continue with Google",
+    "facebookSignIn" : "Continue with Facebook",
+    "price": "Price",
+    "filters":"FILTERS",
+    "clearAll": "clear all"
+
+}
