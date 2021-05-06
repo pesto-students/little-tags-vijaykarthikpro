@@ -1,7 +1,6 @@
 @use '../../../styles.scss' as styles;
 
 .website-header {
-
   .navbar {
     background: black;
     height: 80px;
@@ -197,7 +196,6 @@
       .right {
         padding: 0;
       }
-
     }
 
     .nav-links {
@@ -208,7 +206,7 @@
   }
 }
 
-@media screen and (min-width:600px) and (max-width: 1200px) {
+@media screen and (min-width: 600px) and (max-width: 1200px) {
   .website-header {
     width: 100vw;
 
@@ -234,7 +232,6 @@
 
 @media screen and (max-width: 600px) {
   .website-header {
-
     .navbar {
       padding: 22px;
 
@@ -261,8 +258,9 @@
           display: none;
         }
         img {
-          width: 15px;
-          height: 15px;
+          width: 20px;
+          height: 20px;
+          margin: 0 5px;
         }
         .menu-item {
           padding: 0;

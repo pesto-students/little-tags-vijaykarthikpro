@@ -18,6 +18,9 @@
     "logout" : "Log Out",
     "loginAlert" : "Please login to continue!",
     "googleSignIn" : "Continue with Google",
-    "facebookSignIn" : "Continue with Facebook"
+    "facebookSignIn" : "Continue with Facebook",
+    "price": "price",
+    "filters":"FILTERS",
+    "clearAll": "clear all"
 
 }
