@@ -28,19 +28,30 @@
   margin: 15px 0 15px 0;
 
   .ft-links {
-    
+    span {
+      a {
+        color: white;
+        margin: 5px;
+        // text-decoration: none;
+      }
+    }
     img {
       width: 12px;
       height: 12px;
       margin: 0 5px 0 5px;
     }
   }
-}
 
+  .copyright {
+    span {
+      margin-right: 5px;
+    }
+  }
+}
 
 @media (max-width: 690px) {
   .footer {
-    padding: 20px
+    padding: 20px;
   }
   .bottom {
     display: flex;
